@@ -1,0 +1,166 @@
+# Defaults: https://github.com/bbatsov/rubocop/blob/master/config/default.yml
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+# Accept both [:a, :b, :c] and %i[a b c]
+Style/SymbolArray:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 150
+
+Metrics/MethodLength:
+  Max: 30
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Metrics/AbcSize:
+  Max: 15
+
+# Accept Japanese characters in comments
+Style/AsciiComments:
+  Enabled: false
+
+# Allow %r as a regular expression syntax
+Style/RegexpLiteral:
+  Enabled: false
+
+# Sometimes you absolutely want to be sure you have a boolean.
+# The guide for this cop even admits that their recommendation
+# doesn't logically equal !!.
+Style/DoubleNegation:
+  Enabled: false
+
+# Developers agreed that it's harder to read assignments across multiple lines.
+Style/ConditionalAssignment:
+  Enabled: false
+
+# Disallow %w[]
+Style/WordArray:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+# It sometimes make sense to use #length == 0 or #size == 0, for example, when the object does not implement Enumerable.
+Style/ZeroLengthPredicate:
+  Enabled: false
+
+# > 0, == 0, < 0 is more common in major programming languages.
+# In addition, sometimes it is necessary to compare a non-numeric value with 0 (e.g. params[:size] == 0 but it can be nil)
+Style/NumericPredicate:
+  Enabled: false
+
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+AllCops:
+  Exclude: 
+   - bin/*
+
+Style/Documentation:
+  Enabled: false
+
+Gemspec/DateAssignment: # new in 1.10
+  Enabled: true
+Layout/LineEndStringConcatenationIndentation: # new in 1.18
+  Enabled: true
+Layout/SpaceBeforeBrackets: # new in 1.7
+  Enabled: true
+Lint/AmbiguousAssignment: # new in 1.7
+  Enabled: true
+Lint/AmbiguousOperatorPrecedence: # new in 1.21
+  Enabled: true
+Lint/AmbiguousRange: # new in 1.19
+  Enabled: true
+Lint/DeprecatedConstants: # new in 1.8
+  Enabled: true
+Lint/DuplicateBranch: # new in 1.3
+  Enabled: true
+Lint/DuplicateRegexpCharacterClassElement: # new in 1.1
+  Enabled: true
+Lint/EmptyBlock: # new in 1.1
+  Enabled: true
+Lint/EmptyClass: # new in 1.3
+  Enabled: true
+Lint/EmptyInPattern: # new in 1.16
+  Enabled: true
+Lint/IncompatibleIoSelectWithFiberScheduler: # new in 1.21
+  Enabled: true
+Lint/LambdaWithoutLiteralBlock: # new in 1.8
+  Enabled: true
+Lint/NoReturnInBeginEndBlocks: # new in 1.2
+  Enabled: true
+Lint/NumberedParameterAssignment: # new in 1.9
+  Enabled: true
+Lint/OrAssignmentToConstant: # new in 1.9
+  Enabled: true
+Lint/RedundantDirGlobSort: # new in 1.8
+  Enabled: true
+Lint/RequireRelativeSelfPath: # new in 1.22
+  Enabled: true
+Lint/SymbolConversion: # new in 1.9
+  Enabled: true
+Lint/ToEnumArguments: # new in 1.1
+  Enabled: true
+Lint/TripleQuotes: # new in 1.9
+  Enabled: true
+Lint/UnexpectedBlockArity: # new in 1.5
+  Enabled: true
+Lint/UnmodifiedReduceAccumulator: # new in 1.1
+  Enabled: true
+Security/IoMethods: # new in 1.22
+  Enabled: true
+Style/ArgumentsForwarding: # new in 1.1
+  Enabled: true
+Style/CollectionCompact: # new in 1.2
+  Enabled: true
+Style/DocumentDynamicEvalDefinition: # new in 1.1
+  Enabled: true
+Style/EndlessMethod: # new in 1.8
+  Enabled: true
+Style/HashConversion: # new in 1.10
+  Enabled: true
+Style/HashExcept: # new in 1.7
+  Enabled: true
+Style/IfWithBooleanLiteralBranches: # new in 1.9
+  Enabled: true
+Style/InPatternThen: # new in 1.16
+  Enabled: true
+Style/MultilineInPatternThen: # new in 1.16
+  Enabled: true
+Style/NegatedIfElseCondition: # new in 1.2
+  Enabled: true
+Style/NilLambda: # new in 1.3
+  Enabled: true
+Style/NumberedParameters: # new in 1.22
+  Enabled: true
+Style/NumberedParametersLimit: # new in 1.22
+  Enabled: true
+Style/QuotedSymbols: # new in 1.16
+  Enabled: true
+Style/RedundantArgument: # new in 1.4
+  Enabled: true
+Style/RedundantSelfAssignmentBranch: # new in 1.19
+  Enabled: true
+Style/SelectByRegexp: # new in 1.22
+  Enabled: true
+Style/StringChars: # new in 1.12
+  Enabled: true
+Style/SwapValues: # new in 1.1
+  Enabled: true
