@@ -87,7 +87,7 @@ Naming/VariableNumber:
 AllCops:
   NewCops: enable
   Exclude:
-    # Auto-generated
+    - vendor/**/*.rb 
     - 'bin/**/*'
     - 'db/schema.rb'
     - 'db/migrate/*.rb'
