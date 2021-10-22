@@ -87,7 +87,7 @@ Naming/VariableNumber:
 AllCops:
   NewCops: enable
   Exclude:
-    - gemfiles/vendor/bundle/**/*
+    - vendor/bundle/**/*
     - vendor/**/*.rb 
     - 'bin/**/*'
     - 'db/schema.rb'
