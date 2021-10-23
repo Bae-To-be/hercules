@@ -30,10 +30,10 @@ gem 'skylight'
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]
   gem 'debug', '>= 1.0.0', platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv-rails'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
-  gem 'dotenv-rails'
 end
 
 group :development do

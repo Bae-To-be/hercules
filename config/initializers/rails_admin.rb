@@ -3,19 +3,10 @@
 RailsAdmin.config do |config|
   config.authorize_with do
     authenticate_or_request_with_http_basic('Login required') do |username, password|
-      username == ENV.fetch("ADMIN_USERNAME") &&
-        password == ENV.fetch("ADMIN_PASSWORD")
+      username == ENV.fetch('ADMIN_USERNAME') &&
+        password == ENV.fetch('ADMIN_PASSWORD')
     end
   end
-
-  ## == PaperTrail ==
-  # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
-
-  ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
-
-  ## == Gravatar integration ==
-  ## To disable Gravatar integration in Navigation Bar set to false
-  # config.show_gravatar = true
 
   config.actions do
     dashboard                     # mandatory
