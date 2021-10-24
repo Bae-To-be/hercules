@@ -83,6 +83,6 @@ test:
 #
 production:
   <<: *default
-  database: hercules_production
-  username: hercules
+  database: <%= ENV["HERCULES_DATABASE_NAME"] %>
+  username: <%= ENV["HERCULES_DATABASE_USERNAME"] %>
   password: <%= ENV["HERCULES_DATABASE_PASSWORD"] %>
