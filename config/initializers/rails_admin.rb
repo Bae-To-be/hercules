@@ -1,6 +1,7 @@
 # frozen_string_literal: true
-require "nested_form/engine"
-require "nested_form/builder_mixin"
+
+require 'nested_form/engine'
+require 'nested_form/builder_mixin'
 
 RailsAdmin.config do |config|
   config.authorize_with do
@@ -9,7 +10,7 @@ RailsAdmin.config do |config|
         password == ENV.fetch('ADMIN_PASSWORD')
     end
   end
-  
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
