@@ -15,12 +15,15 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :gender, presence: true
 
+  has_many_attached :images
+
   def to_h
     {
       name: name,
       gender: gender,
       interested_in: interested_in,
-      birthday: birthday
+      birthday: birthday,
+      images: images.map(&:url)
     }
   end
 end

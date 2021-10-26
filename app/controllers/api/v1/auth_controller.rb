@@ -3,12 +3,12 @@
 module Api
   module V1
     class AuthController < BaseController
+      skip_before_action :require_jwt
+
       def verify
-        response = Auth::Facebook.new(
+        render_response(Auth::Facebook.new(
           params[:token]
-        ).run
-        render json: response.body,
-               status: response.code
+        ).run)
       end
     end
   end

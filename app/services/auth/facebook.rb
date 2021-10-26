@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'open-uri'
+
 module Auth
   class Facebook
     GET_PROFILE_PARAMS = 'me?fields=name,email,picture.height(720).width(720),gender,birthday'
@@ -21,9 +23,11 @@ module Auth
           return ServiceResponse
                    .ok(formatted_data(existing_user, false))
         end
-
-        ServiceResponse
-          .ok(formatted_data(new_user, true))
+        User.transaction do
+          attach_image
+          ServiceResponse
+            .ok(formatted_data(new_user, true))
+        end
       rescue Koala::Facebook::AuthenticationError
         ServiceResponse
           .unauthorized(INVALID_TOKEN)
@@ -31,6 +35,7 @@ module Auth
         ServiceResponse
           .bad_request(e.message)
       rescue StandardError => e
+        Rails.logger.error(e)
         ServiceResponse
           .internal_server_error(e.message)
       end
@@ -59,6 +64,18 @@ module Auth
     def token_expiry
       Time.now.to_i +
         (ENV.fetch('JWT_EXPIRY_HOURS').to_i * 3600)
+    end
+
+    def attach_image
+      url = profile.dig(:picture, :data, :url)
+
+      return if url.blank?
+
+      # rubocop:disable Security/Open
+      image_data = URI.open(url).read
+      # rubocop:enable Security/Open
+      data = ImageOptim.new.optimize_image_data(image_data)
+      new_user.images.attach(io: StringIO.new(data), filename: "fb_#{new_user.id}.jpeg")
     end
 
     def existing_user
