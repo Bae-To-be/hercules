@@ -10,7 +10,17 @@ class User < ApplicationRecord
 
   validates :email,
             presence: true,
+            uniqueness: true,
             format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :name, presence: true
   validates :gender, presence: true
+
+  def to_h
+    {
+      name: name,
+      gender: gender,
+      interested_in: interested_in,
+      birthday: birthday
+    }
+  end
 end

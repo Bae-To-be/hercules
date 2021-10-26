@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+require 'simplecov'
+SimpleCov.start 'rails' do
+  if ENV['CI']
+    formatter SimpleCov::Formatter::SimpleFormatter
+  else
+    formatter SimpleCov::Formatter::MultiFormatter.new([
+                                                         SimpleCov::Formatter::SimpleFormatter,
+                                                         SimpleCov::Formatter::HTMLFormatter
+                                                       ])
+  end
+end
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'

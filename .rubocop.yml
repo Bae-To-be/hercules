@@ -23,11 +23,6 @@ Layout/MultilineMethodCallIndentation:
 Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
 
-Metrics/AbcSize:
-  Max: 15
-  Exclude:
-    - 'spec/**/*_spec.rb' # RSpec
-
 # Accept Japanese characters in comments
 Style/AsciiComments:
   Enabled: false

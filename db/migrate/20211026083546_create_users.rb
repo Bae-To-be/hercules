@@ -5,6 +5,8 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :name, null: false
       t.integer :gender, null: true
       t.integer :interested_in, array: true, default: []
+      t.date :birthday
+      t.string :facebook_id
 
       t.timestamps
     end

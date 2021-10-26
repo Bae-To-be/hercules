@@ -25,6 +25,9 @@ gem 'sassc-rails', '~> 2.1'
 
 # custom
 gem 'array_enum'
+gem 'jwt'
+gem 'koala'
+gem 'oj'
 gem 'rails_admin', '2.0'
 gem 'skylight'
 
@@ -53,5 +56,6 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.0'
+  gem 'simplecov', require: false
   gem 'webdrivers'
 end

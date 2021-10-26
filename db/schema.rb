@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2021_10_26_083546) do
     t.string "name", null: false
     t.integer "gender"
     t.integer "interested_in", default: [], array: true
+    t.date "birthday"
+    t.string "facebook_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
