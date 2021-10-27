@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :gender, presence: true
 
-  has_many_attached :images
+  has_many :images, dependent: :destroy
 
   def to_h
     {
@@ -23,7 +23,7 @@ class User < ApplicationRecord
       gender: gender,
       interested_in: interested_in,
       birthday: birthday,
-      images: images.map(&:url)
+      images: images.with_attached_file.map(&:to_h)
     }
   end
 end
