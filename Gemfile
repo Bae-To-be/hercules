@@ -27,12 +27,12 @@ gem 'image_processing', '~> 1.2'
 
 # custom
 gem 'array_enum'
+gem 'aws-sdk-s3', require: false
 gem 'jwt'
 gem 'koala'
 gem 'oj'
 gem 'rails_admin', '2.0'
 gem 'skylight'
-gem "aws-sdk-s3", require: false
 
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]
