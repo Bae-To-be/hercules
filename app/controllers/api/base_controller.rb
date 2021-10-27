@@ -24,14 +24,7 @@ module Api
     end
 
     def parsed_token
-      JWT.decode(
-        auth.gsub!('Bearer ', ''),
-        ENV.fetch('JWT_SECRET'),
-        true,
-        { algorithm: 'HS256' }
-      )[0]
-    rescue JWT::DecodeError
-      ''
+      Auth::Token.parsed_token(auth.gsub!('Bearer ', ''))
     end
 
     def auth

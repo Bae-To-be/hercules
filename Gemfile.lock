@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: ee0d2a73e77a0f9c295880a036a60d47b3a8dacd
+  branch: master
+  specs:
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -110,6 +118,8 @@ GEM
       railties (>= 3.2)
     erubi (1.10.0)
     exifr (1.3.9)
+    factory_bot (6.2.0)
+      activesupport (>= 5.0.0)
     faraday (1.8.0)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -373,6 +383,8 @@ DEPENDENCIES
   capybara (>= 3.26)
   debug (>= 1.0.0)
   dotenv-rails
+  factory_bot
+  faker!
   image_optim
   image_optim_pack
   image_processing (~> 1.2)

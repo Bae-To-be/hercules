@@ -54,16 +54,7 @@ module Auth
     end
 
     def jwt_token(user)
-      JWT.encode(
-        user.attributes.merge(exp: token_expiry),
-        ENV.fetch('JWT_SECRET'),
-        'HS256'
-      )
-    end
-
-    def token_expiry
-      Time.now.to_i +
-        (ENV.fetch('JWT_EXPIRY_HOURS').to_i * 3600)
+      Auth::Token.jwt_token(user)
     end
 
     def attach_image
