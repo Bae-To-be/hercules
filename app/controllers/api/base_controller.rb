@@ -3,9 +3,6 @@
 module Api
   class BaseController < ActionController::API
     before_action :require_jwt
-    before_action do
-      ActiveStorage::Current.host = "localhost:#{request.port}" if Rails.env.development?
-    end
 
     private
 

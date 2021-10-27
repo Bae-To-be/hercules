@@ -32,6 +32,7 @@ gem 'koala'
 gem 'oj'
 gem 'rails_admin', '2.0'
 gem 'skylight'
+gem "aws-sdk-s3", require: false
 
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]
