@@ -3,6 +3,9 @@
 require 'simplecov'
 require 'simplecov-console'
 
+SimpleCov::Formatter::Console.show_covered = true
+SimpleCov::Formatter::Console.max_rows = -1
+
 SimpleCov.start 'rails' do
   if ENV['CI']
     formatter SimpleCov::Formatter::Console
