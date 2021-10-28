@@ -9,11 +9,11 @@ class UploadImage
   def run
     ImageOptim.new.optimize_image!(path)
     image = user.images.create!(profile_picture: false) do |record|
-       record.file.attach(path)
+      record.file.attach(path)
     end
     ServiceResponse.ok(image.to_h)
-  rescue ActiveRecord::RecordInvalid, 
-    ActiveRecord::RecordNotSaved => e
+  rescue ActiveRecord::RecordInvalid,
+         ActiveRecord::RecordNotSaved
     ServiceResponse
       .bad_request('invalid image')
   rescue StandardError => e

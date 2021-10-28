@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Auth
-  class Token 
+  class Token
     class << self
       def jwt_token(user)
         JWT.encode(
@@ -8,7 +10,7 @@ module Auth
           'HS256'
         )
       end
-  
+
       def parsed_token(token)
         JWT.decode(
           token,

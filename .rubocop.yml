@@ -100,3 +100,4 @@ Metrics/BlockLength:
     # ActiveAdmin's DSL prefers long blocks
     - app/admin/**/*
     - config/**/*
+    - 'spec/**/*_spec.rb' # RSpec

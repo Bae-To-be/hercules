@@ -10,12 +10,24 @@ class Image < ApplicationRecord
 
   def to_h
     {
-      url: url,
+      url: download_url,
       profile_picture: profile_picture
     }
   end
 
   private
+
+  def download_url
+    if Rails.env.test?
+      Rails
+        .application
+        .routes
+        .url_helpers
+        .rails_blob_path(file, only_path: true)
+    else
+      url
+    end
+  end
 
   def validate_blob
     if file.attached?

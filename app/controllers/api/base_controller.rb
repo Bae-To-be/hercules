@@ -24,7 +24,7 @@ module Api
     end
 
     def parsed_token
-      Auth::Token.parsed_token(auth.gsub!('Bearer ', ''))
+      Auth::Token.parsed_token(auth.gsub('Bearer ', ''))
     end
 
     def auth
