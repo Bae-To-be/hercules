@@ -11,7 +11,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'auth', to: 'auth#verify'
 
+      post 'facebook/data_deletion', to: 'facebook#data_deletion'
+
       resources :images, only: %i[create]
     end
   end
+
+  get 'facebook/data_deletion', to: 'api/v1/facebook#deletion_status'
 end
