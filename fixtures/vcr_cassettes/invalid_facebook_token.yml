@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/me?access_token=random_string&appsecret_proof=3a0b49c1d78957ec5fdba3402772d638208d6c5add0f2f4c896cbe74974f20ec&fields=name,email,picture.height(720).width(720),gender,birthday
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.8.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Vary:
+      - Origin
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Fb-Rlafr:
+      - '0'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Www-Authenticate:
+      - OAuth "Facebook Platform" "invalid_token" "Invalid OAuth access token."
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - AMF5y3e4wrY0Emxad92Vh9w
+      X-Fb-Trace-Id:
+      - GNMTaDXbJCf
+      X-Fb-Rev:
+      - '1004630656'
+      X-Fb-Debug:
+      - 45LKaAvzZIHNpf5kGe2zqzatsrF3sH7XyTBjH0DSyI9GgRFVHe5C3Pe9SwHUtoNv07MmQl9vjjd0Xa4CgLfblg==
+      Date:
+      - Thu, 28 Oct 2021 03:31:23 GMT
+      Priority:
+      - u=3,i
+      Alt-Svc:
+      - h3=":443"; ma=3600, h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '125'
+    body:
+      encoding: UTF-8
+      string: '{"error":{"message":"Invalid OAuth access token.","type":"OAuthException","code":190,"fbtrace_id":"AMF5y3e4wrY0Emxad92Vh9w"}}'
+  recorded_at: Thu, 28 Oct 2021 03:31:23 GMT
+recorded_with: VCR 6.0.0

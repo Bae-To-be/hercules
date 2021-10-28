@@ -87,3 +87,10 @@ Shoulda::Matchers.configure do |config|
 end
 
 FactoryBot.find_definitions
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'fixtures/vcr_cassettes'
+  config.hook_into :webmock
+  config.filter_sensitive_data('<FACEBOOK_APP_ID>')     { ENV.fetch('FACEBOOK_APP_ID') }
+  config.filter_sensitive_data('<FACEBOOK_APP_SECRET>') { ENV.fetch('FACEBOOK_APP_SECRET') }
+end

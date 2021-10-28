@@ -1,0 +1,68 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/me?access_token=EAAEXaAklTiMBAALXawA4bd6gWJT9NA39nZCTp80aC1XX7YECPwWKAmbZBJbKoZANZBAaEg3SIbIzuULmbtvyZCaKUZBjN21uxRq0SJKdH6LTJ9BT3zSRh8WzeVbK4ZBlxAuZCILkGI638EL7agUdnJYjI81z9HYwiBR8VF2USrjqG6gZBgouOAasBsCBaCdBuLuQFfyxHgs9kLPB1yGJBZAknBKtQbOecROXQZD&appsecret_proof=b806d934bc66faea545ddbb96cf1e0325b5f7cc9eafd59b33c4078d8fcac08ba&fields=name,email,picture.height(720).width(720),gender,birthday
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.8.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"5e6c81e033e113da971b4c5997202e3b3ceebacb"'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      X-App-Usage:
+      - '{"call_count":0,"total_cputime":0,"total_time":0}'
+      X-Fb-Rlafr:
+      - '0'
+      Access-Control-Allow-Origin:
+      - "*"
+      Facebook-Api-Version:
+      - v12.0
+      Strict-Transport-Security:
+      - max-age=15552000; preload
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - AIeG9youaqOCEvXdoKC1PxY
+      X-Fb-Trace-Id:
+      - FllHjqpbcYt
+      X-Fb-Rev:
+      - '1004630656'
+      X-Fb-Debug:
+      - v9GlanAcWbJ41kSG5Ffd8pxBqvp36zY8OarY1M0BiStmJ9PUAw9sK3gWxbb9fuA9Zrina75rfJtF1wOMWa03fg==
+      Date:
+      - Thu, 28 Oct 2021 03:33:08 GMT
+      Priority:
+      - u=3,i
+      Alt-Svc:
+      - h3=":443"; ma=3600, h3-29=":443"; ma=3600,h3-27=":443"; ma=3600
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '274'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"name":"Gaurav Rakheja","email":"gaurav\u0040baetobe.com","picture":{"data":{"height":720,"is_silhouette":false,"url":"https:\/\/platform-lookaside.fbsbx.com\/platform\/profilepic\/?asid=4475441505834736&height=720&width=720&ext=1637983988&hash=AeTXTJsRiRgB-I65UE0","width":720}},"gender":"male","birthday":"01\/02\/1997","id":"4475441505834736"}'
+  recorded_at: Thu, 28 Oct 2021 03:33:08 GMT
+recorded_with: VCR 6.0.0
