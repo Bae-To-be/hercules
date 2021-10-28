@@ -1,9 +1,19 @@
 # frozen_string_literal: true
 
 require 'simplecov'
+
+if ENV['CI']
+  require 'simplecov-lcov'
+
+  SimpleCov::Formatter::LcovFormatter.config do |c|
+    c.report_with_single_file = true
+    c.single_report_path = 'coverage/lcov.info'
+  end
+end
+
 SimpleCov.start 'rails' do
   if ENV['CI']
-    formatter SimpleCov::Formatter::SimpleFormatter
+    formatter SimpleCov::Formatter::LcovFormatter
   else
     formatter SimpleCov::Formatter::MultiFormatter.new([
                                                          SimpleCov::Formatter::SimpleFormatter,
