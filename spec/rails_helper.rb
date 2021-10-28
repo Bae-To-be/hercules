@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 require 'simplecov'
+require 'simplecov-console'
 
 SimpleCov.start 'rails' do
   if ENV['CI']
-    formatter SimpleCov::Formatter::SimpleFormatter
+    formatter SimpleCov::Formatter::Console
   else
     formatter SimpleCov::Formatter::MultiFormatter.new([
                                                          SimpleCov::Formatter::SimpleFormatter,
-                                                         SimpleCov::Formatter::HTMLFormatter
+                                                         SimpleCov::Formatter::Console
                                                        ])
   end
 end
