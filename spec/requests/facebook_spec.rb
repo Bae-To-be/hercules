@@ -15,7 +15,7 @@ RSpec.feature 'Facebook Endpoints', type: :request do
              params: { signed_request: signed_request }
         expect(response.status).to eq 200
         expect(JSON.parse(response.body, symbolize_names: true)).to eq({
-          url: "#{ENV.fetch('APP_HOST_URL')}/facebook_data_deletion?id=#{Api::V1::FacebookController::ID_PREFIX}#{user.id}",
+          url: "#{ENV.fetch('APP_HOST_URL')}/facebook/data_deletion?id=#{Api::V1::FacebookController::ID_PREFIX}#{user.id}",
           confirmation_code: Api::V1::FacebookController::ID_PREFIX + user.id.to_s
         })
       end

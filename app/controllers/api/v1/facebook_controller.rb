@@ -23,7 +23,7 @@ module Api
         user.destroy!
 
         render json: {
-          url: "#{ENV.fetch('APP_HOST_URL')}/facebook_data_deletion?id=#{ID_PREFIX}#{user.id}",
+          url: "#{ENV.fetch('APP_HOST_URL')}/facebook/data_deletion?id=#{ID_PREFIX}#{user.id}",
           confirmation_code: ID_PREFIX + user.id.to_s
         }, status: :ok
       rescue ActiveRecord::RecordNotFound => e
