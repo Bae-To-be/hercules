@@ -10,8 +10,8 @@ RSpec.feature 'Authorization', type: :request do
     context 'when unauthorized' do
       it 'returns 401' do
         get '/api/v1/me',
-             params: { image: nil },
-             headers: { 'HTTP_AUTHORIZATION' => 'random_string' }
+            params: { image: nil },
+            headers: { 'HTTP_AUTHORIZATION' => 'random_string' }
 
         expect(response.status).to eq 401
       end
@@ -20,8 +20,8 @@ RSpec.feature 'Authorization', type: :request do
     context 'when valid token' do
       it 'returns 401' do
         get '/api/v1/me',
-             params: { image: nil },
-             headers: { 'HTTP_AUTHORIZATION' => token }
+            params: { image: nil },
+            headers: { 'HTTP_AUTHORIZATION' => token }
 
         expect(response.status).to eq 200
         expect(JSON.parse(response.body, symbolize_names: true)[:data]).to eq(user.to_h)

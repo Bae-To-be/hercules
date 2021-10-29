@@ -101,3 +101,9 @@ Metrics/BlockLength:
     - app/admin/**/*
     - config/**/*
     - 'spec/**/*_spec.rb' # RSpec
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
