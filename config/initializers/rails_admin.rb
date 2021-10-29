@@ -15,6 +15,32 @@ RailsAdmin.config do |config|
     configure :interested_in, :gender_list
   end
 
+  config.model 'WorkTitle' do
+    configure :work_title_connections do
+      hide
+    end
+
+    configure :source_relations do
+      hide
+    end
+
+    configure :target_relations do
+      hide
+    end
+
+    edit do
+      configure :related_work_titles do
+        hide
+      end
+    end
+
+    create do
+      configure :related_work_titles do
+        hide
+      end
+    end
+  end
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
@@ -31,5 +57,10 @@ RailsAdmin.config do |config|
     # history_show
   end
 
-  config.excluded_models = %w[ActiveStorage::Blob ActiveStorage::Attachment ActiveStorage::VariantRecord]
+  config.excluded_models = %w[
+    ActiveStorage::Blob
+    ActiveStorage::Attachment
+    ActiveStorage::VariantRecord
+    WorkTitleConnection
+  ]
 end
