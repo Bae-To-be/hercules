@@ -31,7 +31,7 @@ gem 'aws-sdk-s3', require: false
 gem 'jwt'
 gem 'koala'
 gem 'oj'
-gem 'rails_admin', '2.0'
+gem 'rails_admin', github: 'sferik/rails_admin'
 gem 'skylight'
 
 group :development, :test do

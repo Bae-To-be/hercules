@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_10_27_100834) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.boolean "profile_picture"
+    t.boolean "profile_picture", default: false
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

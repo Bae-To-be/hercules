@@ -11,6 +11,10 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'User' do
+    configure :interested_in, :gender_list
+  end
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
@@ -26,4 +30,6 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.excluded_models = %w[ActiveStorage::Blob ActiveStorage::Attachment ActiveStorage::VariantRecord]
 end

@@ -1,0 +1,3 @@
+.ra-multiselect.col-sm-6{style: 'padding-left: 0'}
+  = form.select field.method_name, options_for_select(field.options_for_select, selected: form.object.public_send(field.method_name)), { include_hidden: false }, multiple: true, class: 'form-control ra-filtering-select-input ui-autocomplete-input'
+  
