@@ -2,5 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe WorkTitleConnection, type: :model do
+RSpec.describe CourseConnection, type: :model do
+  
 end

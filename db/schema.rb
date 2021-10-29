@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_29_122939) do
+ActiveRecord::Schema.define(version: 2021_10_29_133216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,15 @@ ActiveRecord::Schema.define(version: 2021_10_29_122939) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_companies_on_name", unique: true
+  end
+
+  create_table "course_relationships", force: :cascade do |t|
+    t.bigint "source_id", null: false
+    t.bigint "target_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["source_id"], name: "index_course_relationships_on_source_id"
+    t.index ["target_id"], name: "index_course_relationships_on_target_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -98,6 +107,7 @@ ActiveRecord::Schema.define(version: 2021_10_29_122939) do
     t.bigint "target_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index "(ARRAY[LEAST(source_id, target_id), GREATEST(target_id, source_id)])", name: "course_pair_uniq", unique: true
     t.index "(ARRAY[LEAST(source_id, target_id), GREATEST(target_id, source_id)])", name: "work_title_pair_uniq", unique: true
     t.index ["source_id"], name: "index_work_title_relationships_on_source_id"
     t.index ["target_id"], name: "index_work_title_relationships_on_target_id"
@@ -112,6 +122,8 @@ ActiveRecord::Schema.define(version: 2021_10_29_122939) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "course_relationships", "courses", column: "source_id"
+  add_foreign_key "course_relationships", "courses", column: "target_id"
   add_foreign_key "work_title_relationships", "work_titles", column: "source_id"
   add_foreign_key "work_title_relationships", "work_titles", column: "target_id"
 
@@ -123,5 +135,14 @@ ActiveRecord::Schema.define(version: 2021_10_29_122939) do
    SELECT work_title_relationships.target_id AS work_title_id,
       work_title_relationships.source_id AS related_work_title_id
      FROM work_title_relationships;
+  SQL
+  create_view "course_connections", sql_definition: <<-SQL
+      SELECT course_relationships.source_id AS course_id,
+      course_relationships.target_id AS related_course_id
+     FROM course_relationships
+  UNION
+   SELECT course_relationships.target_id AS course_id,
+      course_relationships.source_id AS related_course_id
+     FROM course_relationships;
   SQL
 end
