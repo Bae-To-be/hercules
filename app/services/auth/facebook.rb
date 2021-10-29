@@ -48,8 +48,7 @@ module Auth
     def formatted_data(user, is_new)
       {
         is_new_user: is_new,
-        token: jwt_token(user),
-        **user.to_h
+        token: jwt_token(user)
       }
     end
 

@@ -32,9 +32,7 @@ RSpec.feature 'Authorization', type: :request do
                params: { token: token }
           expect(response.status).to eq 200
           response_user = JSON.parse(response.body, symbolize_names: true)[:data]
-          expect(response_user[:birthday]).to eq '1997-02-01'
-          expect(response_user[:gender]).to eq 'male'
-          expect(response_user[:images][0][:profile_picture]).to eq true
+          expect(response_user[:token]).to_not be nil
           expect(response_user[:is_new_user]).to eq true
         end
       end
@@ -60,8 +58,7 @@ RSpec.feature 'Authorization', type: :request do
                params: { token: token }
           expect(response.status).to eq 200
           response_user = JSON.parse(response.body, symbolize_names: true)[:data]
-          expect(response_user[:birthday]).to eq user.birthday.to_s
-          expect(response_user[:gender]).to eq user.gender
+          expect(response_user[:token]).to_not be nil
           expect(response_user[:is_new_user]).to eq false
         end
       end
