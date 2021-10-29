@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post 'auth', to: 'auth#verify'
+      get 'me', to: 'auth#me'
 
       post 'facebook/data_deletion', to: 'facebook#data_deletion'
 

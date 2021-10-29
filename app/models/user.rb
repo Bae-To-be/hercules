@@ -22,8 +22,7 @@ class User < ApplicationRecord
       name: name,
       gender: gender,
       interested_in: interested_in,
-      birthday: birthday,
-      images: images.with_attached_file.map(&:to_h)
+      birthday: birthday.strftime("%d-%m-%Y")
     }
   end
 end
