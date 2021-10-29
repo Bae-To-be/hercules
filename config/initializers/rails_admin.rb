@@ -15,7 +15,7 @@ RailsAdmin.config do |config|
     configure :interested_in, :gender_list
   end
 
-  ['WorkTitle', 'Course'].each do |connected|
+  ['WorkTitle', 'Course', 'Industry'].each do |connected|
     config.model connected do
       configure "#{connected.underscore}_connections".to_sym do
         hide
@@ -30,7 +30,7 @@ RailsAdmin.config do |config|
       end
 
       edit do
-        configure "related_#{connected.underscore}s".to_sym do
+        configure "related_#{connected.underscore.pluralize}".to_sym do
           hide
         end
       end
@@ -39,31 +39,6 @@ RailsAdmin.config do |config|
         configure :related_work_titles do
           hide
         end
-      end
-    end
-  end
-  config.model 'WorkTitle' do
-    configure :work_title_connections do
-      hide
-    end
-
-    configure :source_relations do
-      hide
-    end
-
-    configure :target_relations do
-      hide
-    end
-
-    edit do
-      configure :related_work_titles do
-        hide
-      end
-    end
-
-    create do
-      configure :related_work_titles do
-        hide
       end
     end
   end
@@ -90,5 +65,6 @@ RailsAdmin.config do |config|
     ActiveStorage::VariantRecord
     WorkTitleConnection
     CourseConnection
+    IndustryConnection
   ]
 end

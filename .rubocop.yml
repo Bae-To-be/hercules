@@ -92,6 +92,10 @@ AllCops:
     - 'db/migrate/*.rb'
     - bin/*
 
+Lint/EmptyBlock:
+  Exclude:
+    - 'spec/**/*_spec.rb' # RSpec
+
 Rails/Output:
   Enabled: true
 

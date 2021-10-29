@@ -3,5 +3,4 @@
 require 'rails_helper'
 
 RSpec.describe CourseConnection, type: :model do
-  
 end

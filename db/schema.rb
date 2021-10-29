@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_29_133216) do
+ActiveRecord::Schema.define(version: 2021_10_29_141428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,16 @@ ActiveRecord::Schema.define(version: 2021_10_29_133216) do
     t.index ["name"], name: "index_industries_on_name", unique: true
   end
 
+  create_table "industry_relationships", force: :cascade do |t|
+    t.bigint "source_id", null: false
+    t.bigint "target_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index "(ARRAY[LEAST(source_id, target_id), GREATEST(target_id, source_id)])", name: "industry_pair_uniq", unique: true
+    t.index ["source_id"], name: "index_industry_relationships_on_source_id"
+    t.index ["target_id"], name: "index_industry_relationships_on_target_id"
+  end
+
   create_table "universities", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -124,6 +134,8 @@ ActiveRecord::Schema.define(version: 2021_10_29_133216) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "course_relationships", "courses", column: "source_id"
   add_foreign_key "course_relationships", "courses", column: "target_id"
+  add_foreign_key "industry_relationships", "industries", column: "source_id"
+  add_foreign_key "industry_relationships", "industries", column: "target_id"
   add_foreign_key "work_title_relationships", "work_titles", column: "source_id"
   add_foreign_key "work_title_relationships", "work_titles", column: "target_id"
 
@@ -144,5 +156,14 @@ ActiveRecord::Schema.define(version: 2021_10_29_133216) do
    SELECT course_relationships.target_id AS course_id,
       course_relationships.source_id AS related_course_id
      FROM course_relationships;
+  SQL
+  create_view "industry_connections", sql_definition: <<-SQL
+      SELECT industry_relationships.source_id AS industry_id,
+      industry_relationships.target_id AS related_industry_id
+     FROM industry_relationships
+  UNION
+   SELECT industry_relationships.target_id AS industry_id,
+      industry_relationships.source_id AS related_industry_id
+     FROM industry_relationships;
   SQL
 end
