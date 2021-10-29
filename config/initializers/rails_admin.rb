@@ -44,7 +44,7 @@ RailsAdmin.config do |config|
   end
 
   config.actions do
-    dashboard                    
+    dashboard
     index
     new
     export
