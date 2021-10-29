@@ -2,6 +2,7 @@
 
 require 'simplecov'
 require 'simplecov-console'
+require 'simplecov-material'
 
 SimpleCov::Formatter::Console.show_covered = true
 SimpleCov::Formatter::Console.max_rows = -1
@@ -11,7 +12,7 @@ SimpleCov.start 'rails' do
     formatter SimpleCov::Formatter::Console
   else
     formatter SimpleCov::Formatter::MultiFormatter.new([
-                                                         SimpleCov::Formatter::SimpleFormatter,
+                                                         SimpleCov::Formatter::MaterialFormatter,
                                                          SimpleCov::Formatter::Console
                                                        ])
   end

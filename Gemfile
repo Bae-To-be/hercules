@@ -63,6 +63,7 @@ group :test do
   gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', require: false
   gem 'simplecov-console', require: false
+  gem 'simplecov-material', require: false
   gem 'vcr'
   gem 'webdrivers'
   gem 'webmock'

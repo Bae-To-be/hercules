@@ -16,7 +16,7 @@ class User < ApplicationRecord
   validates :gender, presence: true
 
   has_many :images, dependent: :destroy
-  
+
   has_one :profile_picture,
           -> { where(profile_picture: true) },
           class_name: 'Image'
