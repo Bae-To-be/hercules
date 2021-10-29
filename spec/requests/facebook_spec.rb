@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.feature 'Facebook Endpoints', type: :request do
   describe 'data_deletion' do
     context 'when user existed' do
-      let(:user) { create(:user, facebook_id: '12345') }
+      let(:user) { create(:user, facebook_id: '4475441505834736') }
       let(:payload) { Base64.urlsafe_encode64({ user_id: user.facebook_id }.to_json) }
       let(:encoded_sig) { Base64.urlsafe_encode64(OpenSSL::HMAC.digest('SHA256', ENV.fetch('FACEBOOK_APP_SECRET'), payload)) }
       let(:signed_request) { "#{encoded_sig}.#{payload}" }

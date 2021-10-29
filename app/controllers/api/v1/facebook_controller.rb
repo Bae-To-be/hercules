@@ -35,6 +35,12 @@ module Api
       end
 
       def deletion_status
+        if params['id'].nil?
+          render plain: 'Required parameter missing',
+                 status: :bad_request
+          return
+        end
+
         id = params['id'].gsub(ID_PREFIX, '').to_i
         user = User.find_by(id: id)
         if user
