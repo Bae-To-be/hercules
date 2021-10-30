@@ -11,8 +11,10 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model 'User' do
-    configure :interested_in, :gender_list
+  config.model 'Gender' do
+    configure :user_gender_interests do
+      hide
+    end
   end
 
   ['WorkTitle', 'Course', 'Industry'].each do |connected|

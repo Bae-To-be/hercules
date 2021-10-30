@@ -77,7 +77,6 @@ module Auth
     def new_user
       @new_user ||= User.create!(
         email: profile[:email],
-        gender: profile[:gender],
         birthday: profile[:birthday],
         name: profile[:name],
         facebook_id: profile[:id]

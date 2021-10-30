@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_30_041431) do
+ActiveRecord::Schema.define(version: 2021_10_30_044330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,13 @@ ActiveRecord::Schema.define(version: 2021_10_30_041431) do
     t.index ["name"], name: "index_courses_on_name", unique: true
   end
 
+  create_table "genders", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "images", force: :cascade do |t|
     t.boolean "profile_picture", default: false
     t.bigint "user_id"
@@ -98,11 +105,19 @@ ActiveRecord::Schema.define(version: 2021_10_30_041431) do
     t.index ["name"], name: "index_universities_on_name", unique: true
   end
 
+  create_table "user_gender_interests", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "gender_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gender_id"], name: "index_user_gender_interests_on_gender_id"
+    t.index ["user_id", "gender_id"], name: "index_user_gender_interests_on_user_id_and_gender_id", unique: true
+    t.index ["user_id"], name: "index_user_gender_interests_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "name", null: false
-    t.integer "gender"
-    t.integer "interested_in", default: [], array: true
     t.date "birthday"
     t.string "facebook_id"
     t.datetime "created_at", precision: 6, null: false
@@ -112,12 +127,12 @@ ActiveRecord::Schema.define(version: 2021_10_30_041431) do
     t.bigint "company_id"
     t.bigint "work_title_id"
     t.bigint "university_id"
+    t.bigint "gender_id"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["course_id"], name: "index_users_on_course_id"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["gender"], name: "index_users_on_gender"
+    t.index ["gender_id"], name: "index_users_on_gender_id"
     t.index ["industry_id"], name: "index_users_on_industry_id"
-    t.index ["interested_in"], name: "index_users_on_interested_in"
     t.index ["university_id"], name: "index_users_on_university_id"
     t.index ["work_title_id"], name: "index_users_on_work_title_id"
   end
@@ -146,6 +161,8 @@ ActiveRecord::Schema.define(version: 2021_10_30_041431) do
   add_foreign_key "course_relationships", "courses", column: "target_id"
   add_foreign_key "industry_relationships", "industries", column: "source_id"
   add_foreign_key "industry_relationships", "industries", column: "target_id"
+  add_foreign_key "user_gender_interests", "genders"
+  add_foreign_key "user_gender_interests", "users"
   add_foreign_key "work_title_relationships", "work_titles", column: "source_id"
   add_foreign_key "work_title_relationships", "work_titles", column: "target_id"
 
