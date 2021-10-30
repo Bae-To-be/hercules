@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_29_141428) do
+ActiveRecord::Schema.define(version: 2021_10_30_041431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,9 +107,19 @@ ActiveRecord::Schema.define(version: 2021_10_29_141428) do
     t.string "facebook_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "industry_id"
+    t.bigint "course_id"
+    t.bigint "company_id"
+    t.bigint "work_title_id"
+    t.bigint "university_id"
+    t.index ["company_id"], name: "index_users_on_company_id"
+    t.index ["course_id"], name: "index_users_on_course_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gender"], name: "index_users_on_gender"
+    t.index ["industry_id"], name: "index_users_on_industry_id"
     t.index ["interested_in"], name: "index_users_on_interested_in"
+    t.index ["university_id"], name: "index_users_on_university_id"
+    t.index ["work_title_id"], name: "index_users_on_work_title_id"
   end
 
   create_table "work_title_relationships", force: :cascade do |t|

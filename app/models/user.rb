@@ -21,6 +21,26 @@ class User < ApplicationRecord
           -> { where(profile_picture: true) },
           class_name: 'Image'
 
+  belongs_to :course, 
+    optional: true,
+    inverse_of: :users
+
+  belongs_to :industry,
+    optional: true,
+    inverse_of: :users
+
+  belongs_to :company,
+    optional: true,
+    inverse_of: :users
+
+  belongs_to :work_title,
+    optional: true,
+    inverse_of: :users
+
+  belongs_to :university,  
+    optional: true,
+    inverse_of: :users
+
   def to_h
     {
       name: name,

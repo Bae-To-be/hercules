@@ -17,4 +17,7 @@ class Industry < ApplicationRecord
 
   has_many :related_industries,
            through: :industry_connections
+
+  has_many :users,
+    inverse_of: :industry
 end
