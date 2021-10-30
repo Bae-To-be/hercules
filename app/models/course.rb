@@ -19,5 +19,5 @@ class Course < ApplicationRecord
            through: :course_connections
 
   has_many :users,
-  inverse_of: :course
+           inverse_of: :course
 end

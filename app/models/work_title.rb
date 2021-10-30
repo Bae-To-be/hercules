@@ -19,5 +19,5 @@ class WorkTitle < ApplicationRecord
            through: :work_title_connections
 
   has_many :users,
-    inverse_of: :work_title
+           inverse_of: :work_title
 end

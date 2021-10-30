@@ -6,5 +6,5 @@ class Company < ApplicationRecord
             uniqueness: true
 
   has_many :users,
-    inverse_of: :company
+           inverse_of: :company
 end

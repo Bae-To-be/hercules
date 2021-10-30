@@ -6,5 +6,5 @@ class University < ApplicationRecord
             uniqueness: true
 
   has_many :users,
-    inverse_of: :university
+           inverse_of: :university
 end

@@ -19,5 +19,5 @@ class Industry < ApplicationRecord
            through: :industry_connections
 
   has_many :users,
-    inverse_of: :industry
+           inverse_of: :industry
 end
