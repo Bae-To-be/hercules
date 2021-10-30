@@ -19,8 +19,9 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 # Use Sass to process CSS
-gem 'sassc-rails', '~> 2.1'
+gem 'sassc-rails'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+gem 'ffi', '= 1.9.18'
 gem 'image_optim'
 gem 'image_optim_pack'
 gem 'image_processing', '~> 1.2'
