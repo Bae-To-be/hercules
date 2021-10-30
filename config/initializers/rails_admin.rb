@@ -68,5 +68,6 @@ RailsAdmin.config do |config|
     WorkTitleConnection
     CourseConnection
     IndustryConnection
+    UserGenderInterest
   ]
 end
