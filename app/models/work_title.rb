@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class WorkTitle < ApplicationRecord
+  include PgSearch::Model
+  
   validates :name,
             presence: true,
             uniqueness: true
@@ -20,4 +22,8 @@ class WorkTitle < ApplicationRecord
 
   has_many :users,
            inverse_of: :work_title
+
+  pg_search_scope :search_by_name, 
+    against: :name,
+    using: [:trigram]
 end
