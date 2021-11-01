@@ -50,8 +50,8 @@ class User < ApplicationRecord
 
   scope :between_age, lambda { |lower, upper|
     where('birthday BETWEEN ? AND ?',
-          Date.today.utc.advance(years: -upper),
-          Date.today.utc.advance(years: -lower))
+          Time.now.utc.to_date.advance(years: -upper),
+          Time.now.utc.to_date.advance(years: -lower))
   }
 
   scope :interested_in_gender, lambda { |gender_id|
@@ -74,12 +74,12 @@ class User < ApplicationRecord
   def to_h
     {
       name: name,
-      course: course.name,
-      gender: gender.name,
-      industry: industry.name,
-      company: company.name,
-      university: university.name,
-      work_title: work_title.name,
+      course: course&.name,
+      gender: gender&.name,
+      industry: industry&.name,
+      company: company&.name,
+      university: university&.name,
+      work_title: work_title&.name,
       birthday: birthday.strftime('%d-%m-%Y'),
       age: current_age,
       profile_picture: profile_picture&.url
@@ -87,11 +87,11 @@ class User < ApplicationRecord
   end
 
   def current_age
-    years = Date.today.utc.year - birthday.year
-    years += 1 if Date.today.utc.month < birthday.month
+    years = Time.now.utc.to_date.year - birthday.year
+    years += 1 if Time.now.utc.to_date.month < birthday.month
 
-    if Date.today.utc.month == birthday.month &&
-       Date.today.utc.day < dob.day
+    if Time.now.utc.to_date.month == birthday.month &&
+       Time.now.utc.to_date.day < dob.day
       years -= 1
     end
 

@@ -80,9 +80,6 @@ Metrics/ModuleLength:
 Metrics/ClassLength:
   Enabled: false
 
-Rails/Date:
-  Enabled: false
-
 Naming/VariableNumber:
   Exclude:
   - 'spec/**/*_spec.rb' # RSpec
