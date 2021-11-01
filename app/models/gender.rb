@@ -6,4 +6,8 @@ class Gender < ApplicationRecord
 
   has_many :user_gender_interests,
            inverse_of: :gender
+
+  validates :name,
+            presence: true,
+            uniqueness: true
 end

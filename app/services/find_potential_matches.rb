@@ -132,6 +132,7 @@ class FindPotentialMatches
   def base_query
     User
       .where.not(id: [user.id, *swiped_user_ids])
+      .where(gender_id: user.interested_gener_ids)
       .between_age(user.interested_age_lower, user.interested_age_upper + 1)
       .interested_in_gender(user.gender_id)
       .public_send(institute_query, institute_id)
