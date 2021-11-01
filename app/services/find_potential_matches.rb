@@ -126,12 +126,12 @@ class FindPotentialMatches
   end
 
   def work_titles_matching_user
-    WorkTitle.search_by_name(user.work_title_name)
+    WorkTitle.search_by_name(user.work_title.name)
   end
 
   def base_query
     User
-      .where.not(id: user.id)
+      .where.not(id: [user.id, *swiped_user_ids])
       .between_age(user.interested_age_lower, user.interested_age_upper + 1)
       .interested_in_gender(user.gender_id)
       .public_send(institute_query, institute_id)
@@ -139,10 +139,12 @@ class FindPotentialMatches
       .distinct
   end
 
+  def swiped_user_ids
+    Swipe.where(from_id: user.id).pluck(:to_id)
+  end
+
   def add_if_doesnt_exist(step_results, results)
-    step_results.each do |user|
-      results << user unless results.include?(user)
-    end
+    results.push(*step_results).uniq
   end
 
   def institute_query
