@@ -4,7 +4,30 @@ module Api
   class BaseController < ActionController::API
     before_action :require_jwt
 
+    # Handlers for errors are searched from bottom to top
+    rescue_from StandardError,
+                with: :internal_server_error
+
+    rescue_from ActiveRecord::RecordInvalid,
+                ActiveRecord::RecordNotSaved,
+                with: :bad_request
+
     private
+
+    def bad_request(exception)
+      render_response(
+        ServiceResponse
+          .bad_request(exception.message)
+      )
+    end
+
+    def internal_server_error(exception)
+      Rails.logger.error(exception)
+      render_response(
+        ServiceResponse
+          .internal_server_error(exception.message)
+      )
+    end
 
     def render_response(response)
       render json: response.body,

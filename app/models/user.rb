@@ -20,6 +20,14 @@ class User < ApplicationRecord
            through: :user_gender_interests,
            source: :gender
 
+  has_many :swipes_performed,
+           class_name: 'Swipe',
+           inverse_of: :from
+
+  has_many :swipes_received,
+           class_name: 'Swipe',
+           inverse_of: :to
+
   has_one :profile_picture,
           -> { where(profile_picture: true) },
           class_name: 'Image'
@@ -73,6 +81,7 @@ class User < ApplicationRecord
 
   def to_h
     {
+      id: id,
       name: name,
       course: course&.name,
       gender: gender&.name,

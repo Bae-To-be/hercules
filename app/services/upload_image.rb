@@ -16,8 +16,6 @@ class UploadImage
          ActiveRecord::RecordNotSaved
     ServiceResponse
       .bad_request('invalid image')
-  rescue StandardError => e
-    ServiceResponse.internal_server_error(e.message)
   end
 
   private
