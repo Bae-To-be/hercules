@@ -6,7 +6,7 @@ module Api
       def index
         render_response(
           FindPotentialMatches.new(
-            current_user, 
+            current_user,
             params[:limit].presence || 10
           ).run
         )

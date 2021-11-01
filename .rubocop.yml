@@ -77,6 +77,11 @@ Metrics/ModuleLength:
   Exclude:
   - 'spec/**/*_spec.rb' # minitest
 
+Metrics/ClassLength:
+  Enabled: false
+
+Rails/Date:
+  Enabled: false
 
 Naming/VariableNumber:
   Exclude:

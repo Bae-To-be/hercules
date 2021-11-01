@@ -2,7 +2,7 @@
 
 class Course < ApplicationRecord
   include PgSearch::Model
-  
+
   validates :name,
             presence: true,
             uniqueness: true

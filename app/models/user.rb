@@ -48,29 +48,29 @@ class User < ApplicationRecord
              optional: true,
              inverse_of: :users
 
-  scope :between_age, -> (lower, upper) {
-    where('birthday BETWEEN ? AND ?', 
-      Date.today.advance(years: -upper), 
-      Date.today.advance(years: -lower))
+  scope :between_age, lambda { |lower, upper|
+    where('birthday BETWEEN ? AND ?',
+          Date.today.utc.advance(years: -upper),
+          Date.today.utc.advance(years: -lower))
   }
 
-  scope :interested_in_gender, -> (gender_id) {
+  scope :interested_in_gender, lambda { |gender_id|
     joins(:user_gender_interests)
       .where(user_gender_interests: { gender_id: gender_id })
   }
 
-  scope :exclude_company, -> (company_id) {
+  scope :exclude_company, lambda { |company_id|
     where.not(company_id: company_id)
   }
 
-  scope :exclude_university, -> (university_id) {
+  scope :exclude_university, lambda { |university_id|
     where.not(university_id: university_id)
   }
 
   def student?
     company_id.nil?
   end
-     
+
   def to_h
     {
       name: name,
@@ -87,14 +87,12 @@ class User < ApplicationRecord
   end
 
   def current_age
-    years = Date.today.year - birthday.year
-    if Date.today.month < birthday.month
-      years = years + 1
-    end
+    years = Date.today.utc.year - birthday.year
+    years += 1 if Date.today.utc.month < birthday.month
 
-    if (Date.today.month == birthday.month &&
-      Date.today.day < dob.day)
-      years = years - 1
+    if Date.today.utc.month == birthday.month &&
+       Date.today.utc.day < dob.day
+      years -= 1
     end
 
     years
