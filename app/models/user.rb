@@ -48,36 +48,6 @@ class User < ApplicationRecord
              optional: true,
              inverse_of: :users
 
-  delegate :name,
-           to: :course,
-           allow_nil: true,
-           prefix: true
-
-  delegate :name,
-           to: :industry,
-           allow_nil: true,
-           prefix: true
-
-  delegate :name,
-           to: :gender,
-           allow_nil: true,
-           prefix: true
-
-  delegate :name,
-           to: :company,
-           allow_nil: true,
-           prefix: true
-
-  delegate :name,
-           to: :university,
-           allow_nil: true,
-           prefix: true
-
-  delegate :name,
-           to: :work_title,
-           allow_nil: true,
-           prefix: true
-
   scope :between_age, -> (lower, upper) {
     where('birthday BETWEEN ? AND ?', 
       Date.today.advance(years: -upper), 
