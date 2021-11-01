@@ -13,6 +13,9 @@ class Swipe < ApplicationRecord
 
   validate :from_and_to_different
 
+  validates :to,
+            uniqueness: { scope: :from, message: 'user is already swiped' }
+
   private
 
   def from_and_to_different
