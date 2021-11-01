@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  extend ArrayEnum
+  include PgSearch::Model
 
   validates :email,
             presence: true,
@@ -78,17 +78,55 @@ class User < ApplicationRecord
            allow_nil: true,
            prefix: true
 
+  scope :between_age, -> (lower, upper) {
+    where('birthday BETWEEN ? AND ?', 
+      Date.today.advance(years: -upper), 
+      Date.today.advance(years: -lower))
+  }
+
+  scope :interested_in_gender, -> (gender_id) {
+    joins(:user_gender_interests)
+      .where(user_gender_interests: { gender_id: gender_id })
+  }
+
+  scope :exclude_company, -> (company_id) {
+    where.not(company_id: company_id)
+  }
+
+  scope :exclude_university, -> (university_id) {
+    where.not(university_id: university_id)
+  }
+
+  def student?
+    company_id.nil?
+  end
+     
   def to_h
     {
       name: name,
-      course: course_name,
-      gender: gender_name,
-      industry: industry_name,
-      company: company_name,
-      university: university_name,
-      work_title: work_title_name,
-      birthday: birthday&.strftime('%d-%m-%Y'),
+      course: course.name,
+      gender: gender.name,
+      industry: industry.name,
+      company: company.name,
+      university: university.name,
+      work_title: work_title.name,
+      birthday: birthday.strftime('%d-%m-%Y'),
+      age: current_age,
       profile_picture: profile_picture&.url
     }
+  end
+
+  def current_age
+    years = Date.today.year - birthday.year
+    if Date.today.month < birthday.month
+      years = years + 1
+    end
+
+    if (Date.today.month == birthday.month &&
+      Date.today.day < dob.day)
+      years = years - 1
+    end
+
+    years
   end
 end

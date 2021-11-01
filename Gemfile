@@ -26,7 +26,6 @@ gem 'image_optim_pack'
 gem 'image_processing', '~> 1.2'
 
 # custom
-gem 'array_enum'
 gem 'aws-sdk-s3', require: false
 gem 'jwt'
 gem 'koala'
@@ -34,6 +33,7 @@ gem 'oj'
 gem 'rails_admin', '~> 2.2.1'
 gem 'scenic'
 gem 'skylight'
+gem 'pg_search'
 
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]

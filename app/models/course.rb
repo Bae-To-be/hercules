@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Course < ApplicationRecord
+  include PgSearch::Model
+  
   validates :name,
             presence: true,
             uniqueness: true
@@ -20,4 +22,6 @@ class Course < ApplicationRecord
 
   has_many :users,
            inverse_of: :course
+
+  pg_search_scope :search_by_name, against: :name, using: [:trigram]
 end
