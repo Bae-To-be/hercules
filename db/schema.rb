@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_01_081932) do
+ActiveRecord::Schema.define(version: 2021_11_01_102714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -99,6 +99,17 @@ ActiveRecord::Schema.define(version: 2021_11_01_081932) do
     t.index ["target_id"], name: "index_industry_relationships_on_target_id"
   end
 
+  create_table "swipes", force: :cascade do |t|
+    t.bigint "from_id", null: false
+    t.bigint "to_id", null: false
+    t.integer "direction", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["from_id", "to_id"], name: "index_swipes_on_from_id_and_to_id", unique: true
+    t.index ["from_id"], name: "index_swipes_on_from_id"
+    t.index ["to_id"], name: "index_swipes_on_to_id"
+  end
+
   create_table "universities", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -164,6 +175,8 @@ ActiveRecord::Schema.define(version: 2021_11_01_081932) do
   add_foreign_key "course_relationships", "courses", column: "target_id"
   add_foreign_key "industry_relationships", "industries", column: "source_id"
   add_foreign_key "industry_relationships", "industries", column: "target_id"
+  add_foreign_key "swipes", "users", column: "from_id"
+  add_foreign_key "swipes", "users", column: "to_id"
   add_foreign_key "user_gender_interests", "genders"
   add_foreign_key "user_gender_interests", "users"
   add_foreign_key "work_title_relationships", "work_titles", column: "source_id"

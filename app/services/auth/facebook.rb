@@ -31,13 +31,6 @@ module Auth
       rescue Koala::Facebook::AuthenticationError
         ServiceResponse
           .unauthorized(INVALID_TOKEN)
-      rescue ActiveRecord::RecordInvalid => e
-        ServiceResponse
-          .bad_request(e.message)
-      rescue StandardError => e
-        Rails.logger.error(e)
-        ServiceResponse
-          .internal_server_error(e.message)
       end
     end
 
