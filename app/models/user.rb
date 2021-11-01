@@ -87,7 +87,7 @@ class User < ApplicationRecord
       company: company_name,
       university: university_name,
       work_title: work_title_name,
-      birthday: birthday.strftime('%d-%m-%Y'),
+      birthday: birthday&.strftime('%d-%m-%Y'),
       profile_picture: profile_picture&.url
     }
   end
