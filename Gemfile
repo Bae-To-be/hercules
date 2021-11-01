@@ -30,10 +30,10 @@ gem 'aws-sdk-s3', require: false
 gem 'jwt'
 gem 'koala'
 gem 'oj'
+gem 'pg_search'
 gem 'rails_admin', '~> 2.2.1'
 gem 'scenic'
 gem 'skylight'
-gem 'pg_search'
 
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]
