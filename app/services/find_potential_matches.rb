@@ -137,7 +137,6 @@ class FindPotentialMatches
       .between_age(user.interested_age_lower, user.interested_age_upper)
       .interested_in_gender(user.gender_id)
       .public_send(institute_query, institute_id)
-      .includes(:work_title, :company, :course, :industry, :profile_picture, :gender)
       .distinct
   end
 
