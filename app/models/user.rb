@@ -2,11 +2,20 @@
 
 class User < ApplicationRecord
   include PgSearch::Model
+  acts_as_mappable
 
   validates :email,
             presence: true,
             uniqueness: true,
             format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  validates :lng,
+            allow_nil: true,
+            numericality: true
+
+  validates :lat,
+            allow_nil: true,
+            numericality: true
 
   validates :name, presence: true
 
@@ -79,6 +88,10 @@ class User < ApplicationRecord
     company_id.nil?
   end
 
+  def search_radius_value
+    search_radius.zero? ? ENV.fetch('DEFAULT_SEARCH_RADIUS') : search_radius
+  end
+
   def to_h
     {
       id: id,
@@ -100,7 +113,7 @@ class User < ApplicationRecord
     years += 1 if Time.now.utc.to_date.month < birthday.month
 
     if Time.now.utc.to_date.month == birthday.month &&
-       Time.now.utc.to_date.day < dob.day
+       Time.now.utc.to_date.day < birthday.day
       years -= 1
     end
 

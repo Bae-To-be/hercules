@@ -7,7 +7,7 @@ module Api
         render_response(
           FindPotentialMatches.new(
             current_user,
-            params[:limit].presence || 10
+            params[:limit]&.to_i.presence || 10
           ).run
         )
       end
