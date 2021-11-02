@@ -122,7 +122,7 @@ class FindPotentialMatches
   end
 
   def courses_matching_user
-    Course.search_by_name(user.course_name)
+    Course.search_by_name(user.course.name)
   end
 
   def work_titles_matching_user
@@ -132,8 +132,9 @@ class FindPotentialMatches
   def base_query
     User
       .where.not(id: [user.id, *swiped_user_ids])
-      .where(gender_id: user.interested_gener_ids)
-      .between_age(user.interested_age_lower, user.interested_age_upper + 1)
+      .where(gender_id: user.interested_gender_ids)
+      .in_range(0..user.search_radius_value * 1000, origin: user)
+      .between_age(user.interested_age_lower, user.interested_age_upper)
       .interested_in_gender(user.gender_id)
       .public_send(institute_query, institute_id)
       .includes(:work_title, :company, :course, :industry, :profile_picture, :gender)

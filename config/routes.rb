@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       resources :images, only: %i[create]
       resources :swipes, only: %i[create]
       resources :potential_matches, only: %i[index]
+      resource :location, only: %i[create]
     end
   end
 

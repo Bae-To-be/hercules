@@ -27,6 +27,7 @@ gem 'image_processing', '~> 1.2'
 
 # custom
 gem 'aws-sdk-s3', require: false
+gem 'geokit-rails'
 gem 'jwt'
 gem 'koala'
 gem 'oj'

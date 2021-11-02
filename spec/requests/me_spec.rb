@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Authorization', type: :request do
+RSpec.feature 'User profile', type: :request do
   let!(:user) { create(:user) }
   let!(:token) { Auth::Token.jwt_token(user) }
 
