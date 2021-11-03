@@ -45,6 +45,16 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'User' do
+    configure :swipes_performed do
+      hide
+    end
+
+    configure :swipes_received do
+      hide
+    end
+  end
+
   config.actions do
     dashboard
     index
@@ -69,5 +79,6 @@ RailsAdmin.config do |config|
     CourseConnection
     IndustryConnection
     UserGenderInterest
+    Swipe
   ]
 end
