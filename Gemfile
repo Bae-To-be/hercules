@@ -35,6 +35,7 @@ gem 'pg_search'
 gem 'rails_admin', '~> 2.2.1'
 gem 'scenic'
 gem 'skylight'
+gem 'rexml'
 
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]
