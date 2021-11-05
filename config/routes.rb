@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   # Almost every application defines a route for the root path ("/") at the top of this file.
   # root "articles#index"
 
+  root 'pages#home'
+
+  get '/privacy_policy', to: 'pages#privacy_policy'
+  get '/terms_and_conditions', to: 'pages#terms_and_conditions'
+
   namespace :api do
     namespace :v1 do
       post 'auth', to: 'auth#verify'

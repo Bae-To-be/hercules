@@ -159,7 +159,7 @@ GEM
       temple (>= 0.8.0)
       tilt
     hashdiff (1.0.1)
-    i18n (1.8.10)
+    i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     image_optim (0.31.1)
       exifr (~> 1.2, >= 1.2.2)
