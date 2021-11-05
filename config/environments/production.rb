@@ -53,7 +53,7 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = {
     request_id: :request_id,
-    ip:         :remote_ip,
+    ip: :remote_ip
   }
 
   # Use a different cache store in production.
@@ -89,9 +89,7 @@ Rails.application.configure do
     config.semantic_logger.add_appender(io: $stdout, formatter: config.rails_semantic_logger.format)
   end
 
-  if ENV["LOG_LEVEL"].present?
-    config.log_level = ENV["LOG_LEVEL"].downcase.strip.to_sym
-  end
+  config.log_level = ENV['LOG_LEVEL'].downcase.strip.to_sym if ENV['LOG_LEVEL'].present?
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false

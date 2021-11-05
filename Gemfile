@@ -26,6 +26,7 @@ gem 'image_optim_pack'
 gem 'image_processing', '~> 1.2'
 
 # custom
+gem 'amazing_print'
 gem 'aws-sdk-s3', require: false
 gem 'geokit-rails'
 gem 'jwt'
@@ -33,11 +34,10 @@ gem 'koala'
 gem 'oj'
 gem 'pg_search'
 gem 'rails_admin', '~> 2.2.1'
+gem 'rails_semantic_logger'
 gem 'rexml'
 gem 'scenic'
 gem 'skylight'
-gem 'amazing_print'
-gem 'rails_semantic_logger'
 
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]
