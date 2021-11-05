@@ -36,6 +36,8 @@ gem 'rails_admin', '~> 2.2.1'
 gem 'rexml'
 gem 'scenic'
 gem 'skylight'
+gem 'amazing_print'
+gem 'rails_semantic_logger'
 
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]
