@@ -10,6 +10,7 @@ module Api
 
     rescue_from ActiveRecord::RecordInvalid,
                 ActiveRecord::RecordNotSaved,
+                Auth::FindOrCreateUser::InvalidProvider,
                 with: :bad_request
 
     private
@@ -23,6 +24,7 @@ module Api
 
     def internal_server_error(exception)
       Rails.logger.error(exception)
+      binding.b
       render_response(
         ServiceResponse
           .internal_server_error(exception.message)

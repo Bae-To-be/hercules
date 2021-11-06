@@ -38,6 +38,7 @@ gem 'rails_semantic_logger'
 gem 'rexml'
 gem 'scenic'
 gem 'skylight'
+gem 'google-id-token', git: 'https://github.com/google/google-id-token.git'
 
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]
@@ -73,4 +74,5 @@ group :test do
   gem 'vcr'
   gem 'webdrivers'
   gem 'webmock'
+  gem 'timecop'
 end

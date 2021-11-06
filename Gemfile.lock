@@ -6,6 +6,13 @@ GIT
     faker (2.19.0)
       i18n (>= 1.6, < 2)
 
+GIT
+  remote: https://github.com/google/google-id-token.git
+  revision: 46ac65ff03bd125d93b5acadd1c1adbdb86d919c
+  specs:
+    google-id-token (1.4.2)
+      jwt (>= 1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -390,6 +397,7 @@ GEM
       unicode-display_width (>= 1.1.1, < 3)
     thor (1.1.0)
     tilt (2.0.10)
+    timecop (0.9.4)
     turbo-rails (7.1.1)
       rails (>= 6.0.0)
     tzinfo (2.0.4)
@@ -432,6 +440,7 @@ DEPENDENCIES
   factory_bot
   faker!
   geokit-rails
+  google-id-token!
   image_optim
   image_optim_pack
   image_processing (~> 1.2)
@@ -460,6 +469,7 @@ DEPENDENCIES
   skylight
   spring
   stimulus-rails (>= 0.4.0)
+  timecop
   turbo-rails (>= 0.7.11)
   tzinfo-data
   vcr

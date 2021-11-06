@@ -6,7 +6,8 @@ module Api
       skip_before_action :require_jwt, only: %i[verify]
 
       def verify
-        render_response(Auth::Facebook.new(
+        render_response(Auth::FindOrCreateUser.new(
+          params[:auth_method],
           params[:token]
         ).run)
       end

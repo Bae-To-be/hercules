@@ -5,7 +5,7 @@ module Auth
     class << self
       def jwt_token(user)
         JWT.encode(
-          user.attributes.merge(exp: token_expiry),
+          { id: user.id, exp: token_expiry },
           ENV.fetch('JWT_SECRET'),
           'HS256'
         )
