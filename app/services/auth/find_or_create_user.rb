@@ -13,7 +13,7 @@ module Auth
       )
       @token = token
     rescue NameError
-      raise InvalidProvider, "#{auth_method} is not a valid provider"
+      raise InvalidProvider, "#{auth_method} is not a valid auth method"
     end
 
     def run
