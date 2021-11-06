@@ -15,7 +15,7 @@ module Auth
         {
           email: profile[:email],
           birthday: profile[:birthday],
-          name: profile[:name],
+          name: profile[:name]
         }
       end
 
@@ -28,13 +28,13 @@ module Auth
       def image_url
         profile.dig(:picture, :data, :url)
       end
-  
+
       private
-  
+
       def client
         @client ||= Koala::Facebook::API.new(token)
       end
-  
+
       def profile
         @profile ||= client
                        .get_object(GET_PROFILE_PARAMS)

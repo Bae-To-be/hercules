@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Auth
   class FindOrCreateUser
     class InvalidProvider < StandardError; end
-    
+
     MISSING_AUTH_TOKEN = 'missing auth token'
     INVALID_TOKEN      = 'invalid token'
 
@@ -32,13 +34,13 @@ module Auth
           .ok(formatted_data(new_user, true))
       end
     rescue GoogleIDToken::ClientIDMismatchError,
-      GoogleIDToken::AudienceMismatchError,
-      GoogleIDToken::InvalidIssuerError,
-      GoogleIDToken::SignatureError,
-      GoogleIDToken::CertificateError,
-      Koala::Facebook::AuthenticationError => e
-        ServiceResponse
-          .unauthorized(INVALID_TOKEN)
+           GoogleIDToken::AudienceMismatchError,
+           GoogleIDToken::InvalidIssuerError,
+           GoogleIDToken::SignatureError,
+           GoogleIDToken::CertificateError,
+           Koala::Facebook::AuthenticationError
+      ServiceResponse
+        .unauthorized(INVALID_TOKEN)
     end
 
     private

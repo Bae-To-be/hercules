@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Auth
   module Strategies
@@ -29,7 +30,7 @@ module Auth
         @parsed_token ||= token_validator.check(
           token,
           ENV.fetch('GOOGLE_WEB_CLIENT_ID'),
-          ENV.fetch('GOOGLE_ANDROID_CLIENT_ID'),
+          ENV.fetch('GOOGLE_ANDROID_CLIENT_ID')
         ).deep_symbolize_keys
       end
 

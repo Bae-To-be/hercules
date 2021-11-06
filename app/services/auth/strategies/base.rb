@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Auth
   module Strategies
     class Base
@@ -21,7 +23,7 @@ module Auth
         raise "Implement #image_url in #{self.class.name}"
       end
 
-      private 
+      private
 
       attr_reader :token
     end

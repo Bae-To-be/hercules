@@ -29,6 +29,7 @@ gem 'image_processing', '~> 1.2'
 gem 'amazing_print'
 gem 'aws-sdk-s3', require: false
 gem 'geokit-rails'
+gem 'google-id-token', git: 'https://github.com/google/google-id-token.git'
 gem 'jwt'
 gem 'koala'
 gem 'oj'
@@ -38,7 +39,6 @@ gem 'rails_semantic_logger'
 gem 'rexml'
 gem 'scenic'
 gem 'skylight'
-gem 'google-id-token', git: 'https://github.com/google/google-id-token.git'
 
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]
@@ -71,8 +71,8 @@ group :test do
   gem 'simplecov', require: false
   gem 'simplecov-console', require: false
   gem 'simplecov-material', require: false
+  gem 'timecop'
   gem 'vcr'
   gem 'webdrivers'
   gem 'webmock'
-  gem 'timecop'
 end

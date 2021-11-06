@@ -24,7 +24,6 @@ module Api
 
     def internal_server_error(exception)
       Rails.logger.error(exception)
-      binding.b
       render_response(
         ServiceResponse
           .internal_server_error(exception.message)
