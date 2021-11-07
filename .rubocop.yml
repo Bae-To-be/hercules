@@ -101,6 +101,9 @@ Lint/EmptyBlock:
 Rails/Output:
   Enabled: true
 
+Rails/DynamicFindBy:
+  Enabled: false
+
 Metrics/BlockLength:
   Exclude:
     # ActiveAdmin's DSL prefers long blocks

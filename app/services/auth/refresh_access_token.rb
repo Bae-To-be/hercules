@@ -16,7 +16,7 @@ module Auth
         )
       end
 
-      token = RefreshToken.find_by(token: refresh_token)
+      token = RefreshToken.find_by_token(refresh_token)
 
       if token.nil?
         return ServiceResponse.unauthorized(

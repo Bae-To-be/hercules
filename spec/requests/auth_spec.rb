@@ -41,7 +41,7 @@ RSpec.feature 'Authorization', type: :request do
               expect(response_user[:access_token]).to_not be nil
               user = User.last
               expect(Auth::Token.parsed_token(response_user[:access_token])['id']).to eq user.id
-              expect(RefreshToken.find_by(token: response_user[:refresh_token])).to eq user.refresh_tokens.last
+              expect(RefreshToken.find_by_token(response_user[:refresh_token])).to eq user.refresh_tokens.last
               expect(response_user[:is_new_user]).to eq true
             end
           end
@@ -72,7 +72,7 @@ RSpec.feature 'Authorization', type: :request do
             expect(response_user[:access_token]).to_not be nil
             user = User.last
             expect(Auth::Token.parsed_token(response_user[:access_token])['id']).to eq user.id
-            expect(RefreshToken.find_by(token: response_user[:refresh_token])).to eq user.refresh_tokens.last
+            expect(RefreshToken.find_by_token(response_user[:refresh_token])).to eq user.refresh_tokens.last
             expect(response_user[:is_new_user]).to eq true
           end
         end
@@ -100,7 +100,7 @@ RSpec.feature 'Authorization', type: :request do
             response_user = JSON.parse(response.body, symbolize_names: true)[:data]
             expect(response_user[:access_token]).to_not be nil
 
-            expect(RefreshToken.find_by(token: response_user[:refresh_token])).to eq user.refresh_tokens.last
+            expect(RefreshToken.find_by_token(response_user[:refresh_token])).to eq user.refresh_tokens.last
             expect(response_user[:is_new_user]).to eq false
           end
         end

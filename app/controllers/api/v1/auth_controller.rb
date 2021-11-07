@@ -27,7 +27,7 @@ module Api
         end
 
         RefreshToken
-          .find_by(token: params[:refresh_token])
+          .find_by_token(params[:refresh_token])
           &.destroy
 
         render_response(ServiceResponse.ok(nil))
