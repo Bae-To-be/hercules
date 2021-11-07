@@ -50,7 +50,9 @@ module Auth
     def formatted_data(user, is_new)
       {
         is_new_user: is_new,
-        token: jwt_token(user)
+        refresh_token: user.refresh_tokens.create!.token,
+        expires_in: Auth::Token.expires_in,
+        access_token: jwt_token(user)
       }
     end
 

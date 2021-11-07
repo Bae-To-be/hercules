@@ -22,11 +22,15 @@ module Auth
         ''
       end
 
+      def expires_in
+        (ENV.fetch('JWT_EXPIRY_MINUTES').to_i * 60)
+      end
+
       private
 
       def token_expiry
         Time.now.to_i +
-          (ENV.fetch('JWT_EXPIRY_HOURS').to_i * 3600)
+          expires_in
       end
     end
   end

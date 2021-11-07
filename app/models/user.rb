@@ -41,6 +41,8 @@ class User < ApplicationRecord
           -> { where(profile_picture: true) },
           class_name: 'Image'
 
+  has_many :refresh_tokens, dependent: :delete_all
+
   belongs_to :course,
              optional: true,
              inverse_of: :users

@@ -19,7 +19,7 @@ RSpec.feature 'Authorization', type: :request do
              params: { auth_method: 'random', token: '' }
 
         expect(response.status).to eq 400
-        expect(JSON.parse(response.body, symbolize_names: true)[:error]).to eq('random is not a valid provider')
+        expect(JSON.parse(response.body, symbolize_names: true)[:error]).to eq('random is not a valid auth method')
       end
     end
 
@@ -38,7 +38,10 @@ RSpec.feature 'Authorization', type: :request do
                    params: { auth_method: 'google', token: token }
               expect(response.status).to eq 200
               response_user = JSON.parse(response.body, symbolize_names: true)[:data]
-              expect(response_user[:token]).to_not be nil
+              expect(response_user[:access_token]).to_not be nil
+              user = User.last
+              expect(Auth::Token.parsed_token(response_user[:access_token])['id']).to eq user.id
+              expect(RefreshToken.find_by(token: response_user[:refresh_token])).to eq user.refresh_tokens.last
               expect(response_user[:is_new_user]).to eq true
             end
           end
@@ -66,7 +69,10 @@ RSpec.feature 'Authorization', type: :request do
                  params: { auth_method: 'facebook', token: token }
             expect(response.status).to eq 200
             response_user = JSON.parse(response.body, symbolize_names: true)[:data]
-            expect(response_user[:token]).to_not be nil
+            expect(response_user[:access_token]).to_not be nil
+            user = User.last
+            expect(Auth::Token.parsed_token(response_user[:access_token])['id']).to eq user.id
+            expect(RefreshToken.find_by(token: response_user[:refresh_token])).to eq user.refresh_tokens.last
             expect(response_user[:is_new_user]).to eq true
           end
         end
@@ -92,7 +98,9 @@ RSpec.feature 'Authorization', type: :request do
                  params: { auth_method: 'facebook', token: token }
             expect(response.status).to eq 200
             response_user = JSON.parse(response.body, symbolize_names: true)[:data]
-            expect(response_user[:token]).to_not be nil
+            expect(response_user[:access_token]).to_not be nil
+
+            expect(RefreshToken.find_by(token: response_user[:refresh_token])).to eq user.refresh_tokens.last
             expect(response_user[:is_new_user]).to eq false
           end
         end
@@ -114,6 +122,61 @@ RSpec.feature 'Authorization', type: :request do
             })
           end
         end
+      end
+    end
+  end
+
+  describe '/api/v1/logout' do
+    context 'when refresh token missing' do
+      it 'returns 401' do
+        post '/api/v1/logout'
+        expect(response.status).to eq 400
+      end
+    end
+
+    context 'when refresh token present' do
+      let!(:user) { create(:user, email: 'gaurav@baetobe.com') }
+      let!(:token) { user.refresh_tokens.create! }
+
+      it 'returns 200' do
+        post '/api/v1/logout',
+             params: { refresh_token: token.token }
+        expect(user.refresh_tokens.reload).to be_blank
+        expect(response.status).to eq(200)
+      end
+    end
+  end
+
+  describe '/api/v1/refresh_token' do
+    context 'when token missing' do
+      it 'returns 400' do
+        post '/api/v1/refresh_token'
+        expect(response.status).to eq 400
+        expect(JSON.parse(response.body, symbolize_names: true)[:error])
+          .to eq 'Refresh token is a required parameter'
+      end
+    end
+
+    context 'when token is invalid' do
+      it 'returns 401' do
+        post '/api/v1/refresh_token',
+             params: { refresh_token: 'random_string' }
+        expect(response.status).to eq 401
+        expect(JSON.parse(response.body, symbolize_names: true)[:error])
+          .to eq 'Invalid refresh token passed'
+      end
+    end
+
+    context 'when token is valid' do
+      let!(:user) { create(:user, email: 'gaurav@baetobe.com') }
+      let!(:token) { user.refresh_tokens.create! }
+
+      it 'returns 200' do
+        post '/api/v1/refresh_token',
+             params: { refresh_token: token.token }
+        expect(response.status).to eq(200)
+        data = JSON.parse(response.body, symbolize_names: true)[:data]
+        expect(data[:access_token]).not_to be_nil
       end
     end
   end

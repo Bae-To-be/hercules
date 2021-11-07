@@ -48,11 +48,11 @@ module Api
     end
 
     def parsed_token
-      Auth::Token.parsed_token(auth.gsub('Bearer ', ''))
+      Auth::Token.parsed_token(auth)
     end
 
     def auth
-      @auth ||= request.headers['HTTP_AUTHORIZATION']
+      @auth ||= request.headers['HTTP_AUTHORIZATION']&.gsub('Bearer ', '')
     end
   end
 end

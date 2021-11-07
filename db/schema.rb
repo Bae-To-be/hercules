@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_06_101559) do
+ActiveRecord::Schema.define(version: 2021_11_07_070640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -98,6 +98,15 @@ ActiveRecord::Schema.define(version: 2021_11_06_101559) do
     t.index "(ARRAY[LEAST(source_id, target_id), GREATEST(target_id, source_id)])", name: "industry_pair_uniq", unique: true
     t.index ["source_id"], name: "index_industry_relationships_on_source_id"
     t.index ["target_id"], name: "index_industry_relationships_on_target_id"
+  end
+
+  create_table "refresh_tokens", force: :cascade do |t|
+    t.string "crypted_token"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["crypted_token"], name: "index_refresh_tokens_on_crypted_token", unique: true
+    t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
   end
 
   create_table "swipes", force: :cascade do |t|
