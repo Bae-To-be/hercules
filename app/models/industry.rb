@@ -20,4 +20,12 @@ class Industry < ApplicationRecord
 
   has_many :users,
            inverse_of: :industry
+
+
+  def to_h
+    { 
+      id: id,
+      name: name
+    }
+  end
 end

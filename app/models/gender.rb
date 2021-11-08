@@ -10,4 +10,12 @@ class Gender < ApplicationRecord
   validates :name,
             presence: true,
             uniqueness: true
+
+  def to_h
+    { 
+      id: id,
+      name: name,
+      description: description
+    }
+  end
 end
