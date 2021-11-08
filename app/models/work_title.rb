@@ -27,9 +27,8 @@ class WorkTitle < ApplicationRecord
                   against: :name,
                   using: [:trigram]
 
-
   def to_h
-    { 
+    {
       id: id,
       name: name
     }

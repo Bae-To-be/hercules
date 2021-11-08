@@ -5,8 +5,8 @@ module Api
     class CompaniesController < BaseController
       def index
         render_response(ListRecords.new(
-          Company, 
-          :search_by_name, 
+          Company,
+          :search_by_name,
           params[:query]
         ).run)
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ListRecords
   def initialize(model, search_scope, query)
     @model = model

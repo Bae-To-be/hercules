@@ -5,8 +5,8 @@ module Api
     class WorkTitlesController < BaseController
       def index
         render_response(ListRecords.new(
-          WorkTitle, 
-          :search_by_name, 
+          WorkTitle,
+          :search_by_name,
           params[:query]
         ).run)
       end

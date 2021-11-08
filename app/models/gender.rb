@@ -12,7 +12,7 @@ class Gender < ApplicationRecord
             uniqueness: true
 
   def to_h
-    { 
+    {
       id: id,
       name: name,
       description: description

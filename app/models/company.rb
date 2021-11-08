@@ -10,12 +10,12 @@ class Company < ApplicationRecord
   has_many :users,
            inverse_of: :company
 
-  pg_search_scope :search_by_name, 
-    against: :name, 
-    using: [:tsearch, :trigram]
+  pg_search_scope :search_by_name,
+                  against: :name,
+                  using: [:tsearch, :trigram]
 
   def to_h
-    { 
+    {
       id: id,
       name: name
     }
