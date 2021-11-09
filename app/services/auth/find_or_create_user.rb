@@ -38,6 +38,7 @@ module Auth
            GoogleIDToken::InvalidIssuerError,
            GoogleIDToken::SignatureError,
            GoogleIDToken::CertificateError,
+           GoogleIDToken::ExpiredTokenError,
            Koala::Facebook::AuthenticationError
       ServiceResponse
         .unauthorized(INVALID_TOKEN)
