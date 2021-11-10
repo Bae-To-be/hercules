@@ -80,5 +80,6 @@ RailsAdmin.config do |config|
     IndustryConnection
     UserGenderInterest
     Swipe
+    RefreshToken
   ]
 end
