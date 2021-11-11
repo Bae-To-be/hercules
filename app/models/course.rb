@@ -23,7 +23,13 @@ class Course < ApplicationRecord
   has_many :users,
            inverse_of: :course
 
-  pg_search_scope :search_by_name, against: :name, using: [:trigram]
+  pg_search_scope :search_by_name, against: :name, using: {
+    tsearch: {
+      prefix: true,
+      dictionary: 'english'
+    },
+    trigram: {}
+  }
 
   def to_h
     {

@@ -12,7 +12,13 @@ class Company < ApplicationRecord
 
   pg_search_scope :search_by_name,
                   against: :name,
-                  using: [:tsearch, :trigram]
+                  using: {
+                    tsearch: {
+                      prefix: true,
+                      dictionary: 'english'
+                    },
+                    trigram: {}
+                  }
 
   def to_h
     {

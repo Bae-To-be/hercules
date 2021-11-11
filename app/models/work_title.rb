@@ -25,7 +25,13 @@ class WorkTitle < ApplicationRecord
 
   pg_search_scope :search_by_name,
                   against: :name,
-                  using: [:trigram]
+                  using: {
+                    tsearch: {
+                      prefix: true,
+                      dictionary: 'english'
+                    },
+                    trigram: {}
+                  }
 
   def to_h
     {
