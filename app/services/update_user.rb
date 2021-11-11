@@ -38,7 +38,7 @@ class UpdateUser
         )
       end
 
-      if params[:location].present?
+      unless params[:location].nil?
         unless params[:location][:lat].present? &&
                params[:location][:lng].present?
           return ServiceResponse.bad_request(
