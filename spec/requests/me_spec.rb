@@ -24,7 +24,7 @@ RSpec.feature 'User profile', type: :request do
             headers: { 'HTTP_AUTHORIZATION' => token }
 
         expect(response.status).to eq 200
-        expect(JSON.parse(response.body, symbolize_names: true)[:data]).to eq(user.to_h)
+        expect(JSON.parse(response.body, symbolize_names: true)[:data]).to eq(user.me_hash)
       end
     end
   end

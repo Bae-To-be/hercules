@@ -19,6 +19,10 @@ class User < ApplicationRecord
 
   validates :name, presence: true
 
+  validates :linkedin_url,
+            format: { with: Regexp.new('https:\\/\\/[a-z]{2,3}\\.linkedin\\.com\\/.*') },
+            allow_blank: true
+
   has_many :images, dependent: :destroy
 
   has_many :user_gender_interests,
@@ -92,6 +96,21 @@ class User < ApplicationRecord
 
   def search_radius_value
     search_radius.zero? ? ENV.fetch('DEFAULT_SEARCH_RADIUS') : search_radius
+  end
+
+  def me_hash
+    {
+      id: id,
+      name: name,
+      course: course&.name,
+      gender: gender&.name,
+      industry: industry&.name,
+      company: company&.name,
+      university: university&.name,
+      work_title: work_title&.name,
+      birthday: birthday.strftime('%d-%m-%Y'),
+      age: current_age
+    }
   end
 
   def to_h

@@ -35,7 +35,7 @@ module Api
 
       def me
         render_response(
-          ServiceResponse.ok(current_user.to_h)
+          ServiceResponse.ok(current_user.me_hash)
         )
       end
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_07_070640) do
+ActiveRecord::Schema.define(version: 2021_11_11_095851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(version: 2021_11_07_070640) do
     t.decimal "lng", precision: 10, scale: 6
     t.integer "search_radius", default: 0
     t.string "google_id"
+    t.string "linkedin_url"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["course_id"], name: "index_users_on_course_id"
     t.index ["email"], name: "index_users_on_email", unique: true
