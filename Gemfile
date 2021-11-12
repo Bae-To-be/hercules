@@ -24,6 +24,7 @@ gem 'sassc-rails'
 gem 'image_optim'
 gem 'image_optim_pack'
 gem 'image_processing', '~> 1.2'
+gem 'rollbar'
 
 # custom
 gem 'amazing_print'

@@ -310,6 +310,7 @@ GEM
       io-console (~> 0.5)
     remotipart (1.4.4)
     rexml (3.2.5)
+    rollbar (3.3.0)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -456,6 +457,7 @@ DEPENDENCIES
   rails_admin (~> 2.2.1)
   rails_semantic_logger
   rexml
+  rollbar
   rspec-rails (~> 5.0.0)
   rubocop-rails
   rubocop-rspec
