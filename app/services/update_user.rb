@@ -46,13 +46,9 @@ class UpdateUser
           )
         end
 
-        if params.dig(:location, :country_code).present?
-          user.country_code = params.dig(:location, :country_code)
-        end
+        user.country_code = params.dig(:location, :country_code) if params.dig(:location, :country_code).present?
 
-        if params.dig(:location, :locality).present?
-          user.locality = params.dig(:location, :locality)
-        end
+        user.locality = params.dig(:location, :locality) if params.dig(:location, :locality).present?
 
         user.lat = params.dig(:location, :lat)
         user.lng = params.dig(:location, :lng)
