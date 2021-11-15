@@ -22,7 +22,7 @@ module Api
           :work_title_name,
           :university_name,
           :course_name,
-          location: %i[lat lng]
+          location: %i[lat lng country_code locality]
         )
       end
     end
