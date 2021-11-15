@@ -39,15 +39,23 @@ class UpdateUser
       end
 
       unless params[:location].nil?
-        unless params[:location][:lat].present? &&
-               params[:location][:lng].present?
+        unless params.dig(:location, :lat).present? &&
+               params.dig(:location, :lng).present?
           return ServiceResponse.bad_request(
             LOCATION_ATTRIBUTES_MISSING
           )
         end
 
-        user.lat = params[:location][:lat]
-        user.lng = params[:location][:lng]
+        if params.dig(:location, :country_code).present?
+          user.country_code = params.dig(:location, :country_code)
+        end
+
+        if params.dig(:location, :locality).present?
+          user.locality = params.dig(:location, :locality)
+        end
+
+        user.lat = params.dig(:location, :lat)
+        user.lng = params.dig(:location, :lng)
       end
 
       if params[:interested_gender_ids].present?
