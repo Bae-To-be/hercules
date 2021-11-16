@@ -14,8 +14,7 @@ class Gender < ApplicationRecord
   def to_h
     {
       id: id,
-      name: name,
-      description: description
+      name: name
     }
   end
 end
