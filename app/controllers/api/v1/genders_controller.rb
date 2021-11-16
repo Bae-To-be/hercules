@@ -6,7 +6,8 @@ module Api
       def index
         render_response(
           ServiceResponse.ok(
-            Gender.all.map(&:to_h)
+            default: Gender.where(name: ['Male', 'Female']).map(&:to_h),
+            all: Gender.all.map(&:to_h)
           )
         )
       end
