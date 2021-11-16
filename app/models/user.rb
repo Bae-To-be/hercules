@@ -108,7 +108,7 @@ class User < ApplicationRecord
       company: company&.name,
       university: university&.name,
       work_title: work_title&.name,
-      birthday: birthday.strftime('%d-%m-%Y'),
+      birthday: birthday&.strftime('%d-%m-%Y'),
       age: current_age
     }
   end
@@ -123,13 +123,15 @@ class User < ApplicationRecord
       company: company&.name,
       university: university&.name,
       work_title: work_title&.name,
-      birthday: birthday.strftime('%d-%m-%Y'),
+      birthday: birthday&.strftime('%d-%m-%Y'),
       age: current_age,
       profile_picture: profile_picture&.url
     }
   end
 
   def current_age
+    return if birthday.blank?
+
     years = Time.now.utc.to_date.year - birthday.year
     years += 1 if Time.now.utc.to_date.month < birthday.month
 
