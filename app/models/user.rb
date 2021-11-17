@@ -109,7 +109,8 @@ class User < ApplicationRecord
       university: university&.name,
       work_title: work_title&.name,
       birthday: birthday&.strftime('%d-%m-%Y'),
-      age: current_age
+      age: current_age,
+      interested_genders: interested_genders.map(&:name)
     }
   end
 
