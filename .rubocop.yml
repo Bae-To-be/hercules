@@ -115,6 +115,10 @@ Metrics/BlockLength:
     - config/**/*
     - 'spec/**/*_spec.rb' # RSpec
 
+Rails/UniqueValidationWithoutIndex:
+  Exclude:
+    - app/models/user_gender_interest.rb
+
 Rails/HasManyOrHasOneDependent:
   Enabled: false
 

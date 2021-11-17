@@ -9,6 +9,7 @@ class UpdateUser
     gender_id
     industry_id
     linkedin_url
+    interested_gender_ids
   ].freeze
 
   EXCLUDE_TITLIZE = %i[course_name].freeze
@@ -52,14 +53,6 @@ class UpdateUser
 
         user.lat = params.dig(:location, :lat)
         user.lng = params.dig(:location, :lng)
-      end
-
-      if params[:interested_gender_ids].present?
-        params[:interested_gender_ids].each do |gender_id|
-          user.user_gender_interests.create!(
-            gender_id: gender_id
-          )
-        end
       end
 
       FUZZY_ATTRIBUTES.each do |key, model|
