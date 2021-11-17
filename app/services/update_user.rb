@@ -68,7 +68,7 @@ class UpdateUser
 
       user.save!
     end
-    ServiceResponse.ok(nil)
+    ServiceResponse.ok(user.me_hash)
   end
 
   private
