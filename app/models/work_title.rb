@@ -30,7 +30,9 @@ class WorkTitle < ApplicationRecord
                       prefix: true,
                       dictionary: 'english'
                     },
-                    trigram: {}
+                    trigram: {
+                      threshold: 0.6
+                    }
                   }
 
   def to_h
