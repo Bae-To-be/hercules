@@ -9,7 +9,10 @@ class ListRecords
 
   def run
     ServiceResponse.ok(
-      model.public_send(search_scope, query).map(&:to_h)
+      model
+        .public_send(search_scope, query)
+        .limit(100)
+        .map(&:to_h)
     )
   end
 
