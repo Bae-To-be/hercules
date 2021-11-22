@@ -30,6 +30,8 @@ class User < ApplicationRecord
 
   has_many :images, dependent: :destroy
 
+  has_many :educations, dependent: :destroy, inverse_of: :user
+
   has_many :user_gender_interests,
            inverse_of: :user,
            dependent: :destroy
@@ -102,7 +104,8 @@ class User < ApplicationRecord
       birthday: birthday&.strftime('%d-%m-%Y'),
       age: current_age,
       student: student,
-      interested_genders: interested_genders.map(&:name)
+      interested_genders: interested_genders.map(&:name),
+      education: educations.map(&:to_h)
     }
   end
 
@@ -117,7 +120,8 @@ class User < ApplicationRecord
       birthday: birthday&.strftime('%d-%m-%Y'),
       age: current_age,
       student: student,
-      profile_picture: profile_picture&.url
+      profile_picture: profile_picture&.url,
+      education: educations.map(&:to_h)
     }
   end
 

@@ -20,8 +20,7 @@ class Course < ApplicationRecord
   has_many :related_courses,
            through: :course_connections
 
-  has_many :users,
-           inverse_of: :course
+  has_many :educations, inverse_of: :course
 
   pg_search_scope :search_by_name, against: :name, using: {
     tsearch: {

@@ -6,8 +6,7 @@ class University < ApplicationRecord
             presence: true,
             uniqueness: true
 
-  has_many :users,
-           inverse_of: :university
+  has_many :educations, inverse_of: :university
 
   pg_search_scope :search_by_name,
                   against: :name,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_155027) do
+ActiveRecord::Schema.define(version: 2021_11_22_161226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -65,6 +65,18 @@ ActiveRecord::Schema.define(version: 2021_11_22_155027) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_courses_on_name", unique: true
+  end
+
+  create_table "educations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.bigint "university_id", null: false
+    t.integer "year"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_educations_on_course_id"
+    t.index ["university_id"], name: "index_educations_on_university_id"
+    t.index ["user_id"], name: "index_educations_on_user_id"
   end
 
   create_table "genders", force: :cascade do |t|
@@ -185,6 +197,9 @@ ActiveRecord::Schema.define(version: 2021_11_22_155027) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "course_relationships", "courses", column: "source_id"
   add_foreign_key "course_relationships", "courses", column: "target_id"
+  add_foreign_key "educations", "courses"
+  add_foreign_key "educations", "universities"
+  add_foreign_key "educations", "users"
   add_foreign_key "industry_relationships", "industries", column: "source_id"
   add_foreign_key "industry_relationships", "industries", column: "target_id"
   add_foreign_key "swipes", "users", column: "from_id"

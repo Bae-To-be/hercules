@@ -17,6 +17,12 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Education' do
+    object_label_method do
+      :pretty_name
+    end
+  end
+
   ['WorkTitle', 'Course', 'Industry'].each do |connected|
     config.model connected do
       configure "#{connected.underscore}_connections".to_sym do
