@@ -90,10 +90,6 @@ class User < ApplicationRecord
     where.not(university_id: university_id)
   }
 
-  def student?
-    company_id.nil?
-  end
-
   def search_radius_value
     search_radius.zero? ? ENV.fetch('DEFAULT_SEARCH_RADIUS') : search_radius
   end
@@ -110,6 +106,7 @@ class User < ApplicationRecord
       work_title: work_title&.name,
       birthday: birthday&.strftime('%d-%m-%Y'),
       age: current_age,
+      student: student,
       interested_genders: interested_genders.map(&:name)
     }
   end
@@ -126,6 +123,7 @@ class User < ApplicationRecord
       work_title: work_title&.name,
       birthday: birthday&.strftime('%d-%m-%Y'),
       age: current_age,
+      student: student,
       profile_picture: profile_picture&.url
     }
   end

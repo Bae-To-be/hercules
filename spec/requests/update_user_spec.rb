@@ -48,7 +48,8 @@ RSpec.feature 'Update user fields', type: :request do
                 company_name: company_name,
                 university_name: university_name,
                 work_title_name: work_title_name,
-                location: location
+                location: location,
+                student: true
               },
               headers: { 'HTTP_AUTHORIZATION' => token }
 
@@ -62,6 +63,7 @@ RSpec.feature 'Update user fields', type: :request do
         expect(user.university.name).to eq(university_name.titleize)
         expect(user.lat).to eq(location[:lat])
         expect(user.lng).to eq(location[:lng])
+        expect(user.student?).to eq true
       end
     end
   end

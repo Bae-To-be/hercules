@@ -21,6 +21,7 @@ module Api
           :work_title_name,
           :university_name,
           :course_name,
+          :student,
           interested_gender_ids: [],
           location: %i[lat lng country_code locality]
         )

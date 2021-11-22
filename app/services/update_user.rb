@@ -9,6 +9,7 @@ class UpdateUser
     gender_id
     industry_id
     linkedin_url
+    student
     interested_gender_ids
   ].freeze
 
