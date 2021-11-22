@@ -11,7 +11,7 @@ class ListRecords
     ServiceResponse.ok(
       model
         .public_send(search_scope, query)
-        .limit(100)
+        .limit(50)
         .map(&:to_h)
     )
   end
