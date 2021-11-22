@@ -46,7 +46,6 @@ RSpec.feature 'Update user fields', type: :request do
                 student: true
               },
               headers: { 'HTTP_AUTHORIZATION' => token }
-
         expect(response.status).to eq 200
         user.reload
         expect(user.gender_id).to eq(gender.id)

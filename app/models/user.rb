@@ -23,6 +23,11 @@ class User < ApplicationRecord
             format: { with: Regexp.new('https:\\/\\/[a-z]{2,3}\\.linkedin\\.com\\/.*') },
             allow_blank: true
 
+  validates :birthday,
+            inclusion: { in: lambda { |_g|
+                               (-Float::INFINITY..(Time.now.utc.to_date - 18.years))
+                             }, message: 'cannot be less than 18 years' }, allow_nil: true
+
   has_many :images, dependent: :destroy
 
   has_many :user_gender_interests,
