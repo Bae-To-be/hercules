@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_152840) do
+ActiveRecord::Schema.define(version: 2021_11_22_155027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -143,10 +143,8 @@ ActiveRecord::Schema.define(version: 2021_11_22_152840) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "industry_id"
-    t.bigint "course_id"
     t.bigint "company_id"
     t.bigint "work_title_id"
-    t.bigint "university_id"
     t.bigint "gender_id"
     t.integer "interested_age_lower"
     t.integer "interested_age_upper"
@@ -159,11 +157,9 @@ ActiveRecord::Schema.define(version: 2021_11_22_152840) do
     t.string "locality"
     t.boolean "student", default: false
     t.index ["company_id"], name: "index_users_on_company_id"
-    t.index ["course_id"], name: "index_users_on_course_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gender_id"], name: "index_users_on_gender_id"
     t.index ["industry_id"], name: "index_users_on_industry_id"
-    t.index ["university_id"], name: "index_users_on_university_id"
     t.index ["work_title_id"], name: "index_users_on_work_title_id"
   end
 

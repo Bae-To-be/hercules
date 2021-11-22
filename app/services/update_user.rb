@@ -13,13 +13,9 @@ class UpdateUser
     interested_gender_ids
   ].freeze
 
-  EXCLUDE_TITLIZE = %i[course_name].freeze
-
   FUZZY_ATTRIBUTES = {
     company_name: Company,
-    work_title_name: WorkTitle,
-    university_name: University,
-    course_name: Course
+    work_title_name: WorkTitle
   }.freeze
 
   def initialize(user, params)
@@ -59,8 +55,7 @@ class UpdateUser
       FUZZY_ATTRIBUTES.each do |key, model|
         next if params[key].blank?
 
-        name = EXCLUDE_TITLIZE.include?(key) ? params[key] : params[key].titleize
-        record = model.find_or_create_by!(name: name)
+        record = model.find_or_create_by!(name: params[key].titleize)
         user.public_send(
           "#{model.name.underscore}=",
           record

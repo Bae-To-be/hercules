@@ -47,10 +47,6 @@ class User < ApplicationRecord
 
   has_many :refresh_tokens, dependent: :delete_all
 
-  belongs_to :course,
-             optional: true,
-             inverse_of: :users
-
   belongs_to :industry,
              optional: true,
              inverse_of: :users
@@ -60,10 +56,6 @@ class User < ApplicationRecord
              inverse_of: :users
 
   belongs_to :work_title,
-             optional: true,
-             inverse_of: :users
-
-  belongs_to :university,
              optional: true,
              inverse_of: :users
 
@@ -98,11 +90,9 @@ class User < ApplicationRecord
     {
       id: id,
       name: name,
-      course: course&.name,
       gender: gender&.name,
       industry: industry&.name,
       company: company&.name,
-      university: university&.name,
       work_title: work_title&.name,
       birthday: birthday&.strftime('%d-%m-%Y'),
       age: current_age,
@@ -115,11 +105,9 @@ class User < ApplicationRecord
     {
       id: id,
       name: name,
-      course: course&.name,
       gender: gender&.name,
       industry: industry&.name,
       company: company&.name,
-      university: university&.name,
       work_title: work_title&.name,
       birthday: birthday&.strftime('%d-%m-%Y'),
       age: current_age,
