@@ -107,6 +107,7 @@ class User < ApplicationRecord
       interested_genders: interested_genders.map(&:name),
       education: educations.map(&:to_h),
       linkedin_url: linkedin_url,
+      linkedin_public: linkedin_public
     }
   end
 

@@ -15,6 +15,7 @@ module Api
         params.permit(
           :birthday,
           :linkedin_url,
+          :linkedin_public,
           :gender_id,
           :industry_id,
           :company_name,
