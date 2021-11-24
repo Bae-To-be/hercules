@@ -5,7 +5,7 @@ module Api
     class ImagesController < BaseController
       def create
         render_response(
-          UploadImage.new(params[:image], current_user).run
+          UploadImage.new(params[:image], params[:position], current_user).run
         )
       end
     end

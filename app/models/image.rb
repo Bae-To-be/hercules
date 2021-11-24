@@ -6,12 +6,14 @@ class Image < ApplicationRecord
   has_one_attached :file
   delegate_missing_to :file
 
+  validates :position, uniqueness: { scope: :user_id }
+
   before_save :validate_blob
 
   def to_h
     {
-      url: download_url,
-      profile_picture: profile_picture
+      position: position,
+      url: download_url
     }
   end
 

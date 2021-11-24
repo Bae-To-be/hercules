@@ -52,10 +52,6 @@ class User < ApplicationRecord
            foreign_key: :to_id,
            dependent: :destroy
 
-  has_one :profile_picture,
-          -> { where(profile_picture: true) },
-          class_name: 'Image'
-
   has_many :refresh_tokens, dependent: :delete_all
 
   belongs_to :industry,
@@ -126,7 +122,6 @@ class User < ApplicationRecord
       birthday: birthday&.strftime('%d-%m-%Y'),
       age: current_age,
       student: student,
-      profile_picture: profile_picture&.url,
       education: educations.map(&:to_h)
     }
   end

@@ -85,7 +85,7 @@ module Auth
       image_data = URI.open(url).read
       # rubocop:enable Security/Open
       data = ImageOptim.new.optimize_image_data(image_data)
-      new_user.images.create!(profile_picture: true) do |image|
+      new_user.images.create!(position: 0) do |image|
         image.file.attach(io: StringIO.new(data), filename: "fb_#{image.id}.jpeg")
       end
     end

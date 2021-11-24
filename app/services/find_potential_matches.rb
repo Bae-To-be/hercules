@@ -30,7 +30,7 @@ class FindPotentialMatches
 
   def formatted_result(ids)
     User
-      .includes(:work_title, :company, :course, :industry, :profile_picture, :gender, :university)
+      .includes(:work_title, :company, :course, :industry, :gender, :university)
       .find(ids).map(&:to_h)
   end
 
