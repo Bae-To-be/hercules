@@ -42,11 +42,15 @@ class User < ApplicationRecord
 
   has_many :swipes_performed,
            class_name: 'Swipe',
-           inverse_of: :from
+           inverse_of: :from,
+           foreign_key: :from_id,
+           dependent: :destroy
 
   has_many :swipes_received,
            class_name: 'Swipe',
-           inverse_of: :to
+           inverse_of: :to,
+           foreign_key: :to_id,
+           dependent: :destroy
 
   has_one :profile_picture,
           -> { where(profile_picture: true) },
