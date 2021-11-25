@@ -71,7 +71,7 @@ RailsAdmin.config do |config|
     visible false
   end
 
-  PAPER_TRAIL_AUDIT_MODEL = ['User'].freeze
+  audited_models = ['User']
   config.actions do
     dashboard
     index
@@ -83,10 +83,10 @@ RailsAdmin.config do |config|
     delete
     show_in_app
     history_index do
-      only PAPER_TRAIL_AUDIT_MODEL
+      only audited_models
     end
     history_show do
-      only PAPER_TRAIL_AUDIT_MODEL
+      only audited_models
     end
 
     ## With an audit adapter, you can add:
