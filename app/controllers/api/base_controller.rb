@@ -10,6 +10,7 @@ module Api
 
     rescue_from ActiveRecord::RecordInvalid,
                 ActiveRecord::RecordNotSaved,
+                UpdateUser::InvalidRequest,
                 Auth::FindOrCreateUser::InvalidProvider,
                 with: :bad_request
 

@@ -3,6 +3,7 @@
 class UpdateUser
   NO_VALID_ATTRIBUTES = 'no valid attributes'
   LOCATION_ATTRIBUTES_MISSING = 'missing lat and/or lng'
+  class InvalidRequest < StandardError; end
 
   DIRECT_ATTRIBUTES = %i[
     birthday
@@ -51,6 +52,24 @@ class UpdateUser
 
         user.lat = params.dig(:location, :lat)
         user.lng = params.dig(:location, :lng)
+      end
+
+      unless params[:education].nil?
+        user.educations = params[:education].map do |education_params|
+          if education_params[:course_name].blank? ||
+             education_params[:university_name].blank? ||
+             education_params[:year].blank?
+
+            raise InvalidRequest, 'Invalid education parameters'
+          end
+
+          Education.find_or_create_by!(
+            user: user,
+            course: Course.find_or_create_by!(name: education_params[:course_name]),
+            university: University.find_or_create_by!(name: education_params[:university_name].titleize),
+            year: education_params[:year]
+          )
+        end
       end
 
       FUZZY_ATTRIBUTES.each do |key, model|
