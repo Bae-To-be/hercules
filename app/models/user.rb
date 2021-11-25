@@ -3,6 +3,7 @@
 class User < ApplicationRecord
   include PgSearch::Model
   acts_as_mappable
+  has_paper_trail
 
   validates :email,
             presence: true,

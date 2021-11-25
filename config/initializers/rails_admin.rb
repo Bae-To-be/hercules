@@ -4,6 +4,8 @@ require 'nested_form/engine'
 require 'nested_form/builder_mixin'
 
 RailsAdmin.config do |config|
+  config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
+
   config.authorize_with do
     authenticate_or_request_with_http_basic('Login required') do |username, password|
       username == ENV.fetch('ADMIN_USERNAME') &&
@@ -61,6 +63,15 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'PaperTrail::Version' do
+    visible false
+  end
+
+  config.model 'PaperTrail::VersionAssociation' do
+    visible false
+  end
+
+  PAPER_TRAIL_AUDIT_MODEL = ['User'].freeze
   config.actions do
     dashboard
     index
@@ -71,6 +82,12 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app
+    history_index do
+      only PAPER_TRAIL_AUDIT_MODEL
+    end
+    history_show do
+      only PAPER_TRAIL_AUDIT_MODEL
+    end
 
     ## With an audit adapter, you can add:
     # history_index
