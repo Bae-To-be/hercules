@@ -10,11 +10,7 @@ class FindPotentialMatches
   end
 
   def run
-    result = if user.student?
-               find_matches_for_student
-             else
-               find_matches_for_professional
-             end
+    result = find_matches_for_professional
 
     Rails.logger.info "Filter Performance for user ID: #{user.id}: #{result.filters}"
 
@@ -32,31 +28,6 @@ class FindPotentialMatches
     User
       .includes(:work_title, :company, :course, :industry, :gender, :university)
       .find(ids).map(&:to_h)
-  end
-
-  def find_matches_for_student
-    filters = {}
-    results = users_in_same_course.pluck(:id)
-
-    filters[:same_course] = results.size
-
-    return Result.new(results, filters) if results.size >= limit
-
-    related_courses = courses_matching_user.includes(:related_courses).flat_map(&:related_course_ids)
-    if related_courses.any?
-      step_results = base_query
-                       .where(course_id: related_courses)
-                       .limit(limit).pluck(:id)
-
-      filters[:similar_courses] = step_results.size
-      add_if_doesnt_exist(step_results, results)
-
-      return Result.new(results, filters) if results.size >= limit
-    end
-
-    results += base_query.limit(limit).pluck(:id)
-
-    Result.new(results, filters)
   end
 
   def find_matches_for_professional
@@ -150,10 +121,10 @@ class FindPotentialMatches
   end
 
   def institute_query
-    user.student? ? :exclude_university : :exclude_company
+    :exclude_company
   end
 
   def institute_id
-    user.student? ? user.university_id : user.company_id
+    user.company_id
   end
 end

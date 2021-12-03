@@ -104,7 +104,6 @@ class User < ApplicationRecord
       work_title: work_title&.name,
       birthday: birthday&.strftime('%d-%m-%Y'),
       age: current_age,
-      student: student,
       interested_genders: interested_genders.map(&:name),
       education: educations.map(&:to_h),
       linkedin_url: linkedin_url,
@@ -122,7 +121,6 @@ class User < ApplicationRecord
       work_title: work_title&.name,
       birthday: birthday&.strftime('%d-%m-%Y'),
       age: current_age,
-      student: student,
       education: educations.map(&:to_h)
     }
   end

@@ -11,7 +11,6 @@ class UpdateUser
     industry_id
     linkedin_url
     linkedin_public
-    student
     interested_gender_ids
   ].freeze
 
