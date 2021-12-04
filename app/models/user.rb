@@ -105,7 +105,7 @@ class User < ApplicationRecord
       birthday: birthday&.strftime('%d-%m-%Y'),
       age: current_age,
       interested_genders: interested_genders.map(&:name),
-      education: educations.map(&:to_h),
+      education: educations.includes(:course, :university).map(&:to_h),
       linkedin_url: linkedin_url,
       linkedin_public: linkedin_public
     }
