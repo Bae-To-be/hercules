@@ -29,7 +29,8 @@ class User < ApplicationRecord
                                (-Float::INFINITY..(Time.now.utc.to_date - 18.years))
                              }, message: 'cannot be less than 18 years' }, allow_nil: true
 
-  has_many :images, dependent: :destroy
+  has_many :images, dependent: :destroy, inverse_of: :user
+  has_many :verification_files, dependent: :destroy, inverse_of: :user
 
   has_many :educations, dependent: :destroy, inverse_of: :user
 

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       post 'facebook/data_deletion', to: 'facebook#data_deletion'
 
       resources :images, only: %i[create index destroy]
+      resources :verification_files, only: %i[create index]
       resources :swipes, only: %i[create]
 
       resources :potential_matches, only: %i[index]
