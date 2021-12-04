@@ -102,6 +102,7 @@ class FindPotentialMatches
   end
 
   def base_query
+    # TODO: Accommodate ALL gender preference from both sides
     User
       .where.not(id: [user.id, *swiped_user_ids])
       .where(gender_id: user.interested_gender_ids)
