@@ -14,6 +14,13 @@ module Api
           UploadVerificationFile.new(params[:file], current_user, params[:file_type]).run
         )
       end
+
+      def destroy
+        VerificationFile.find_by!(file_type: params[:id], user_id: current_user.id).destroy!
+        render_response(
+          ServiceResponse.ok(nil)
+        )
+      end
     end
   end
 end
