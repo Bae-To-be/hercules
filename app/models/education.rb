@@ -12,7 +12,7 @@ class Education < ApplicationRecord
   delegate :name, to: :university, prefix: true
 
   def pretty_name
-    "#{course.name} at #{university.name} in #{year}"
+    "#{course&.name} at #{university&.name} in #{year}"
   end
 
   def to_h
