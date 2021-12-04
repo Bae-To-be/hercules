@@ -121,7 +121,7 @@ class User < ApplicationRecord
       work_title: work_title&.name,
       birthday: birthday&.strftime('%d-%m-%Y'),
       age: current_age,
-      education: educations.map(&:to_h)
+      education: educations.includes(:course, :university).map(&:to_h)
     }
   end
 
