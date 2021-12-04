@@ -19,6 +19,10 @@ class ServiceResponse
     def unauthorized(message)
       new(code: 401, error: message)
     end
+
+    def not_found(message)
+      new(code: 404, error: message)
+    end
   end
 
   def initialize(code:, data: nil, error: nil)

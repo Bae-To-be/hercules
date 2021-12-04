@@ -14,12 +14,22 @@ module Api
                 Auth::FindOrCreateUser::InvalidProvider,
                 with: :bad_request
 
+    rescue_from ActiveRecord::RecordNotFound,
+                with: :not_found
+
     private
 
     def bad_request(exception)
       render_response(
         ServiceResponse
           .bad_request(exception.message)
+      )
+    end
+
+    def not_found(exception)
+      render_response(
+        ServiceResponse
+          .not_found(exception.message)
       )
     end
 

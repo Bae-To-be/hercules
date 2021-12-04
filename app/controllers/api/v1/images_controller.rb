@@ -14,6 +14,13 @@ module Api
           UploadImage.new(params[:image], params[:position], current_user).run
         )
       end
+
+      def destroy
+        Image.find_by!(position: params[:id], user_id: current_user.id).destroy!
+        render_response(
+          ServiceResponse.ok(nil)
+        )
+      end
     end
   end
 end
