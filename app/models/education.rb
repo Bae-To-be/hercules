@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Education < ApplicationRecord
+  has_paper_trail
+
   belongs_to :user, inverse_of: :educations
   belongs_to :course, inverse_of: :educations
   belongs_to :university, inverse_of: :educations

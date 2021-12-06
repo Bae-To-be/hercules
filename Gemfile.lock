@@ -13,6 +13,13 @@ GIT
     google-id-token (1.4.2)
       jwt (>= 1)
 
+GIT
+  remote: https://github.com/westonganger/paper_trail-association_tracking.git
+  revision: 015422c567f75b6b8de708312b5dc9b7da143437
+  specs:
+    paper_trail-association_tracking (2.1.3)
+      paper_trail (>= 12.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -456,6 +463,7 @@ DEPENDENCIES
   koala
   oj
   paper_trail
+  paper_trail-association_tracking!
   pg (~> 1.1)
   pg_search
   puma (~> 5.0)

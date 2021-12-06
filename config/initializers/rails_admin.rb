@@ -71,7 +71,7 @@ RailsAdmin.config do |config|
     visible false
   end
 
-  audited_models = ['User']
+  audited_models = ['User', 'Image', 'VerificationFile', 'Education']
   config.actions do
     dashboard
     index

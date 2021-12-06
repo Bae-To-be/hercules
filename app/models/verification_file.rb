@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class VerificationFile < ApplicationRecord
+  has_paper_trail
+
   belongs_to :user, inverse_of: :verification_files
 
   has_one_attached :file
