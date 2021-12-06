@@ -23,6 +23,12 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'VerificationRequest' do
+    configure :user do
+      read_only true
+    end
+  end
+
   config.model 'Education' do
     object_label_method do
       :pretty_name
@@ -79,12 +85,15 @@ RailsAdmin.config do |config|
   config.actions do
     dashboard
     index
-    new
-    export
+    new do
+      except 'VerificationRequest'
+    end
     bulk_delete
     show
     edit
-    delete
+    delete do
+      except 'VerificationRequest'
+    end
     show_in_app
     history_index do
       only audited_models
@@ -92,10 +101,6 @@ RailsAdmin.config do |config|
     history_show do
       only audited_models
     end
-
-    ## With an audit adapter, you can add:
-    # history_index
-    # history_show
   end
 
   config.excluded_models = %w[

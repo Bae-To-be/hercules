@@ -81,6 +81,13 @@ class UpdateUser
         )
       end
 
+      if user.birthday_changed?
+        user.interested_age_lower = user.current_age - ENV.fetch('LOWER_AGE_BUFFER').to_i
+        user.interested_age_upper = user.current_age + ENV.fetch('UPPER_AGE_BUFFER').to_i
+      end
+
+      user.queue_verification!
+
       user.save!
     end
     ServiceResponse.ok(user.me_hash)

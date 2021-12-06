@@ -37,7 +37,7 @@ class VerificationFile < ApplicationRecord
 
   def validate_blob
     if file.attached?
-      if file.blob.byte_size > 1_000_000
+      if file.blob.byte_size > 1_000_000_0
         file.purge
         errors.add(:base, 'File is too large')
         throw(:abort)

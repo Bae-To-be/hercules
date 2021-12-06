@@ -31,6 +31,7 @@ class User < ApplicationRecord
 
   has_many :images, dependent: :destroy, inverse_of: :user
   has_many :verification_files, dependent: :destroy, inverse_of: :user
+  has_many :verification_requests, dependent: :destroy, inverse_of: :user
 
   has_many :educations, dependent: :destroy, inverse_of: :user
 
@@ -108,7 +109,8 @@ class User < ApplicationRecord
       interested_genders: interested_genders.map(&:name),
       education: educations.includes(:course, :university).map(&:to_h),
       linkedin_url: linkedin_url,
-      linkedin_public: linkedin_public
+      linkedin_public: linkedin_public,
+      approved: verification_requests.last.approved?
     }
   end
 
@@ -124,6 +126,29 @@ class User < ApplicationRecord
       age: current_age,
       education: educations.includes(:course, :university).map(&:to_h)
     }
+  end
+
+  def queue_verification!
+    # Avoid running if its a location update
+    return if (changes.keys - %w[lat lng country_code locality]).empty?
+
+    if (user.verification_requests.blank? ||
+      user.verification_requests.last.rejected?) &&
+       user.registration_complete?
+
+      user.verification_requests.create!
+    end
+  end
+
+  def registration_complete?
+    gender_id.present? &&
+      industry_id.present? &&
+      company_id.present? &&
+      educations.present? &&
+      birthday.present? &&
+      linkedin_url.present? &&
+      verification_files.size == 2 &&
+      images.size > 1
   end
 
   def current_age

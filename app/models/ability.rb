@@ -9,6 +9,14 @@ class Ability
     can :access, :rails_admin     # only allow admin users to access Rails Admin
     can :read, :dashboard
 
+    if user.kyc_agent?
+      can :manage, VerificationRequest, status: :in_review
+      can :show, User
+      can :read, Education
+      can :read, Image
+      can :read, VerificationFile
+    end
+
     can :manage, :all if user.admin?
   end
 end

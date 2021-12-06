@@ -19,12 +19,21 @@ RSpec.feature 'Update user fields', type: :request do
       let!(:gender) { create(:gender) }
       let!(:industry) { create(:industry) }
       let!(:interested_gender) { create(:gender) }
+      let!(:course) { create(:course) }
+      let!(:university) { create(:university) }
       let!(:token) { Auth::Token.jwt_token(user) }
       let(:birthday) { '02-01-1997' }
       let(:linkedin_url) { 'https://www.linkedin.com/in/test-user' }
       let(:company_name) { 'test company' }
       let(:work_title_name) { 'engineer' }
       let(:location) { { lat: 72.877426, lng: 19.07609 } }
+
+      before do
+        create(:verification_file, user: user, file_type: :selfie)
+        create(:verification_file, user: user, file_type: :identity)
+        create(:image, user: user)
+        create(:image, user: user)
+      end
 
       it 'successfully updates every attribute' do
         expect(user.gender_id).to be_nil
@@ -42,7 +51,12 @@ RSpec.feature 'Update user fields', type: :request do
                 linkedin_url: linkedin_url,
                 company_name: company_name,
                 work_title_name: work_title_name,
-                location: location
+                location: location,
+                education: [
+                  course_name: course.name,
+                  university_name: university.name,
+                  year: 2019
+                ]
               },
               headers: { 'HTTP_AUTHORIZATION' => token }
         expect(response.status).to eq 200
@@ -53,6 +67,9 @@ RSpec.feature 'Update user fields', type: :request do
         expect(user.company.name).to eq(company_name.titleize)
         expect(user.lat).to eq(location[:lat])
         expect(user.lng).to eq(location[:lng])
+        expect(user.interested_age_lower).to eq user.current_age - ENV.fetch('LOWER_AGE_BUFFER').to_i
+        expect(user.interested_age_upper).to eq user.current_age + ENV.fetch('UPPER_AGE_BUFFER').to_i
+        expect(user.verification_requests.last).to be_in_review
       end
     end
   end

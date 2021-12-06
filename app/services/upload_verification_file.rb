@@ -8,15 +8,18 @@ class UploadVerificationFile
   end
 
   def run
-    existing = user.verification_files.find_by(file_type: file_type)
-    file = if existing.present?
-             existing.file.attach(path)
-             existing.tap(&:save!)
-           else
-             user.verification_files.create!(file_type: file_type) do |record|
-               record.file.attach(path)
+    VerificationFile.transaction do
+      existing = user.verification_files.find_by(file_type: file_type)
+      file = if existing.present?
+               existing.file.attach(path)
+               existing.tap(&:save!)
+             else
+               user.verification_files.create!(file_type: file_type) do |record|
+                 record.file.attach(path)
+               end
              end
-           end
+      user.queue_verification!
+    end
     ServiceResponse.ok(file.to_h)
   rescue ActiveRecord::RecordInvalid,
          ActiveRecord::RecordNotSaved
