@@ -18,7 +18,7 @@ class UploadVerificationFile
                  record.file.attach(path)
                end
              end
-      user.queue_verification!
+      user.queue_verification!(check_changes: false)
       ServiceResponse.ok(file.to_h)
     end
   rescue ActiveRecord::RecordInvalid,

@@ -128,9 +128,9 @@ class User < ApplicationRecord
     }
   end
 
-  def queue_verification!
+  def queue_verification!(check_changes: true)
     # Avoid running if its a location update
-    return if (changes.keys - %w[lat lng country_code locality]).empty?
+    return if !check_changes && (changes.keys - %w[lat lng country_code locality]).empty?
 
     if (verification_requests.blank? ||
       verification_requests.last.rejected?) &&
