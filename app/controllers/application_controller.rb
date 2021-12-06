@@ -2,11 +2,7 @@
 
 class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
-    if current_user.admin?
-      redirect_to '/admin', alert: exception.message
-    else
-      redirect_to main_app.admin_login_path, alert: exception.message
-    end
+    redirect_to '/admin', alert: exception.message
   end
 
   def current_user
