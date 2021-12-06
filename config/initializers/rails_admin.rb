@@ -91,9 +91,7 @@ RailsAdmin.config do |config|
     bulk_delete
     show
     edit
-    delete do
-      except 'VerificationRequest'
-    end
+    delete
     show_in_app
     history_index do
       only audited_models
