@@ -110,7 +110,7 @@ class User < ApplicationRecord
       education: educations.includes(:course, :university).map(&:to_h),
       linkedin_url: linkedin_url,
       linkedin_public: linkedin_public,
-      approved: verification_requests.last.approved?
+      approved: verification_requests.last&.approved? || false
     }
   end
 
@@ -132,11 +132,11 @@ class User < ApplicationRecord
     # Avoid running if its a location update
     return if (changes.keys - %w[lat lng country_code locality]).empty?
 
-    if (user.verification_requests.blank? ||
-      user.verification_requests.last.rejected?) &&
-       user.registration_complete?
+    if (verification_requests.blank? ||
+      verification_requests.last.rejected?) &&
+       registration_complete?
 
-      user.verification_requests.create!
+      verification_requests.create!
     end
   end
 
