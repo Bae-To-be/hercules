@@ -19,8 +19,8 @@ class UploadVerificationFile
                end
              end
       user.queue_verification!
+      ServiceResponse.ok(file.to_h)
     end
-    ServiceResponse.ok(file.to_h)
   rescue ActiveRecord::RecordInvalid,
          ActiveRecord::RecordNotSaved
     ServiceResponse
