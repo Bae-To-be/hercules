@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_06_102830) do
+ActiveRecord::Schema.define(version: 2021_12_06_105410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(version: 2021_12_06_102830) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string "google_id", null: false
+    t.string "email", null: false
+    t.integer "role", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["google_id"], name: "index_admin_users_on_google_id", unique: true
   end
 
   create_table "companies", force: :cascade do |t|

@@ -28,8 +28,10 @@ gem 'image_processing', '~> 1.2'
 # custom
 gem 'amazing_print'
 gem 'aws-sdk-s3', require: false
+gem 'cancancan'
 gem 'geokit-rails'
 gem 'google-id-token', git: 'https://github.com/google/google-id-token.git'
+gem 'google_sign_in'
 gem 'jwt'
 gem 'koala'
 gem 'oj'

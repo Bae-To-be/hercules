@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :admin do
+    get '/login', to: 'login#new', as: :login
+    get '/login/create', to: 'login#create', as: :create_login
+  end
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   # Almost every application defines a route for the root path ("/") at the top of this file.

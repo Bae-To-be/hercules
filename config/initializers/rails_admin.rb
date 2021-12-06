@@ -4,14 +4,18 @@ require 'nested_form/engine'
 require 'nested_form/builder_mixin'
 
 RailsAdmin.config do |config|
+  config.parent_controller = 'ApplicationController'
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
-  config.authorize_with do
-    authenticate_or_request_with_http_basic('Login required') do |username, password|
-      username == ENV.fetch('ADMIN_USERNAME') &&
-        password == ENV.fetch('ADMIN_PASSWORD')
-    end
+  config.current_user_method do
+    current_user
   end
+
+  config.authenticate_with do
+    redirect_to main_app.admin_login_path if cookies.signed[:user_id].blank?
+  end
+
+  config.authorize_with :cancancan
 
   config.model 'Gender' do
     configure :user_gender_interests do
