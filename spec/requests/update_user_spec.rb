@@ -67,7 +67,7 @@ RSpec.feature 'Update user fields', type: :request do
         expect(user.company.name).to eq(company_name.titleize)
         expect(user.lat).to eq(location[:lat])
         expect(user.lng).to eq(location[:lng])
-        expect(user.interested_age_lower).to eq user.current_age - ENV.fetch('LOWER_AGE_BUFFER').to_i
+        expect(user.interested_age_lower).to eq [(user.current_age - ENV.fetch('LOWER_AGE_BUFFER').to_i), 18].max
         expect(user.interested_age_upper).to eq user.current_age + ENV.fetch('UPPER_AGE_BUFFER').to_i
         expect(user.verification_requests.last).to be_in_review
       end
