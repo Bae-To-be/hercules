@@ -6,7 +6,7 @@ class MessageService
 
   class << self
     def approved(user)
-      return if user.fcm[:token].blank?
+      return if user.fcm[:token].blank? || Rails.env.test?
 
       send_message(
         APPROVED_TITLE,
