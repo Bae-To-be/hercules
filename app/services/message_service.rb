@@ -8,22 +8,22 @@ class MessageService
 
   class << self
     def approved(user)
-      return if user.fcm[:token].blank? || Rails.env.test?
+      return if user.fcm['token'].blank? || Rails.env.test?
 
       send_message(
         APPROVED_TITLE,
         APPROVED_TITLE,
-        user.fcm[:token]
+        user.fcm['token']
       )
     end
 
     def rejected(user)
-      return if user.fcm[:token].blank? || Rails.env.test?
+      return if user.fcm['token'].blank? || Rails.env.test?
 
       send_message(
         REJECTED_TITLE,
         REJECTED_TITLE,
-        user.fcm[:token]
+        user.fcm['token']
       )
     end
 
