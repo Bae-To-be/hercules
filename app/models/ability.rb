@@ -12,10 +12,6 @@ class Ability
     if user.kyc_agent?
       can :manage, VerificationRequest, status: :in_review
       can :update, VerificationRequest
-      can :show, User
-      can :read, Education
-      can :read, Image
-      can :read, VerificationFile
     end
 
     can :manage, :all if user.admin?

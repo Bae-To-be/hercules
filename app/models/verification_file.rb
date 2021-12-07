@@ -21,8 +21,6 @@ class VerificationFile < ApplicationRecord
     }
   end
 
-  private
-
   def download_url
     if Rails.env.test?
       Rails
@@ -34,6 +32,8 @@ class VerificationFile < ApplicationRecord
       url
     end
   end
+
+  private
 
   def validate_blob
     if file.attached?

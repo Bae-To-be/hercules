@@ -10,4 +10,12 @@ class VerificationRequest < ApplicationRecord
     approved: 1,
     rejected: 2
   }
+
+  delegate :linkedin_url,
+           :identity_verification_file,
+           :selfie_verification_file,
+           :images_for_verification,
+           :kyc_info,
+           to: :user,
+           prefix: true
 end

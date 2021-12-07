@@ -31,6 +31,13 @@ class User < ApplicationRecord
 
   has_many :images, dependent: :destroy, inverse_of: :user
   has_many :verification_files, dependent: :destroy, inverse_of: :user
+  has_one :selfie_verification,
+          -> { where(file_type: :selfie) },
+          class_name: 'VerificationFile'
+  has_one :identity_verification,
+          -> { where(file_type: :identity) },
+          class_name: 'VerificationFile'
+
   has_many :verification_requests, dependent: :destroy, inverse_of: :user
 
   has_many :educations, dependent: :destroy, inverse_of: :user
@@ -72,6 +79,9 @@ class User < ApplicationRecord
   belongs_to :gender,
              optional: true,
              inverse_of: :users
+
+  delegate :file, to: :selfie_verification, prefix: true, allow_nil: true
+  delegate :file, to: :identity_verification, prefix: true, allow_nil: true
 
   scope :between_age, lambda { |lower, upper|
     where('birthday BETWEEN ? AND ?',
@@ -128,6 +138,18 @@ class User < ApplicationRecord
     }
   end
 
+  def kyc_info
+    {
+      name: name,
+      gender: gender&.name,
+      industry: industry&.name,
+      company: company&.name,
+      work_title: work_title&.name,
+      birthday: birthday&.strftime('%d-%m-%Y'),
+      education: educations.includes(:course, :university).map(&:to_h)
+    }.to_json
+  end
+
   def queue_verification!(check_changes: true)
     # Avoid running if its a location update
     return if check_changes && (changes.keys - %w[lat lng country_code locality]).empty?
@@ -163,5 +185,9 @@ class User < ApplicationRecord
     end
 
     years
+  end
+
+  def images_for_verification
+    images.map(&:file)
   end
 end

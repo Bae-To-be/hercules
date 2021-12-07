@@ -28,6 +28,30 @@ RailsAdmin.config do |config|
       read_only true
     end
 
+    configure :user_linkedin_url do
+      read_only true
+    end
+
+    configure :user_selfie_verification_file, :active_storage do
+      read_only true
+    end
+
+    configure :user_identity_verification_file, :active_storage do
+      read_only true
+    end
+
+    configure :user_kyc_info do
+      read_only true
+
+      label 'Information Submitted'
+    end
+
+    configure :user_images_for_verification, :multiple_active_storage do
+      read_only true
+
+      label 'Images'
+    end
+
     list do
       field :user
       field :status
