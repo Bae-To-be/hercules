@@ -27,6 +27,13 @@ RailsAdmin.config do |config|
     configure :user do
       read_only true
     end
+
+    list do
+      field :user
+      field :status
+      field :created_at
+      field :updated_at
+    end
   end
 
   config.model 'Education' do
