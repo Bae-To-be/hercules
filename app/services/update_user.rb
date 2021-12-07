@@ -71,6 +71,11 @@ class UpdateUser
         end
       end
 
+      if params[:fcm_token].present?
+        user.fcm[:token] = params[:fcm_token]
+        user.fcm[:updated] = Time.now.utc
+      end
+
       FUZZY_ATTRIBUTES.each do |key, model|
         next if params[key].blank?
 

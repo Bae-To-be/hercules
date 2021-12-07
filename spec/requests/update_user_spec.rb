@@ -56,7 +56,8 @@ RSpec.feature 'Update user fields', type: :request do
                   course_name: course.name,
                   university_name: university.name,
                   year: 2019
-                ]
+                ],
+                fcm_token: 'some_token'
               },
               headers: { 'HTTP_AUTHORIZATION' => token }
         expect(response.status).to eq 200
@@ -70,6 +71,7 @@ RSpec.feature 'Update user fields', type: :request do
         expect(user.interested_age_lower).to eq [(user.current_age - ENV.fetch('LOWER_AGE_BUFFER').to_i), 18].max
         expect(user.interested_age_upper).to eq user.current_age + ENV.fetch('UPPER_AGE_BUFFER').to_i
         expect(user.verification_requests.last).to be_in_review
+        expect(user.fcm['token']).to eq 'some_token'
       end
     end
   end

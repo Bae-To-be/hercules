@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_06_124609) do
+ActiveRecord::Schema.define(version: 2021_12_07_123404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(version: 2021_12_06_124609) do
     t.string "country_code"
     t.string "locality"
     t.boolean "linkedin_public", default: false
+    t.json "fcm", default: {}
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gender_id"], name: "index_users_on_gender_id"

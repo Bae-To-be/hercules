@@ -152,7 +152,7 @@ class User < ApplicationRecord
 
   def queue_verification!(check_changes: true)
     # Avoid running if its a location update
-    return if check_changes && (changes.keys - %w[lat lng country_code locality]).empty?
+    return if check_changes && only_meta_updated?
 
     if (verification_requests.blank? ||
       verification_requests.last.rejected?) &&
@@ -189,5 +189,10 @@ class User < ApplicationRecord
 
   def images_for_verification
     images.map(&:file)
+  end
+
+  def only_meta_updated?
+    (changes.keys - %w[lat lng country_code locality]).empty? ||
+      (changes.keys - %w[fcm]).empty?
   end
 end
