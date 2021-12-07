@@ -11,6 +11,8 @@ class VerificationRequest < ApplicationRecord
     rejected: 2
   }
 
+  after_save :notify_user
+
   delegate :linkedin_url,
            :identity_verification_file,
            :selfie_verification_file,
@@ -18,4 +20,10 @@ class VerificationRequest < ApplicationRecord
            :kyc_info,
            to: :user,
            prefix: true
+
+  private
+
+  def notify_user
+    MessageService.approved(user)
+  end
 end
