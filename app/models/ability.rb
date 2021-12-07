@@ -10,7 +10,7 @@ class Ability
     can :read, :dashboard
 
     if user.kyc_agent?
-      can :manage, VerificationRequest, status: :in_review
+      can :read, VerificationRequest, status: :in_review
       can :update, VerificationRequest
     end
 
