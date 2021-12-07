@@ -11,7 +11,7 @@ class VerificationRequest < ApplicationRecord
     rejected: 2
   }
 
-  after_save :notify_user
+  after_update :notify_user
 
   delegate :linkedin_url,
            :identity_verification_file,
