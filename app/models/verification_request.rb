@@ -24,6 +24,7 @@ class VerificationRequest < ApplicationRecord
   private
 
   def notify_user
-    MessageService.approved(user)
+    MessageService.approved(user) if approved?
+    MessageService.rejected(user) if rejected?
   end
 end

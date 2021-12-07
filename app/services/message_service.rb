@@ -3,6 +3,8 @@
 class MessageService
   APPROVED_TITLE = 'Congratulations'
   APPROVED_BODY = 'Your account has been approved'
+  REJECTED_TITLE 'Oh No!'
+  REJECTED_BODY = 'Looks like your application was rejected by our team'
 
   class << self
     def approved(user)
@@ -11,6 +13,16 @@ class MessageService
       send_message(
         APPROVED_TITLE,
         APPROVED_TITLE,
+        user.fcm[:token]
+      )
+    end
+
+    def approved(user)
+      return if user.fcm[:token].blank? || Rails.env.test?
+
+      send_message(
+        REJECTED_TITLE,
+        REJECTED_TITLE,
         user.fcm[:token]
       )
     end
