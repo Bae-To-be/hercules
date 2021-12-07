@@ -17,7 +17,7 @@ class MessageService
       )
     end
 
-    def approved(user)
+    def rejected(user)
       return if user.fcm[:token].blank? || Rails.env.test?
 
       send_message(
