@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class VerificationRequest < ApplicationRecord
+  VERIFICATION_UPDATE = 'verification_update'
+
   has_paper_trail
 
   belongs_to :user, inverse_of: :verification_requests
@@ -24,7 +26,12 @@ class VerificationRequest < ApplicationRecord
   private
 
   def notify_user
-    MessageService.approved(user) if approved?
-    MessageService.rejected(user) if rejected?
+    event_data = {
+      status: status,
+      event: VERIFICATION_UPDATE
+    }
+
+    MessageService.approved(user, event_data) if approved?
+    MessageService.rejected(user, event_data) if rejected?
   end
 end

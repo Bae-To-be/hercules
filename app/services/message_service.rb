@@ -5,41 +5,38 @@ class MessageService
   APPROVED_BODY = 'Your account has been approved'
   REJECTED_TITLE = 'Oh No!'
   REJECTED_BODY = 'Looks like your application was rejected by our team'
-  VERIFICATION_UPDATE = 'verification_update'
 
   class << self
-    def approved(user)
+    def approved(user, metadata)
       return if user.fcm['token'].blank? || Rails.env.test?
 
       send_message(
         APPROVED_TITLE,
         APPROVED_BODY,
         user.fcm['token'],
-        VERIFICATION_UPDATE
+        metadata
       )
     end
 
-    def rejected(user)
+    def rejected(user, metadata)
       return if user.fcm['token'].blank? || Rails.env.test?
 
       send_message(
         REJECTED_TITLE,
         REJECTED_BODY,
         user.fcm['token'],
-        VERIFICATION_UPDATE
+        metadata
       )
     end
 
-    def send_message(title, body, token, event)
+    def send_message(title, body, token, metadata={})
       message = Firebase::Admin::Messaging::Message.new(
         token: token,
         notification: Firebase::Admin::Messaging::Notification.new(
           title: title,
           body: body
         ),
-        data: {
-          event: event
-        }
+        data: metadata
       )
       FIREBASE_APP.messaging.send_one(message)
     end
