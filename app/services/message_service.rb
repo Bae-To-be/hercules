@@ -29,7 +29,7 @@ class MessageService
       )
     end
 
-    def send_message(title, body, token, metadata={})
+    def send_message(title, body, token, metadata = {})
       message = Firebase::Admin::Messaging::Message.new(
         token: token,
         notification: Firebase::Admin::Messaging::Notification.new(
