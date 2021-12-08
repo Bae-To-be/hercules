@@ -120,7 +120,7 @@ class User < ApplicationRecord
       education: educations.includes(:course, :university).map(&:to_h),
       linkedin_url: linkedin_url,
       linkedin_public: linkedin_public,
-      approved: verification_requests.last&.approved? || false
+      approval_status: verification_requests.last&.status || 'in_review'
     }
   end
 

@@ -3,7 +3,7 @@
 class MessageService
   APPROVED_TITLE = 'Congratulations'
   APPROVED_BODY = 'Your account has been approved'
-  REJECTED_TITLE 'Oh No!'
+  REJECTED_TITLE = 'Oh No!'
   REJECTED_BODY = 'Looks like your application was rejected by our team'
 
   class << self
@@ -12,7 +12,7 @@ class MessageService
 
       send_message(
         APPROVED_TITLE,
-        APPROVED_TITLE,
+        APPROVED_BODY,
         user.fcm['token']
       )
     end
@@ -22,7 +22,7 @@ class MessageService
 
       send_message(
         REJECTED_TITLE,
-        REJECTED_TITLE,
+        REJECTED_BODY,
         user.fcm['token']
       )
     end
