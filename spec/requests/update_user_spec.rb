@@ -88,7 +88,7 @@ RSpec.feature 'Update user fields', type: :request do
                 birthday: '03-01-1997'
               },
               headers: { 'HTTP_AUTHORIZATION' => token }
-        
+
         parsed_response = JSON.parse(response.body, symbolize_names: true)
         expect(parsed_response[:data][:approval_status]).to eq 'in_review'
         expect(parsed_response[:data][:verification_details]).to be_nil

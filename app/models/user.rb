@@ -177,7 +177,7 @@ class User < ApplicationRecord
       @recent_verification = verification_requests.last
       return @recent_verification
     end
-    
+
     @recent_verification ||= verification_requests.last
   end
 
