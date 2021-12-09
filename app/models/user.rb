@@ -126,7 +126,7 @@ class User < ApplicationRecord
   end
 
   def verification_rejected?
-    recent_verification&.rejected?
+    recent_verification(refresh: true)&.rejected?
   end
 
   def approval_status
@@ -165,14 +165,16 @@ class User < ApplicationRecord
 
     if registration_complete? &&
        (verification_requests.blank? ||
-       (recent_verification.rejected? &&
-         recent_verification.all_fields_rectified?))
+        (recent_verification.rejected? &&
+          recent_verification.all_fields_rectified?))
 
       verification_requests.create!
     end
   end
 
-  def recent_verification
+  def recent_verification(refresh: false)
+    return verification_requests.last if refresh
+
     @recent_verification ||= verification_requests.last
   end
 
