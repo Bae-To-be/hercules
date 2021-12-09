@@ -36,6 +36,7 @@ class VerificationRequest < ApplicationRecord
 
   def to_hash
     {
+      status: status,
       linkedin_approved: linkedin_approved,
       work_details_approved: work_details_approved,
       education_approved: education_approved,
@@ -64,9 +65,7 @@ class VerificationRequest < ApplicationRecord
 
   def notify_user
     event_data = {
-      status: status,
-      event: VERIFICATION_UPDATE,
-      info: rejected? ? to_hash : nil
+      event: VERIFICATION_UPDATE
     }
 
     MessageService.approved(user, event_data) if approved?
