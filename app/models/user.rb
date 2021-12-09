@@ -130,7 +130,7 @@ class User < ApplicationRecord
   end
 
   def approval_status
-    recent_verification&.status || VerificationRequest::IN_REVIEW
+    recent_verification(refresh: true)&.status || VerificationRequest::IN_REVIEW
   end
 
   def to_h
