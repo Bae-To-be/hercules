@@ -91,8 +91,6 @@ class UpdateUser
         user.interested_age_upper = user.current_age + ENV.fetch('UPPER_AGE_BUFFER').to_i
       end
 
-      user.queue_verification!
-
       if user.verification_rejected?
         changes = []
         if !user.recent_verification.linkedin_approved? &&
@@ -119,6 +117,8 @@ class UpdateUser
 
         user.recent_verification.user_update_submitted!(changes)
       end
+
+      user.queue_verification!
 
       user.save!
     end

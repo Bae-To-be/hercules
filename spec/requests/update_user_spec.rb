@@ -72,6 +72,23 @@ RSpec.feature 'Update user fields', type: :request do
         expect(user.interested_age_upper).to eq user.current_age + ENV.fetch('UPPER_AGE_BUFFER').to_i
         expect(user.verification_requests.last).to be_in_review
         expect(user.fcm['token']).to eq 'some_token'
+
+        user.verification_requests.last.update(
+          status: :rejected,
+          dob_approved: false,
+          education_approved: true,
+          work_details_approved: true,
+          selfie_approved: true,
+          identity_approved: true,
+          linkedin_approved: true
+        )
+
+        patch '/api/v1/user',
+              params: {
+                birthday: '03-01-1997'
+              },
+              headers: { 'HTTP_AUTHORIZATION' => token }
+        expect(user.verification_requests.reload.last).to be_in_review
       end
     end
   end

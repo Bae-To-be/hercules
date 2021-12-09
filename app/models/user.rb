@@ -173,7 +173,7 @@ class User < ApplicationRecord
   end
 
   def recent_verification
-    verification_requests.last
+    @recent_verification ||= verification_requests.last
   end
 
   def registration_complete?
