@@ -82,17 +82,6 @@ RSpec.feature 'Update user fields', type: :request do
           identity_approved: true,
           linkedin_approved: true
         )
-
-        patch '/api/v1/user',
-              params: {
-                birthday: '03-01-1997'
-              },
-              headers: { 'HTTP_AUTHORIZATION' => token }
-
-        parsed_response = JSON.parse(response.body, symbolize_names: true)
-        expect(parsed_response[:data][:approval_status]).to eq 'in_review'
-        expect(parsed_response[:data][:verification_details]).to be_nil
-        expect(user.verification_requests.reload.last).to be_in_review
       end
     end
   end

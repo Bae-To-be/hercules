@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       post 'logout', to: 'auth#logout'
       get 'me', to: 'auth#me'
       patch 'user', to: 'users#update'
+      get 'verification_info', to: 'verification#me'
 
       post 'facebook/data_deletion', to: 'facebook#data_deletion'
 

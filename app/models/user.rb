@@ -119,18 +119,12 @@ class User < ApplicationRecord
       interested_genders: interested_genders.map(&:name),
       education: educations.includes(:course, :university).map(&:to_h),
       linkedin_url: linkedin_url,
-      linkedin_public: linkedin_public,
-      approval_status: approval_status,
-      verification_details: verification_rejected? ? recent_verification.to_hash : nil
+      linkedin_public: linkedin_public
     }
   end
 
   def verification_rejected?
     recent_verification&.rejected?
-  end
-
-  def approval_status
-    recent_verification(refresh: true)&.status || VerificationRequest::IN_REVIEW
   end
 
   def to_h
