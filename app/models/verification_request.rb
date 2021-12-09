@@ -65,7 +65,8 @@ class VerificationRequest < ApplicationRecord
   def notify_user
     event_data = {
       status: status,
-      event: VERIFICATION_UPDATE
+      event: VERIFICATION_UPDATE,
+      info: rejected? ? to_hash : nil
     }
 
     MessageService.approved(user, event_data) if approved?
