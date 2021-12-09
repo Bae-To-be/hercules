@@ -130,7 +130,7 @@ class User < ApplicationRecord
   end
 
   def approval_status
-    recent_verification&.status || VerificationRequest::IN_REVIEW
+    recent_verification(refresh: true)&.status || VerificationRequest::IN_REVIEW
   end
 
   def to_h
@@ -172,7 +172,12 @@ class User < ApplicationRecord
     end
   end
 
-  def recent_verification
+  def recent_verification(refresh: false)
+    if refresh
+      @recent_verification = verification_requests.last
+      return @recent_verification
+    end
+    
     @recent_verification ||= verification_requests.last
   end
 
