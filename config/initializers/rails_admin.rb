@@ -28,7 +28,7 @@ RailsAdmin.config do |config|
       read_only true
     end
 
-    configure :user_changes do
+    configure :user_updates do
       read_only true
     end
 
