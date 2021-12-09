@@ -99,12 +99,10 @@ RailsAdmin.config do |config|
   end
 
   config.model 'User' do
-    configure :swipes_performed do
-      hide
-    end
-
-    configure :swipes_received do
-      hide
+    %i[swipes_performed swipes_received selfie_verification identity_verification verification_requests].each do |hidden_field|
+      configure hidden_field do
+        hide
+      end
     end
   end
 
