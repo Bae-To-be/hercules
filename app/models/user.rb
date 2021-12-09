@@ -120,8 +120,17 @@ class User < ApplicationRecord
       education: educations.includes(:course, :university).map(&:to_h),
       linkedin_url: linkedin_url,
       linkedin_public: linkedin_public,
-      approval_status: verification_requests.last&.status || 'in_review'
+      approval_status: approval_status,
+      verification_details: verification_rejected? ? recent_verification.to_hash : nil
     }
+  end
+
+  def verification_rejected?
+    recent_verification&.rejected?
+  end
+
+  def approval_status
+    recent_verification&.status || VerificationRequest::IN_REVIEW
   end
 
   def to_h
@@ -154,12 +163,17 @@ class User < ApplicationRecord
     # Avoid running if its a location update
     return if check_changes && only_meta_updated?
 
-    if (verification_requests.blank? ||
-      verification_requests.last.rejected?) &&
-       registration_complete?
+    if registration_complete? &&
+       (verification_requests.blank? ||
+       (recent_verification.rejected? &&
+         recent_verification.all_fields_rectified?))
 
       verification_requests.create!
     end
+  end
+
+  def recent_verification
+    @recent_verification ||= verification_requests.last
   end
 
   def registration_complete?

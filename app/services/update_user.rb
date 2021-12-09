@@ -93,6 +93,33 @@ class UpdateUser
 
       user.queue_verification!
 
+      if user.verification_rejected?
+        changes = []
+        if !user.recent_verification.linkedin_approved? &&
+           params[:linkedin_url].present?
+          changes << VerificationRequest::LINKEDIN_URL
+        end
+
+        if !user.recent_verification.dob_approved? &&
+           params[:birthday].present?
+          changes << VerificationRequest::BIRTHDAY
+        end
+
+        if !user.recent_verification.education_approved? &&
+           params[:education].present?
+          changes << VerificationRequest::EDUCATION
+        end
+
+        if !user.recent_verification.work_details_approved? &&
+           (params[:industry_id].present? ||
+             params[:work_title_name].present? ||
+             params[:company_name].present?)
+          changes << VerificationRequest::WORK_INFO
+        end
+
+        user.recent_verification.user_update_submitted!(changes)
+      end
+
       user.save!
     end
     ServiceResponse.ok(user.me_hash)

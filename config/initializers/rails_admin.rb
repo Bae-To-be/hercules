@@ -28,6 +28,10 @@ RailsAdmin.config do |config|
       read_only true
     end
 
+    configure :user_changes do
+      read_only true
+    end
+
     configure :user_linkedin_url do
       read_only true
     end

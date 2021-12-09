@@ -15,7 +15,7 @@ Layout/LineLength:
   Max: 150
 
 Metrics/MethodLength:
-  Max: 60
+  Max: 80
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented_relative_to_receiver
@@ -108,7 +108,7 @@ Rails/DynamicFindBy:
   Enabled: false
 
 Metrics/BlockLength:
-  Max: 60
+  Max: 80
   Exclude:
     # ActiveAdmin's DSL prefers long blocks
     - app/admin/**/*

@@ -18,6 +18,18 @@ class UploadVerificationFile
                  record.file.attach(path)
                end
              end
+      if user.verification_rejected?
+        if !user.recent_verification.selfie_approved? && file.selfie?
+          user.recent_verification.user_update_submitted!(
+            [VerificationRequest::SELFIE]
+          )
+        end
+        if !user.recent_verification.identity_approved? && file.identity?
+          user.recent_verification.user_update_submitted!(
+            [VerificationRequest::IDENTITY]
+          )
+        end
+      end
       user.queue_verification!(check_changes: false)
       ServiceResponse.ok(file.to_h)
     end
