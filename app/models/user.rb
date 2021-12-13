@@ -103,7 +103,7 @@ class User < ApplicationRecord
   }
 
   def search_radius_value
-    search_radius.zero? ? ENV.fetch('DEFAULT_SEARCH_RADIUS') : search_radius
+    search_radius.zero? ? ENV.fetch('DEFAULT_SEARCH_RADIUS').to_i : search_radius
   end
 
   def me_hash

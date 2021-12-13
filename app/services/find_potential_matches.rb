@@ -102,11 +102,12 @@ class FindPotentialMatches
   end
 
   def base_query
+    bounds = Geokit::Bounds.from_point_and_radius(user, user.search_radius_value * 1000)
     # TODO: Accommodate ALL gender preference from both sides
     User
       .where.not(id: [user.id, *swiped_user_ids])
       .where(gender_id: user.interested_gender_ids)
-      .in_range(0..user.search_radius_value * 1000, origin: user)
+      .in_bounds(bounds, inclusive: true)
       .between_age(user.interested_age_lower, user.interested_age_upper)
       .interested_in_gender(user.gender_id)
       .public_send(institute_query, institute_id)
