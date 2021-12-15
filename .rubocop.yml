@@ -66,6 +66,8 @@ Style/ZeroLengthPredicate:
 Style/NumericPredicate:
   Enabled: false
 
+Metrics/ParameterLists:
+  Max: 6
 
 Metrics/CyclomaticComplexity:
   Enabled: false

@@ -44,6 +44,7 @@ gem 'rails_semantic_logger'
 gem 'rexml'
 gem 'rollbar'
 gem 'scenic'
+gem 'sib-api-v3-sdk'
 gem 'skylight'
 
 group :development, :test do

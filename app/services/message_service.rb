@@ -8,7 +8,7 @@ class MessageService
 
   class << self
     def approved(user, metadata)
-      return if user.fcm['token'].blank? || Rails.env.test?
+      return if user.fcm['token'].blank?
 
       send_message(
         APPROVED_TITLE,
@@ -19,7 +19,7 @@ class MessageService
     end
 
     def rejected(user, metadata)
-      return if user.fcm['token'].blank? || Rails.env.test?
+      return if user.fcm['token'].blank?
 
       send_message(
         REJECTED_TITLE,

@@ -24,7 +24,7 @@ class VerificationRequest < ApplicationRecord
     REJECTED => 2
   }
 
-  after_update :notify_user, if: :status_changed?
+  before_update :notify_user, if: :status_changed?
 
   delegate :linkedin_url,
            :identity_verification_file,
@@ -64,11 +64,46 @@ class VerificationRequest < ApplicationRecord
   private
 
   def notify_user
+    return if Rails.env.test?
+
     event_data = {
       event: VERIFICATION_UPDATE
     }
 
-    MessageService.approved(user, event_data) if approved?
-    MessageService.rejected(user, event_data) if rejected?
+    if approved?
+      MessageService.approved(user, event_data)
+      EmailService.new(
+        to_name: 'gaurav',
+        to_email: 'gaurav@baetobe.com',
+        template_id: ENV.fetch('EMAIL_TEMPLATE_ID_VERIFICATION').to_i,
+        dynamic_attributes: {
+          status: status
+        }
+      ).send
+    end
+    return unless rejected?
+
+    EmailService.new(
+      to_name: 'gaurav',
+      to_email: 'gaurav@baetobe.com',
+      template_id: ENV.fetch('EMAIL_TEMPLATE_ID_VERIFICATION').to_i,
+      dynamic_attributes: {
+        status: status,
+        fields: rejected_fields,
+        rejection_reason: rejection_reason
+      }
+    ).send
+    MessageService.rejected(user, event_data)
+  end
+
+  def rejected_fields
+    %i[linkedin
+       work_details
+       education
+       dob
+       selfie
+       identity]
+      .reject { |field| public_send("#{field}_approved?") }
+      .map { |field| field.to_s.titleize }
   end
 end
