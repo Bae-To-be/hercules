@@ -29,7 +29,7 @@ module Auth
       def parsed_token
         @parsed_token ||= token_validator.check(
           token,
-          ENV.fetch('GOOGLE_WEB_CLIENT_ID'),
+          platform == FindOrCreateUser::ANDROID ? ENV.fetch('GOOGLE_WEB_CLIENT_ID') : ENV.fetch('GOOGLE_IOS_CLIENT_ID'),
           platform == FindOrCreateUser::ANDROID ? ENV.fetch('GOOGLE_ANDROID_CLIENT_ID') : ENV.fetch('GOOGLE_IOS_CLIENT_ID')
         ).deep_symbolize_keys
       end

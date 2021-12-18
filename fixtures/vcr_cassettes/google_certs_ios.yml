@@ -1,0 +1,110 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.googleapis.com/oauth2/v1/certs
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Sat, 18 Dec 2021 14:55:33 GMT
+      Date:
+      - Sat, 18 Dec 2021 08:19:23 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin
+      - Referer
+      - X-Origin
+      Server:
+      - scaffolding on HTTPServer2
+      Content-Length:
+      - '1556'
+      X-Xss-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - public, max-age=23770, must-revalidate, no-transform
+      Age:
+      - '39'
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
+        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "c1892eb49d7ef9adf8b2e14c05ca0d032714a237": "-----BEGIN CERTIFICATE-----\nMIIDJjCCAg6gAwIBAgIIDGwDEGOzz3UwDQYJKoZIhvcNAQEFBQAwNjE0MDIGA1UE\nAxMrZmVkZXJhdGVkLXNpZ25vbi5zeXN0ZW0uZ3NlcnZpY2VhY2NvdW50LmNvbTAe\nFw0yMTEyMDYxNTIxMzJaFw0yMTEyMjMwMzM2MzJaMDYxNDAyBgNVBAMTK2ZlZGVy\nYXRlZC1zaWdub24uc3lzdGVtLmdzZXJ2aWNlYWNjb3VudC5jb20wggEiMA0GCSqG\nSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDFYMkHDDEtTwpTTDZuqKJc8+s4Dt9+YXuD\nvw78Pos6/zRvN5HLJffOPMhw4jS0tl8UR8U7wK+nNPMHWHls2KcMDgxf08UzI0GN\nztDiHtBK1hmg5FjoppzfXghCTB9Uze7iFsilW9WCZqlgRIak98qH9I+vy1G9qsOg\nSdcbprnTU2Lw99mDjhoJt7SQnKCXhhmO8sAESQfX0fE+JeiPEkRZ57WVOjIMl8zy\n1mo1NqXm7cXwyTftGGQxYwzWDKm+Xba3owNQQ6aqnlK3BZaCjsoMnXucNewzpNDX\nSvGh+RCbkjazC9+iyvhCvcahQKsTXNec/A1kn8/6xDOI4VF3fp5nAgMBAAGjODA2\nMAwGA1UdEwEB/wQCMAAwDgYDVR0PAQH/BAQDAgeAMBYGA1UdJQEB/wQMMAoGCCsG\nAQUFBwMCMA0GCSqGSIb3DQEBBQUAA4IBAQAjHaApS7hjtOH1JCD4HU/m+w5J5t+T\nPRP0678V1qVTWOsKGNnEb+huG6+s2bCtWQoQs3TfPV2SgUf2wvCHG0tWpiIclsEK\nWiy68eGbM8NCRfQlPCvuS5WBBzQI7OOf2J2JovrBCk7PXe81kDBXoXyMukli77LA\n/r5TbpkOlAY1s0ePaBu4ABjUvjMC7ll3HhOPCNF+SpnoVxw2Iq+5LBy7ckOvT+7t\n2kah329K3VYCw0fdg2YQvSQkypZx2dPdbpbZCSawFmXM+XNPYFU8tREwSBZmg4fr\nLqFNLhEvReJiCVfZeSefp9kdQnhFVx916yzV7XznsDr+gquyjw6mEWxk\n-----END CERTIFICATE-----\n",
+          "d98f49bc6ca4581eae8dfadd494fce10ea23aab0": "-----BEGIN CERTIFICATE-----\nMIIDJjCCAg6gAwIBAgIIS2YzcXy7LjUwDQYJKoZIhvcNAQEFBQAwNjE0MDIGA1UE\nAxMrZmVkZXJhdGVkLXNpZ25vbi5zeXN0ZW0uZ3NlcnZpY2VhY2NvdW50LmNvbTAe\nFw0yMTEyMTQxNTIxMzJaFw0yMTEyMzEwMzM2MzJaMDYxNDAyBgNVBAMTK2ZlZGVy\nYXRlZC1zaWdub24uc3lzdGVtLmdzZXJ2aWNlYWNjb3VudC5jb20wggEiMA0GCSqG\nSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC0LCEc7Ff/KWHmRXB9WpbtAgFMiw+OSMKN\nUKmkOvKe4X/eawR20Robrh4lTPzg4MU0wILQFDnsbvCspBVaR1IPFZQSoaTYGLEG\nIclFZl2h/PVY4FN09WJy8dblmX9oi3u5dYx06n9I4PD47bLZ/TkSpsVYWdHb7XL0\nrwpuI6nzYIPvafLUltv/c/FOzZnQXgQIC1POkO15om2N5655GOvvTjQkCND7l+kv\nkPWDzHXgsnJUij4Uv/L3g08VsyntQKLr0Ih9UdcU7xZgXP3j2iD7juZZGsgPmVLj\nOnH5Au682FRv+VKqbKVR1AHcelF05xh2PfHDLgwcm67u1Np/QCYJAgMBAAGjODA2\nMAwGA1UdEwEB/wQCMAAwDgYDVR0PAQH/BAQDAgeAMBYGA1UdJQEB/wQMMAoGCCsG\nAQUFBwMCMA0GCSqGSIb3DQEBBQUAA4IBAQCrVPEUCDz2gPhuJ8rXOvPKMtNODObn\nrT/hoJsK4eeBFQbEDwr2xIzqtHWKNREKaNTJ6DNo6VQbgP5FBOWmbvtc1eKyXVKB\n2sV8ZbpsG9UvHXfGR8JeTzABY/E0fZimr9AeeWRVnAmKplnvvufcguZEuGOW9szd\nBg2n3zdYI1bgRAaQmSCQJfBOnJFWN5XbVLBaIq9EW7S3h9jPpGxqapXCsyfDdQGO\nlZMCs0bgmYvLXXUyLRkREqUgXlUKWMTu0bYJQ8XbvoS5IgMZ1qG0Jkx2+C8P4xCn\n/UfXQokrS1oyitBFjQTacjZMnPXINt1abnaBvuaRlzJLY7IddLIvNijF\n-----END CERTIFICATE-----\n"
+        }
+  recorded_at: Sat, 18 Dec 2021 07:38:41 GMT
+- request:
+    method: get
+    uri: https://lh3.googleusercontent.com/a/AATXAJwOHCLA8TiVhTD5jyjwZ1SQwMA1clIGXMCl9eaJ=s96-c
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Expose-Headers:
+      - Content-Length
+      Expires:
+      - Sun, 19 Dec 2021 05:25:59 GMT
+      Content-Disposition:
+      - inline;filename="unnamed.png"
+      Content-Type:
+      - image/png
+      Vary:
+      - Origin
+      Access-Control-Allow-Origin:
+      - "*"
+      Timing-Allow-Origin:
+      - "*"
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Sat, 18 Dec 2021 05:25:59 GMT
+      Server:
+      - fife
+      Content-Length:
+      - '1359'
+      X-Xss-Protection:
+      - '0'
+      Cache-Control:
+      - public, max-age=86400, no-transform
+      Age:
+      - '10443'
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
+        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAAAA3NCSVQICAjb4U/gAAAABmJLR0QAAgCIANGdcUBlAAAE9UlEQVR4nO2aXWhbVRzAT5Kbm96kSZo2afqRdil1pZG1uD5s1W2MDacycXZTmSBO64Pf7MU+iIii+DBEGH4giquwBxHXObbBUCkKMmWUrZQ2YFOtXdcupWnTJG2az5ub60Ohufn8Jyw9N5X/7+0czrnnnx/3fOR/j0J5Zpwg+VHKHUClg4IAUBAACgJAQQAoCAAFAaAgABQEgIIAUBAACgJAQQAoCAAFAaAgABQEgIIAUBAACgJAQQAoCAAFAaAgABQEgIIAUBAACgJg5A6AEEJe6q7taeAaq9Uco0iKZD2eXIsLM/74D5OB26txeWNTyHi7o7/L9EJXbXc9Z9TkfpETSeJe56/Pr38ysuxcjlIObwN5BB1qrf7oYMOeRq1SUVT7SEK88s/qc1fntjiuHMiwBg3ssQwd39HbVKwdQgjHKJ511Lhe7jzUWr2VoeWA9hv03j7r2w/Wa1SZbhZDifk1PhAThKSoUyutOqbFwHJMZrP5Nf7klTsjC2Fa8dJdpE86agb2WjLsOJejn93yfjvhy2hs0TIfHLCe6DBatKkgWwzqwaMtu85N0QiXEEKISvHwa3RGajOy3x1rNXOpXyuI5JvxlScuzo55Itntw3zy2r/BX++s9zbprLpUL4uWMWuZn2aCNIKmuQZ9fLjRpldvFkVCvhpbef0Xd+FeY57IiUuzGZv9M53GLQkxF5QEOeo0R+x6ac0Nd/j0MGBng9ur8TM3lhLJVE29lnmjp668EeaDkqB3HrLq2dRYkYQ48NtC8d3PjfumfGnnoMPpurcOSoJ6rJy0OLIQLnUnGl1MW6fqtZS2FxrDWLSM3chKay7/vVrqQyaWIt6IYbMoJMUyRFYENAS92GWqkpxoIgnx81FvqQ85e9N79mbJve4dGlOsqVotLXpCPIVBywUNQaYqlbQY4pP5WlYgNAQZNGmCwjyl5aMs0BDEpP8rTYoo6H8ECgKoiJSrlFO7TE931oDNgnGBTv6s4gQ5zFWPt8N/IwIxgUIwBKcYCAoCoDHFMvZ1VcFctGslmjMZpmeV+226MkdWBDQExYQ0QVqm0Gt73uk/7/Rn17+6u04WQTSmmD+atqBWs9tpXtOIddoXkxYbdExbevajkqEh6PvJAC9J37AqxakuE4VxywINQe4gPxNIy7of20kv636PUFoOrs+HpMVuS1X/NnmJKAn68E/PaiyVBlIqyPv7G5r16gJdKgRKgtxBfsgVkNa0GNQX+nYU/4Siv+OXGXo77is/3/3Lm7ad9TZpR/s7HHUasO/Rdv1bey1bFlohqB5J3hy+6wklpDUP1Ff98fx9Xz9myzfdHmnTX37KfqHPnnEycC5Rui5E+3ZH307Dl4/apN/aN4gkxGl/zBNK+KOCSAjHKMwc06xXN+vVWTdByJgn8uSPs+4gjeS/DBeoDrbqvjhiu98Mz6xsBJFcm147fmm23EHlRYZT/+9zoa7BqcEJn3RfK4YpX+z0sJumHSLvHcU2I/vuPuuBFp3dyGbPo038UWFyJXbRFfj0lgwfDuUUtMluK9fXYWyvYWs5FatSiCKJJsRgXJhb40cXw0Oukr9Tl5GKSLmOeSI571BVAtsp8yALKAgABQGgIAAUBICCAFAQAAoCQEEAKAgABQGgIAAUBICCAFAQAAoCQEEAKAgABQGgIAAUBICCAFAQAAoCQEEAKAgABQH8B77iZJ/glvRHAAAAAElFTkSuQmCC
+  recorded_at: Sat, 18 Dec 2021 07:38:41 GMT
+recorded_with: VCR 6.0.0
