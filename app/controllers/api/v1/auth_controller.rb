@@ -8,7 +8,8 @@ module Api
       def verify
         render_response(Auth::FindOrCreateUser.new(
           params[:auth_method],
-          params[:token]
+          params[:token],
+          params[:platform].presence || Auth::FindOrCreateUser::ANDROID
         ).run)
       end
 

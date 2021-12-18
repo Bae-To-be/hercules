@@ -6,10 +6,12 @@ module Auth
 
     MISSING_AUTH_TOKEN = 'missing auth token'
     INVALID_TOKEN      = 'invalid token'
+    ANDROID = 'android'
 
-    def initialize(auth_method, token)
+    def initialize(auth_method, token, platform)
       @strategy = "Auth::Strategies::#{auth_method.capitalize}".constantize.new(
-        token
+        token,
+        platform
       )
       @token = token
     rescue NameError

@@ -3,8 +3,9 @@
 module Auth
   module Strategies
     class Base
-      def initialize(token)
+      def initialize(token, platform)
         @token = token
+        @platform = platform
       end
 
       def email_id
@@ -25,7 +26,7 @@ module Auth
 
       private
 
-      attr_reader :token
+      attr_reader :token, :platform
     end
   end
 end
