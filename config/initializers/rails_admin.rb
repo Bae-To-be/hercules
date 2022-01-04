@@ -144,5 +144,7 @@ RailsAdmin.config do |config|
     UserGenderInterest
     Swipe
     RefreshToken
+    ActionText::RichText
+    ActionText::EncryptedRichText
   ]
 end

@@ -36,3 +36,6 @@
 /.idea/*
 /.idea
 .idea
+/vendor/*
+/vendor/*/*
+/vendor/*/*/*
