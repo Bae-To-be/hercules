@@ -1,9 +1,32 @@
+# frozen_string_literal: true
+
+require 'simplecov'
+require 'simplecov-console'
+require 'simplecov-material'
+
+if ENV['COVERAGE']
+  SimpleCov::Formatter::Console.show_covered = true
+  SimpleCov::Formatter::Console.max_rows = -1
+
+  SimpleCov.start 'rails' do
+    if ENV['CI']
+      formatter SimpleCov::Formatter::Console
+    else
+      formatter SimpleCov::Formatter::MultiFormatter.new([
+                                                           SimpleCov::Formatter::MaterialFormatter,
+                                                           SimpleCov::Formatter::Console
+                                                         ])
+    end
+  end
+end
+
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -31,6 +54,8 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -61,4 +86,20 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
+FactoryBot.find_definitions
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'fixtures/vcr_cassettes'
+  config.hook_into :webmock
+  config.filter_sensitive_data('<FACEBOOK_APP_ID>')     { ENV.fetch('FACEBOOK_APP_ID') }
+  config.filter_sensitive_data('<FACEBOOK_APP_SECRET>') { ENV.fetch('FACEBOOK_APP_SECRET') }
 end
