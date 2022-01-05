@@ -301,6 +301,10 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     nested_form (0.3.2)
+    net-imap (0.2.2)
+      digest
+      net-protocol
+      strscan
     net-pop (0.1.1)
       digest
       net-protocol
@@ -459,6 +463,7 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (0.7.1)
       rails (>= 6.0.0)
+    strscan (3.0.1)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
     thor (1.2.1)
@@ -521,6 +526,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   jwt
   koala
+  net-imap
   net-pop
   net-smtp
   oj
