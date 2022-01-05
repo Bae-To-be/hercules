@@ -81,7 +81,7 @@ group :test do
   gem 'simplecov-console', require: false
   gem 'simplecov-material', require: false
   gem 'timecop'
-  gem 'vcr'
+  gem 'vcr', git: 'https://github.com/vcr/vcr'
   gem 'webdrivers'
   gem 'webmock'
 end

@@ -100,6 +100,12 @@ GIT
       zeitwerk (~> 2.5)
 
 GIT
+  remote: https://github.com/vcr/vcr
+  revision: 8ced6c96e01737a418cd270e0382a8c2c6d85f7f
+  specs:
+    vcr (6.0.0)
+
+GIT
   remote: https://github.com/westonganger/paper_trail-association_tracking.git
   revision: 015422c567f75b6b8de708312b5dc9b7da143437
   specs:
@@ -463,7 +469,6 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
-    vcr (6.0.0)
     web-console (4.1.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -541,7 +546,7 @@ DEPENDENCIES
   timecop
   turbo-rails
   tzinfo-data
-  vcr
+  vcr!
   web-console (>= 4.1.0)
   webdrivers
   webmock
