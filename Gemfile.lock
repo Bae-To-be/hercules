@@ -301,6 +301,10 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     nested_form (0.3.2)
+    net-pop (0.1.1)
+      digest
+      net-protocol
+      timeout
     net-protocol (0.1.2)
       io-wait
       timeout
@@ -517,6 +521,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   jwt
   koala
+  net-pop
   net-smtp
   oj
   paper_trail
