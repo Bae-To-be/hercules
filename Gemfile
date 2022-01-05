@@ -3,14 +3,14 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '~> 3.0.0'
+ruby '~> 3.1.0'
 
 # Added by rails
 gem 'importmap-rails', '>= 0.3.4'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
-gem 'rails', '~> 7.0.0'
+gem 'rails', github: 'rails/rails', branch: '7-0-stable'
 gem 'stimulus-rails', '>= 0.4.0'
 gem 'turbo-rails'
 # gem "redis", "~> 4.0"
@@ -29,6 +29,7 @@ gem 'image_processing', '~> 1.2'
 gem 'amazing_print'
 gem 'aws-sdk-s3', require: false
 gem 'cancancan'
+gem 'coffee-rails'
 gem 'firebase-admin-sdk'
 gem 'geokit-rails'
 gem 'google-id-token', git: 'https://github.com/google/google-id-token.git'

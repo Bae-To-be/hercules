@@ -4,7 +4,7 @@ require 'nested_form/engine'
 require 'nested_form/builder_mixin'
 
 RailsAdmin.config do |config|
-  config.parent_controller = 'ApplicationController'
+  config.parent_controller = '::ApplicationController'
   config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   config.current_user_method do
