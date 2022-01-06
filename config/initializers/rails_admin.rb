@@ -142,6 +142,7 @@ RailsAdmin.config do |config|
     CourseConnection
     IndustryConnection
     UserGenderInterest
+    UserLanguage
     Swipe
     RefreshToken
     ActionText::RichText

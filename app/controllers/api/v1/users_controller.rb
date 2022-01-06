@@ -24,6 +24,7 @@ module Api
           :fcm_token,
           :height_in_cms,
           :bio,
+          language_ids: [],
           interested_gender_ids: [],
           hometown: [:country_name, :city_name],
           education: [:course_name, :year, :university_name],

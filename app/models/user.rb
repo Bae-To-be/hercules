@@ -58,6 +58,14 @@ class User < ApplicationRecord
            through: :user_gender_interests,
            source: :gender
 
+  has_many :user_languages,
+           inverse_of: :user,
+           dependent: :destroy
+
+  has_many :languages,
+           through: :user_languages,
+           inverse_of: :users
+
   has_many :swipes_performed,
            class_name: 'Swipe',
            inverse_of: :from,
@@ -142,6 +150,7 @@ class User < ApplicationRecord
         country_name: hometown_country,
         city_name: city&.name
       },
+      height_in_cms: height_in_cms,
       religion: religion&.name
     }
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_06_101352) do
+ActiveRecord::Schema.define(version: 2022_01_06_101956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -147,6 +147,13 @@ ActiveRecord::Schema.define(version: 2022_01_06_101352) do
     t.index ["target_id"], name: "index_industry_relationships_on_target_id"
   end
 
+  create_table "languages", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_languages_on_name", unique: true
+  end
+
   create_table "refresh_tokens", force: :cascade do |t|
     t.string "crypted_token"
     t.bigint "user_id", null: false
@@ -188,6 +195,15 @@ ActiveRecord::Schema.define(version: 2022_01_06_101352) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["gender_id"], name: "index_user_gender_interests_on_gender_id"
     t.index ["user_id"], name: "index_user_gender_interests_on_user_id"
+  end
+
+  create_table "user_languages", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "language_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["language_id"], name: "index_user_languages_on_language_id"
+    t.index ["user_id"], name: "index_user_languages_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -305,6 +321,8 @@ ActiveRecord::Schema.define(version: 2022_01_06_101352) do
   add_foreign_key "swipes", "users", column: "to_id"
   add_foreign_key "user_gender_interests", "genders"
   add_foreign_key "user_gender_interests", "users"
+  add_foreign_key "user_languages", "languages"
+  add_foreign_key "user_languages", "users"
   add_foreign_key "users", "cities", column: "hometown_city_id"
   add_foreign_key "verification_files", "users"
   add_foreign_key "work_title_relationships", "work_titles", column: "source_id"
