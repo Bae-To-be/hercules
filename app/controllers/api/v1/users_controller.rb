@@ -22,6 +22,7 @@ module Api
           :company_name,
           :work_title_name,
           :fcm_token,
+          :height_in_cms,
           :bio,
           interested_gender_ids: [],
           hometown: [:country_name, :city_name],

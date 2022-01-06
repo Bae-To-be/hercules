@@ -31,6 +31,7 @@ RSpec.feature 'Update user fields', type: :request do
       let(:country) { 'United States' }
       let(:city) { create(:city) }
       let(:religion) { create(:religion) }
+      let(:height) { 171 }
 
       before do
         create(:verification_file, user: user, file_type: :selfie)
@@ -61,6 +62,7 @@ RSpec.feature 'Update user fields', type: :request do
                   university_name: university.name,
                   year: 2019
                 ],
+                height_in_cms: height,
                 hometown: {
                   city_name: city.name,
                   country_name: country
@@ -86,6 +88,7 @@ RSpec.feature 'Update user fields', type: :request do
         expect(user.hometown_country).to eq country
         expect(user.fcm['token']).to eq 'some_token'
         expect(user.religion).to eq religion
+        expect(user.height_in_cms).to eq height
 
         user.verification_requests.last.update(
           status: :rejected,

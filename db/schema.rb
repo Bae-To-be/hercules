@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_06_095208) do
+ActiveRecord::Schema.define(version: 2022_01_06_101352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -216,6 +216,7 @@ ActiveRecord::Schema.define(version: 2022_01_06_095208) do
     t.bigint "hometown_city_id"
     t.string "hometown_country"
     t.bigint "religion_id"
+    t.integer "height_in_cms"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gender_id"], name: "index_users_on_gender_id"

@@ -14,6 +14,7 @@ class UpdateUser
     interested_gender_ids
     bio
     religion_id
+    height_in_cms
   ].freeze
 
   FUZZY_ATTRIBUTES = {

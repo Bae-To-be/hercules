@@ -14,11 +14,15 @@ class User < ApplicationRecord
             allow_nil: true,
             numericality: true
 
+  validates :lat,
+            allow_nil: true,
+            numericality: true
+
   validates :bio,
             length: { maximum: 500 },
             allow_nil: true
 
-  validates :lat,
+  validates :height_in_cms,
             allow_nil: true,
             numericality: true
 
