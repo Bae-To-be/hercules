@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_06_093923) do
+ActiveRecord::Schema.define(version: 2022_01_06_095208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -156,6 +156,13 @@ ActiveRecord::Schema.define(version: 2022_01_06_093923) do
     t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
   end
 
+  create_table "religions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_religions_on_name", unique: true
+  end
+
   create_table "swipes", force: :cascade do |t|
     t.bigint "from_id", null: false
     t.bigint "to_id", null: false
@@ -208,11 +215,13 @@ ActiveRecord::Schema.define(version: 2022_01_06_093923) do
     t.string "bio"
     t.bigint "hometown_city_id"
     t.string "hometown_country"
+    t.bigint "religion_id"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gender_id"], name: "index_users_on_gender_id"
     t.index ["hometown_city_id"], name: "index_users_on_hometown_city_id"
     t.index ["industry_id"], name: "index_users_on_industry_id"
+    t.index ["religion_id"], name: "index_users_on_religion_id"
     t.index ["work_title_id"], name: "index_users_on_work_title_id"
   end
 

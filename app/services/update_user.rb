@@ -13,6 +13,7 @@ class UpdateUser
     linkedin_public
     interested_gender_ids
     bio
+    religion_id
   ].freeze
 
   FUZZY_ATTRIBUTES = {
@@ -70,6 +71,11 @@ class UpdateUser
             year: education_params[:year]
           )
         end
+      end
+
+      if params[:hometown].present?
+        user.hometown_city_id = City.find_or_create_by!(name: params.dig(:hometown, :city_id)).id
+        user.hometown_country = params.dig(:hometown, :country_name)
       end
 
       if params[:fcm_token].present?

@@ -89,6 +89,10 @@ class User < ApplicationRecord
              foreign_key: :hometown_city_id,
              inverse_of: :users
 
+  belongs_to :religion,
+             optional: true,
+             inverse_of: :users
+
   delegate :file, to: :selfie_verification, prefix: true, allow_nil: true
   delegate :file, to: :identity_verification, prefix: true, allow_nil: true
 
@@ -128,7 +132,13 @@ class User < ApplicationRecord
       interested_genders: interested_genders.map(&:name),
       education: educations.includes(:course, :university).map(&:to_h),
       linkedin_url: linkedin_url,
-      linkedin_public: linkedin_public
+      linkedin_public: linkedin_public,
+      bio: bio,
+      hometown: {
+        country_name: hometown_country,
+        city_name: city&.name
+      },
+      religion: religion&.name
     }
   end
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class City < ApplicationRecord
+class Religion < ApplicationRecord
   include PgSearch::Model
 
   validates :name,
@@ -8,8 +8,7 @@ class City < ApplicationRecord
             uniqueness: true
 
   has_many :users,
-           foreign_key: :hometown_city_id,
-           inverse_of: :city
+           inverse_of: :religion
 
   pg_search_scope :search_by_name,
                   against: :name,
