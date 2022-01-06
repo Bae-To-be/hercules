@@ -74,7 +74,7 @@ class UpdateUser
       end
 
       if params[:hometown].present?
-        user.hometown_city_id = City.find_or_create_by!(name: params.dig(:hometown, :city_id)).id
+        user.hometown_city_id = City.find_or_create_by!(name: params.dig(:hometown, :city_name)).id
         user.hometown_country = params.dig(:hometown, :country_name)
       end
 
