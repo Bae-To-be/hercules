@@ -15,7 +15,7 @@ Layout/LineLength:
   Max: 150
 
 Metrics/MethodLength:
-  Max: 80
+  Max: 90
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented_relative_to_receiver
