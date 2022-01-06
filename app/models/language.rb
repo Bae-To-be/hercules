@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Language < ApplicationRecord
   has_many :user_languages,
            inverse_of: :language,
