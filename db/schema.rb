@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_06_091836) do
+ActiveRecord::Schema.define(version: 2022_01_06_093923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -70,6 +70,13 @@ ActiveRecord::Schema.define(version: 2022_01_06_091836) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "position"
     t.index ["position"], name: "index_articles_on_position", unique: true
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_cities_on_name", unique: true
   end
 
   create_table "companies", force: :cascade do |t|
@@ -199,9 +206,12 @@ ActiveRecord::Schema.define(version: 2022_01_06_091836) do
     t.boolean "linkedin_public", default: false
     t.json "fcm", default: {}
     t.string "bio"
+    t.bigint "hometown_city_id"
+    t.string "hometown_country"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["gender_id"], name: "index_users_on_gender_id"
+    t.index ["hometown_city_id"], name: "index_users_on_hometown_city_id"
     t.index ["industry_id"], name: "index_users_on_industry_id"
     t.index ["work_title_id"], name: "index_users_on_work_title_id"
   end
@@ -285,6 +295,7 @@ ActiveRecord::Schema.define(version: 2022_01_06_091836) do
   add_foreign_key "swipes", "users", column: "to_id"
   add_foreign_key "user_gender_interests", "genders"
   add_foreign_key "user_gender_interests", "users"
+  add_foreign_key "users", "cities", column: "hometown_city_id"
   add_foreign_key "verification_files", "users"
   add_foreign_key "work_title_relationships", "work_titles", column: "source_id"
   add_foreign_key "work_title_relationships", "work_titles", column: "target_id"

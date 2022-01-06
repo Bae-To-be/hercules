@@ -84,6 +84,11 @@ class User < ApplicationRecord
              optional: true,
              inverse_of: :users
 
+  belongs_to :city,
+             optional: true,
+             foreign_key: :hometown_city_id,
+             inverse_of: :users
+
   delegate :file, to: :selfie_verification, prefix: true, allow_nil: true
   delegate :file, to: :identity_verification, prefix: true, allow_nil: true
 
