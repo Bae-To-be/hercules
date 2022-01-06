@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
       resources :potential_matches, only: %i[index]
       resources :companies, only: %i[index]
+      resources :countries, only: %i[index]
       resources :industries, only: %i[index]
       resources :courses, only: %i[index]
       resources :universities, only: %i[index]

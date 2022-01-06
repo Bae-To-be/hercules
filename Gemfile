@@ -50,6 +50,7 @@ gem 'rollbar'
 gem 'scenic'
 gem 'sib-api-v3-sdk'
 gem 'skylight'
+gem 'countries'
 
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]
