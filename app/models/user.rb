@@ -105,6 +105,22 @@ class User < ApplicationRecord
              optional: true,
              inverse_of: :users
 
+  belongs_to :food_preference,
+             optional: true,
+             inverse_of: :users
+
+  belongs_to :children_preference,
+             optional: true,
+             inverse_of: :users
+
+  belongs_to :drinking_preference,
+             optional: true,
+             inverse_of: :users
+
+  belongs_to :smoking_preference,
+             optional: true,
+             inverse_of: :users
+
   delegate :file, to: :selfie_verification, prefix: true, allow_nil: true
   delegate :file, to: :identity_verification, prefix: true, allow_nil: true
 
@@ -150,6 +166,10 @@ class User < ApplicationRecord
         country_name: hometown_country,
         city_name: city&.name
       },
+      food_preference: food_preference&.name,
+      children_preference: children_preference&.name,
+      smoking_preference: smoking_preference&.name,
+      drinking_preference: drinking_preference&.name,
       height_in_cms: height_in_cms,
       religion: religion&.name
     }

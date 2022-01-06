@@ -16,6 +16,10 @@ class UpdateUser
     religion_id
     height_in_cms
     language_ids
+    food_preference_id
+    children_preference_id
+    drinking_preference_id
+    smoking_preference_id
   ].freeze
 
   FUZZY_ATTRIBUTES = {

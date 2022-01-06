@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_06_101956) do
+ActiveRecord::Schema.define(version: 2022_01_06_103640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -72,6 +72,13 @@ ActiveRecord::Schema.define(version: 2022_01_06_101956) do
     t.index ["position"], name: "index_articles_on_position", unique: true
   end
 
+  create_table "children_preferences", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_children_preferences_on_name", unique: true
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -102,6 +109,13 @@ ActiveRecord::Schema.define(version: 2022_01_06_101956) do
     t.index ["name"], name: "index_courses_on_name", unique: true
   end
 
+  create_table "drinking_preferences", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_drinking_preferences_on_name", unique: true
+  end
+
   create_table "educations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
@@ -112,6 +126,13 @@ ActiveRecord::Schema.define(version: 2022_01_06_101956) do
     t.index ["course_id"], name: "index_educations_on_course_id"
     t.index ["university_id"], name: "index_educations_on_university_id"
     t.index ["user_id"], name: "index_educations_on_user_id"
+  end
+
+  create_table "food_preferences", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_food_preferences_on_name", unique: true
   end
 
   create_table "genders", force: :cascade do |t|
@@ -168,6 +189,13 @@ ActiveRecord::Schema.define(version: 2022_01_06_101956) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_religions_on_name", unique: true
+  end
+
+  create_table "smoking_preferences", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_smoking_preferences_on_name", unique: true
   end
 
   create_table "swipes", force: :cascade do |t|
@@ -233,12 +261,20 @@ ActiveRecord::Schema.define(version: 2022_01_06_101956) do
     t.string "hometown_country"
     t.bigint "religion_id"
     t.integer "height_in_cms"
+    t.bigint "food_preference_id"
+    t.bigint "drinking_preference_id"
+    t.bigint "smoking_preference_id"
+    t.bigint "children_preference_id"
+    t.index ["children_preference_id"], name: "index_users_on_children_preference_id"
     t.index ["company_id"], name: "index_users_on_company_id"
+    t.index ["drinking_preference_id"], name: "index_users_on_drinking_preference_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["food_preference_id"], name: "index_users_on_food_preference_id"
     t.index ["gender_id"], name: "index_users_on_gender_id"
     t.index ["hometown_city_id"], name: "index_users_on_hometown_city_id"
     t.index ["industry_id"], name: "index_users_on_industry_id"
     t.index ["religion_id"], name: "index_users_on_religion_id"
+    t.index ["smoking_preference_id"], name: "index_users_on_smoking_preference_id"
     t.index ["work_title_id"], name: "index_users_on_work_title_id"
   end
 

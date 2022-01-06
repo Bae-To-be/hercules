@@ -33,6 +33,10 @@ RSpec.feature 'Update user fields', type: :request do
       let(:religion) { create(:religion) }
       let(:height) { 171 }
       let(:language) { create(:language) }
+      let(:smoking_preference) { SmokingPreference.create(name: 'None') }
+      let(:drinking_preference) { DrinkingPreference.create(name: 'Heavy') }
+      let(:children_preference) { ChildrenPreference.create(name: 'Never') }
+      let(:food_preference) { FoodPreference.create(name: 'Vegan') }
 
       before do
         create(:verification_file, user: user, file_type: :selfie)
@@ -69,6 +73,10 @@ RSpec.feature 'Update user fields', type: :request do
                   city_name: city.name,
                   country_name: country
                 },
+                smoking_preference_id: smoking_preference.id,
+                drinking_preference_id: drinking_preference.id,
+                children_preference_id: children_preference.id,
+                food_preference_id: food_preference.id,
                 fcm_token: 'some_token',
                 bio: bio,
                 religion_id: religion.id
@@ -92,6 +100,10 @@ RSpec.feature 'Update user fields', type: :request do
         expect(user.religion).to eq religion
         expect(user.height_in_cms).to eq height
         expect(user.languages[0]).to eq language
+        expect(user.smoking_preference).to eq smoking_preference
+        expect(user.drinking_preference).to eq drinking_preference
+        expect(user.children_preference).to eq children_preference
+        expect(user.food_preference).to eq food_preference
 
         user.verification_requests.last.update(
           status: :rejected,
