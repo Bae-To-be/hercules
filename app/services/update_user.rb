@@ -12,6 +12,7 @@ class UpdateUser
     linkedin_url
     linkedin_public
     interested_gender_ids
+    bio
   ].freeze
 
   FUZZY_ATTRIBUTES = {

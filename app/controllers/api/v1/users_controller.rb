@@ -21,6 +21,7 @@ module Api
           :company_name,
           :work_title_name,
           :fcm_token,
+          :bio,
           interested_gender_ids: [],
           education: [:course_name, :year, :university_name],
           location: %i[lat lng country_code locality]

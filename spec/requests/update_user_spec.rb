@@ -27,6 +27,7 @@ RSpec.feature 'Update user fields', type: :request do
       let(:company_name) { 'test company' }
       let(:work_title_name) { 'engineer' }
       let(:location) { { lat: 72.877426, lng: 19.07609 } }
+      let(:bio) { 'some random bio' }
 
       before do
         create(:verification_file, user: user, file_type: :selfie)
@@ -57,7 +58,8 @@ RSpec.feature 'Update user fields', type: :request do
                   university_name: university.name,
                   year: 2019
                 ],
-                fcm_token: 'some_token'
+                fcm_token: 'some_token',
+                bio: bio
               },
               headers: { 'HTTP_AUTHORIZATION' => token }
         expect(response.status).to eq 200
@@ -71,6 +73,7 @@ RSpec.feature 'Update user fields', type: :request do
         expect(user.interested_age_lower).to eq [(user.current_age - ENV.fetch('LOWER_AGE_BUFFER').to_i), 18].max
         expect(user.interested_age_upper).to eq user.current_age + ENV.fetch('UPPER_AGE_BUFFER').to_i
         expect(user.verification_requests.last).to be_in_review
+        expect(user.bio).to eq bio
         expect(user.fcm['token']).to eq 'some_token'
 
         user.verification_requests.last.update(
