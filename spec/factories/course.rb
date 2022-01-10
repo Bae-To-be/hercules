@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :course do
-    name { Faker::Educator.unique.course_name }
+    name { Faker::String.unique.random(length: 4) }
   end
 end
