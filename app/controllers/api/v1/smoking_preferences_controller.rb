@@ -6,7 +6,7 @@ module Api
       def index
         render_response(
           ServiceResponse.ok(
-            DrinkingPreference.all.map(&:to_h)
+            SmokingPreference.all.map(&:to_h)
           )
         )
       end

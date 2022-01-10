@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :course do
-    name { Faker::Educator.unique.degree }
+    name { Faker::Educator.unique.course_name }
   end
 end

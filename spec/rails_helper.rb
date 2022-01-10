@@ -3,6 +3,8 @@
 require 'simplecov'
 require 'simplecov-console'
 require 'simplecov-material'
+require_relative './support/shared_examples/simple_list_controller'
+require_relative './support/shared_examples/simple_search_controller'
 
 if ENV['COVERAGE']
   SimpleCov::Formatter::Console.show_covered = true
