@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
       resources :potential_matches, only: %i[index]
       resources :companies, only: %i[index]
+      resources :religions, only: %i[index]
       resources :languages, only: %i[index]
       resources :food_preferences, only: %i[index]
       resources :children_preferences, only: %i[index]
