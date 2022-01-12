@@ -24,6 +24,8 @@ RailsAdmin.config do |config|
   end
 
   config.model 'VerificationRequest' do
+    navigation_label 'KYC'
+
     configure :user do
       read_only true
     end
@@ -112,6 +114,55 @@ RailsAdmin.config do |config|
 
   config.model 'PaperTrail::VersionAssociation' do
     visible false
+  end
+
+  %w[
+    User
+    Education
+    VerificationFile
+    Image
+  ].each do |model|
+    config.model model do
+      navigation_label 'User Profile'
+    end
+  end
+
+  %w[
+    AdminUser
+    Article
+  ].each do |model|
+    config.model model do
+      navigation_label 'Others'
+    end
+  end
+
+  %w[
+    IndustryRelationship
+    WorkTitleRelationship
+    CourseRelationship
+  ].each do |model|
+    config.model model do
+      navigation_label 'Entity Relations'
+    end
+  end
+
+  %w[City
+     Company
+     Language
+     Course
+     University
+     Industry
+     Company
+     WorkTitle
+     Religion
+     Gender
+     DrinkingPreference
+     SmokingPreference
+     FoodPreference
+     ChildrenPreference].each do |model|
+    config.model model do
+      navigation_label 'Background Information'
+    end
   end
 
   audited_models = ['User', 'Image', 'VerificationFile', 'Education', 'VerificationRequest']
