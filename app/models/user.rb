@@ -164,14 +164,14 @@ class User < ApplicationRecord
       bio: bio,
       hometown: {
         country_name: hometown_country,
-        city_name: city&.name
+        city_name: city&.to_h
       },
-      food_preference: food_preference&.name,
-      children_preference: children_preference&.name,
-      smoking_preference: smoking_preference&.name,
-      drinking_preference: drinking_preference&.name,
+      food_preference: food_preference&.to_h,
+      children_preference: children_preference&.to_h,
+      smoking_preference: smoking_preference&.to_h,
+      drinking_preference: drinking_preference&.to_h,
       height_in_cms: height_in_cms,
-      religion: religion&.name,
+      religion: religion&.to_h,
       languages: languages.map(&:to_h)
     }
   end
