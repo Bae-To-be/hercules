@@ -52,6 +52,7 @@ gem 'rollbar'
 gem 'scenic'
 gem 'sib-api-v3-sdk'
 gem 'skylight'
+gem 'webpacker', '~> 5.4.3'
 
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]

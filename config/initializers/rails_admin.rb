@@ -136,6 +136,12 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Article' do
+    field :content do
+      js_location { bindings[:view].asset_pack_path 'action_text.js' }
+    end
+  end
+
   %w[
     IndustryRelationship
     WorkTitleRelationship
