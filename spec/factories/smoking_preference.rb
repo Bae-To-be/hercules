@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :smoking_preference do
-    name { Faker::String.unique.random(length: 4) }
+    name { Faker::Alphanumeric.unique.alpha(number: 10) }
   end
 end

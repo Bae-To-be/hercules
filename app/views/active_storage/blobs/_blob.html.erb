@@ -3,7 +3,7 @@
     <%= image_tag blob.url, class: 'article-image' %>
   <% end %>
 
-  <% unless current_page?(:controller => 'articles', :action => 'show') %>
+  <% unless request.path.starts_with?('/articles/') %>
     <figcaption class="attachment__caption">
       <% if caption = blob.try(:caption) %>
         <%= caption %>
