@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  helper :all
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to '/admin', alert: exception.message
   end
