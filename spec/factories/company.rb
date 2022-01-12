@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :company do
-    name { Faker::Company.unique.name }
+    name { Faker::String.unique.random(length: 4) }
   end
 end
