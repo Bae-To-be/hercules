@@ -171,7 +171,8 @@ class User < ApplicationRecord
       smoking_preference: smoking_preference&.name,
       drinking_preference: drinking_preference&.name,
       height_in_cms: height_in_cms,
-      religion: religion&.name
+      religion: religion&.name,
+      languages: languages.map(&:to_h)
     }
   end
 
