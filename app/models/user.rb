@@ -164,7 +164,7 @@ class User < ApplicationRecord
       bio: bio,
       hometown: {
         country_name: hometown_country,
-        city_name: city&.to_h
+        city: city&.to_h
       },
       food_preference: food_preference&.to_h,
       children_preference: children_preference&.to_h,
