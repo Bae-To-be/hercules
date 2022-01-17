@@ -2,6 +2,7 @@
 
 require 'nested_form/engine'
 require 'nested_form/builder_mixin'
+require_relative '../../lib/rails_admin/maps'
 
 RailsAdmin.config do |config|
   config.parent_controller = '::ApplicationController'
@@ -174,6 +175,7 @@ RailsAdmin.config do |config|
   audited_models = ['User', 'Image', 'VerificationFile', 'Education', 'VerificationRequest']
   config.actions do
     dashboard
+    maps
     index
     new do
       except 'VerificationRequest'
