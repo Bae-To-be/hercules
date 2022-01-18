@@ -38,6 +38,39 @@ RSpec.feature 'Update user fields', type: :request do
       let(:children_preference) { ChildrenPreference.create(name: 'Never') }
       let(:food_preference) { FoodPreference.create(name: 'Vegan') }
 
+      let(:params) do
+        {
+          gender_id: gender.id,
+          interested_gender_ids: [interested_gender.id],
+          birthday: birthday,
+          industry_id: industry.id,
+          linkedin_url: linkedin_url,
+          company_name: company_name,
+          work_title_name: work_title_name,
+          location: location,
+          education: [
+            course_name: course.name,
+            university_name: university.name,
+            year: 2019
+          ],
+          language_ids: [language.id],
+          height_in_cms: height,
+          hometown: {
+            city_name: city.name,
+            country_name: country
+          },
+          status: 'paused',
+          smoking_preference_id: smoking_preference.id,
+          drinking_preference_id: drinking_preference.id,
+          children_preference_id: children_preference.id,
+          food_preference_id: food_preference.id,
+          fcm_token: 'some_token',
+          bio: bio,
+          religion_id: religion.id,
+          search_radius: 2000
+        }
+      end
+
       before do
         create(:verification_file, user: user, file_type: :selfie)
         create(:verification_file, user: user, file_type: :identity)
@@ -45,7 +78,7 @@ RSpec.feature 'Update user fields', type: :request do
         create(:image, user: user)
       end
 
-      it 'successfully updates every attribute' do
+      it 'successfully updates every attribute and auto fills the age limits' do
         expect(user.gender_id).to be_nil
         expect(user.birthday).to_not eq(birthday)
         expect(user.linkedin_url).to be_nil
@@ -53,35 +86,7 @@ RSpec.feature 'Update user fields', type: :request do
         expect(user.company_id).to be_nil
 
         patch '/api/v1/user',
-              params: {
-                gender_id: gender.id,
-                interested_gender_ids: [interested_gender.id],
-                birthday: birthday,
-                industry_id: industry.id,
-                linkedin_url: linkedin_url,
-                company_name: company_name,
-                work_title_name: work_title_name,
-                location: location,
-                education: [
-                  course_name: course.name,
-                  university_name: university.name,
-                  year: 2019
-                ],
-                language_ids: [language.id],
-                height_in_cms: height,
-                hometown: {
-                  city_name: city.name,
-                  country_name: country
-                },
-                status: 'paused',
-                smoking_preference_id: smoking_preference.id,
-                drinking_preference_id: drinking_preference.id,
-                children_preference_id: children_preference.id,
-                food_preference_id: food_preference.id,
-                fcm_token: 'some_token',
-                bio: bio,
-                religion_id: religion.id
-              },
+              params: params,
               headers: { 'HTTP_AUTHORIZATION' => token }
         expect(response.status).to eq 200
         user.reload
@@ -106,6 +111,7 @@ RSpec.feature 'Update user fields', type: :request do
         expect(user.children_preference).to eq children_preference
         expect(user.food_preference).to eq food_preference
         expect(user).to be_paused
+        expect(user.search_radius).to eq 2000
 
         user.verification_requests.last.update(
           status: :rejected,
@@ -116,6 +122,19 @@ RSpec.feature 'Update user fields', type: :request do
           identity_approved: true,
           linkedin_approved: true
         )
+      end
+
+      it 'successfully updates the age limits' do
+        patch '/api/v1/user',
+              params: {
+                interested_age_lower: 20,
+                interested_age_upper: 30
+              },
+              headers: { 'HTTP_AUTHORIZATION' => token }
+        expect(response.status).to eq 200
+        user.reload
+        expect(user.interested_age_lower).to eq 20
+        expect(user.interested_age_upper).to eq 30
       end
     end
   end

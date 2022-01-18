@@ -175,7 +175,10 @@ class User < ApplicationRecord
       drinking_preference: drinking_preference&.to_h,
       height_in_cms: height_in_cms,
       religion: religion&.to_h,
-      languages: languages.map(&:to_h)
+      languages: languages.map(&:to_h),
+      search_radius: search_radius_value,
+      interested_age_lower: interested_age_lower,
+      interested_age_upper: interested_age_upper
     }
   end
 

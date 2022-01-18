@@ -21,6 +21,9 @@ class UpdateUser
     children_preference_id
     drinking_preference_id
     smoking_preference_id
+    search_radius
+    interested_age_lower
+    interested_age_upper
   ].freeze
 
   FUZZY_ATTRIBUTES = {
@@ -107,8 +110,8 @@ class UpdateUser
       end
 
       if user.birthday_changed?
-        user.interested_age_lower = [(user.current_age - ENV.fetch('LOWER_AGE_BUFFER').to_i), 18].max
-        user.interested_age_upper = user.current_age + ENV.fetch('UPPER_AGE_BUFFER').to_i
+        user.interested_age_lower = [(user.current_age - ENV.fetch('LOWER_AGE_BUFFER').to_i), 18].max if user.interested_age_lower.nil?
+        user.interested_age_upper = user.current_age + ENV.fetch('UPPER_AGE_BUFFER').to_i if user.interested_age_upper.nil?
       end
 
       if user.verification_rejected?
