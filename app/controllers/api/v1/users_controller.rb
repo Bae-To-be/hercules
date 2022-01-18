@@ -39,6 +39,7 @@ module Api
           :fcm_token,
           :height_in_cms,
           :bio,
+          :status,
           :food_preference_id,
           :children_preference_id,
           :drinking_preference_id,

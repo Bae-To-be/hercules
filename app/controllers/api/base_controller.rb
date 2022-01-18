@@ -15,21 +15,21 @@ module Api
                 with: :bad_request
 
     rescue_from ActiveRecord::RecordNotFound,
-                with: :not_found
+                with: :record_not_found
 
     private
 
     def bad_request(exception)
       render_response(
         ServiceResponse
-          .bad_request(exception.message)
+          .bad_request(exception.model)
       )
     end
 
-    def not_found(exception)
+    def record_not_found(exception)
       render_response(
         ServiceResponse
-          .not_found(exception.message)
+          .not_found("#{exception.model} not found")
       )
     end
 

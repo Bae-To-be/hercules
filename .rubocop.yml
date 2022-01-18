@@ -110,7 +110,7 @@ Rails/DynamicFindBy:
   Enabled: false
 
 Metrics/BlockLength:
-  Max: 80
+  Max: 90
   Exclude:
     # ActiveAdmin's DSL prefers long blocks
     - app/admin/**/*

@@ -73,6 +73,7 @@ RSpec.feature 'Update user fields', type: :request do
                   city_name: city.name,
                   country_name: country
                 },
+                status: 'paused',
                 smoking_preference_id: smoking_preference.id,
                 drinking_preference_id: drinking_preference.id,
                 children_preference_id: children_preference.id,
@@ -104,6 +105,7 @@ RSpec.feature 'Update user fields', type: :request do
         expect(user.drinking_preference).to eq drinking_preference
         expect(user.children_preference).to eq children_preference
         expect(user.food_preference).to eq food_preference
+        expect(user).to be_paused
 
         user.verification_requests.last.update(
           status: :rejected,

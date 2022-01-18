@@ -10,8 +10,8 @@ RSpec.feature 'User profile', type: :request do
     context 'when unauthorized' do
       it 'returns 401' do
         delete '/api/v1/me',
-            params: { image: nil },
-            headers: { 'HTTP_AUTHORIZATION' => 'random_string' }
+               params: { image: nil },
+               headers: { 'HTTP_AUTHORIZATION' => 'random_string' }
 
         expect(response.status).to eq 401
       end
@@ -20,8 +20,8 @@ RSpec.feature 'User profile', type: :request do
     context 'when valid token' do
       it 'returns 200' do
         delete '/api/v1/me',
-            params: { image: nil },
-            headers: { 'HTTP_AUTHORIZATION' => token }
+               params: { image: nil },
+               headers: { 'HTTP_AUTHORIZATION' => token }
 
         expect(response.status).to eq 200
         expect(User.find_by(id: user.id)).to be_nil

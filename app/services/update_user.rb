@@ -13,6 +13,7 @@ class UpdateUser
     linkedin_public
     interested_gender_ids
     bio
+    status
     religion_id
     height_in_cms
     language_ids
@@ -39,10 +40,16 @@ class UpdateUser
       DIRECT_ATTRIBUTES.each do |direct_attribute|
         next if params[direct_attribute].nil?
 
-        user.public_send(
-          "#{direct_attribute}=",
-          params[direct_attribute]
-        )
+        begin
+          user.public_send(
+            "#{direct_attribute}=",
+            params[direct_attribute]
+          )
+        rescue ArgumentError => e
+          return ServiceResponse.bad_request(
+            e.message
+          )
+        end
       end
 
       unless params[:location].nil?
