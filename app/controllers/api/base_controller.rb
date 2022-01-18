@@ -22,7 +22,7 @@ module Api
     def bad_request(exception)
       render_response(
         ServiceResponse
-          .bad_request(exception.model)
+          .bad_request(exception.message)
       )
     end
 
