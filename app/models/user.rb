@@ -188,9 +188,22 @@ class User < ApplicationRecord
       industry: industry&.name,
       company: company&.name,
       work_title: work_title&.name,
-      birthday: birthday&.strftime('%d-%m-%Y'),
       age: current_age,
-      education: educations.includes(:course, :university).map(&:to_h)
+      education: educations.includes(:course, :university).map(&:to_h),
+      linkedin_url: linkedin_public? ? linkedin_url : '',
+      linkedin_public: linkedin_public,
+      bio: bio,
+      hometown: {
+        country_name: hometown_country,
+        city: city&.to_h
+      },
+      food_preference: food_preference&.to_h,
+      children_preference: children_preference&.to_h,
+      smoking_preference: smoking_preference&.to_h,
+      drinking_preference: drinking_preference&.to_h,
+      height_in_cms: height_in_cms,
+      religion: religion&.to_h,
+      languages: languages.map(&:to_h)
     }
   end
 

@@ -18,7 +18,7 @@ RSpec.feature 'User profile', type: :request do
     end
 
     context 'when valid token' do
-      it 'returns 401' do
+      it 'returns 200' do
         get '/api/v1/me',
             params: { image: nil },
             headers: { 'HTTP_AUTHORIZATION' => token }

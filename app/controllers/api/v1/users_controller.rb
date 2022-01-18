@@ -9,7 +9,17 @@ module Api
         )
       end
 
+      def show
+        render_response(
+          ServiceResponse.ok(user.to_h)
+        )
+      end
+
       private
+
+      def user
+        User.find(params[:id])
+      end
 
       def user_params
         params.permit(
