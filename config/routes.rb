@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       post 'refresh_token', to: 'auth#refresh'
       post 'logout', to: 'auth#logout'
       get 'me', to: 'auth#me'
+      delete 'me', to: 'users#delete_account'
       patch 'user', to: 'users#update'
       get 'verification_info', to: 'verification#me'
 

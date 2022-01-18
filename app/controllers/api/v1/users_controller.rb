@@ -15,6 +15,11 @@ module Api
         )
       end
 
+      def delete_account
+        current_user.destroy!
+        render_response(ServiceResponse.ok(nil))
+      end
+
       private
 
       def user
