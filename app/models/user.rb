@@ -261,4 +261,15 @@ class User < ApplicationRecord
     (changes.keys - %w[lat lng country_code locality]).empty? ||
       (changes.keys - %w[fcm]).empty?
   end
+
+  def location
+    {
+      lat: lat,
+      lng: lng
+    }
+  end
+
+  def location_present?
+    lat.present? && lng.present?
+  end
 end
