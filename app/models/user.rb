@@ -284,10 +284,10 @@ class User < ApplicationRecord
   def location
     {
       lat: lat,
-      lng: lng
+      lng: lng,
+      search_radius: search_radius_value
     }
   end
-
   def location_present?
     lat.present? && lng.present?
   end

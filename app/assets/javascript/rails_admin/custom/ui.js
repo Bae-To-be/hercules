@@ -31,9 +31,15 @@ $(document).on('rails_admin.dom_ready', function() {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
                 subdomains: ['a','b','c']
             }).addTo( map );
-            let users = $('#user_locations').data().content;
-            users.forEach(function (user, i) {
-                L.marker([user.lat, user.lng]).addTo(map);
+            let locations = $('#user_locations').data().content;
+            locations.forEach(function (location, i) {
+                L.circle([location.lat, location.lng], {
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.5,
+                    radius: location.search_radius
+                }).addTo(map);
+                L.marker([location.lat, location.lng]).addTo(map);
             });
         });
         document.head.appendChild(script);
