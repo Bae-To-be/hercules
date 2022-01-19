@@ -15,7 +15,8 @@ class Image < ApplicationRecord
   def to_h
     {
       position: position,
-      url: download_url
+      url: download_url,
+      id: id
     }
   end
 
