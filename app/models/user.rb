@@ -288,6 +288,7 @@ class User < ApplicationRecord
       search_radius: search_radius_value
     }
   end
+
   def location_present?
     lat.present? && lng.present?
   end
