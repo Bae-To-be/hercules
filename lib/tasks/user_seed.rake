@@ -38,6 +38,8 @@ task user_seed: :environment do
     )
     user.educations.create!(course: Course.find_or_create_by!(name: Faker::Educator.degree),
                             university: University.find_or_create_by!(name: Faker::University.name), year: (2010..2021).to_a.sample)
+    languages = %w[English Hindi French Tamil].sample(2)
+    user.languages = languages.map { |language| Language.find_or_create_by!(name: language) }
   rescue ActiveRecord::RecordNotUnique
     next
   end
