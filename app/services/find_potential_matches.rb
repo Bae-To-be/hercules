@@ -107,7 +107,7 @@ class FindPotentialMatches
               .where.not(id: [user.id, *swiped_user_ids])
               .in_bounds(bounds, inclusive: true)
               .between_age(user.interested_age_lower, user.interested_age_upper)
-              .interested_in_genders([user.gender_id, Gender.find_by(name: 'All')].compact)
+              .interested_in_genders([user.gender_id, Gender.find_by(name: 'All').id].compact)
               .public_send(institute_query, institute_id)
               .distinct
 
