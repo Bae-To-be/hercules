@@ -190,7 +190,7 @@ class User < ApplicationRecord
     {
       id: id,
       name: name,
-      profile_picture: images.min_by(&:position)&.url
+      profile_picture: images.min_by(&:position)&.to_h
     }
   end
 
