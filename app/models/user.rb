@@ -230,7 +230,8 @@ class User < ApplicationRecord
       drinking_preference: drinking_preference&.to_h,
       height_in_cms: height_in_cms,
       religion: religion&.to_h,
-      languages: languages.map(&:to_h)
+      languages: languages.map(&:to_h),
+      images: images.map(&:to_h)
     }
   end
 
