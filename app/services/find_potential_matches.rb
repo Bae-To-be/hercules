@@ -26,8 +26,8 @@ class FindPotentialMatches
 
   def formatted_result(ids)
     User
-      .includes(:work_title, :company, :industry, :gender, educations: [:course, :university])
-      .find(ids).map(&:to_h)
+      .includes(:work_title, :images, :company, :industry, :gender)
+      .find(ids).map(&:swipe_hash)
   end
 
   def find_matches
