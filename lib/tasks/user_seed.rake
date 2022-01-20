@@ -1,4 +1,6 @@
-desc "Creates a seed with random users"
+# frozen_string_literal: true
+
+desc 'Creates a seed with random users'
 task user_seed: :environment do
   male_gender = Gender.find_or_create_by!(name: 'Male')
   female_gender = Gender.find_or_create_by!(name: 'Female')
@@ -9,7 +11,7 @@ task user_seed: :environment do
   100.times do
     location = origin.endpoint((0..360).to_a.sample, ENV.fetch('DEFAULT_SEARCH_RADIUS').to_i)
 
-    User.create!(
+    user = User.create!(
       name: Faker::Name.name,
       email: Faker::Internet.unique.email,
       birthday: Time.now.utc.to_date - 20.years,
@@ -32,7 +34,10 @@ task user_seed: :environment do
       food_preference: FoodPreference.find_or_create_by!(name: %w[Vegan Veg Non-Veg].sample),
       smoking_preference: SmokingPreference.find_or_create_by!(name: %w[Sometimes Never Frequently].sample),
       drinking_preference: DrinkingPreference.find_or_create_by!(name: %w[Sometimes Never Frequently].sample),
-      children_preference: ChildrenPreference.find_or_create_by!(name: %w[Someday Never].sample),)
+      children_preference: ChildrenPreference.find_or_create_by!(name: %w[Someday Never].sample)
+    )
+    user.educations.create!(course: Course.find_or_create_by!(name: Faker::Educator.degree),
+                            university: University.find_or_create_by!(name: Faker::University.name), year: (2010..2021).to_a.sample)
   rescue ActiveRecord::RecordNotUnique
     next
   end

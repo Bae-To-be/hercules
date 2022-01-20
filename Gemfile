@@ -31,6 +31,7 @@ gem 'aws-sdk-s3', require: false
 gem 'cancancan'
 gem 'coffee-rails'
 gem 'countries'
+gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
 gem 'firebase-admin-sdk'
 gem 'geokit-rails'
 gem 'google-id-token', git: 'https://github.com/google/google-id-token.git'
@@ -53,7 +54,6 @@ gem 'scenic'
 gem 'sib-api-v3-sdk'
 gem 'skylight'
 gem 'webpacker', '~> 5.4.3'
-gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
 
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]
