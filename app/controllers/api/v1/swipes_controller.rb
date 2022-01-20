@@ -9,6 +9,28 @@ module Api
         )
       end
 
+      def sent
+        render_response(
+          ServiceResponse.ok(swipes_sent)
+        )
+      end
+
+      def received
+        render_response(
+          ServiceResponse.ok(swipes_received)
+        )
+      end
+
+      private
+
+      def swipes_sent
+        Swipe.right.where(from_id: current_user.id).map(&:from_hash)
+      end
+
+      def swipes_received
+        Swipe.right.where(to_id: current_user.id).map(&:to_hash)
+      end
+
       def create_swipe_response
         existing = Swipe.find_by(
           from_id: current_user.id,

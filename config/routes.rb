@@ -34,6 +34,12 @@ Rails.application.routes.draw do
       resources :images, only: %i[create index destroy]
       resources :verification_files, only: %i[create index destroy]
       resources :swipes, only: %i[create]
+      resources :likes, only: [] do
+        collection do
+          get :sent
+          get :received
+        end
+      end
 
       resources :potential_matches, only: %i[index]
       resources :companies, only: %i[index]

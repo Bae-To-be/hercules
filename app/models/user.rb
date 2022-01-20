@@ -186,6 +186,14 @@ class User < ApplicationRecord
     recent_verification&.rejected?
   end
 
+  def basic_hash
+    {
+      id: id,
+      name: name,
+      profile_picture: images.min_by(&:position)&.url
+    }
+  end
+
   def swipe_hash
     {
       id: id,

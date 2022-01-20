@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Swipe < ApplicationRecord
+  include ActionView::Helpers::DateHelper
+
   belongs_to :from,
              class_name: 'User',
              inverse_of: :swipes_performed
@@ -21,7 +23,27 @@ class Swipe < ApplicationRecord
 
   scope :in_last_day, -> { where('created_at >= ?', Time.zone.now - 24.hours) }
 
+  def from_hash
+    {
+      id: id,
+      user: to.basic_hash,
+      time_since_creation: time_since_creation
+    }
+  end
+
+  def to_hash
+    {
+      id: id,
+      user: from.basic_hash,
+      time_since_creation: time_since_creation
+    }
+  end
+
   private
+
+  def time_since_creation
+    "#{time_ago_in_words(created_at)} ago"
+  end
 
   def under_daily_limit
     return unless Swipe.where(from: from).in_last_day.count >= ENV.fetch('DEFAULT_DAILY_SWIPE_LIMIT').to_i
