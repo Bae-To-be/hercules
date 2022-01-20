@@ -10,7 +10,7 @@ class FindPotentialMatches
   end
 
   def run
-    result = find_matches_for_professional
+    result = find_matches
 
     Rails.logger.info "Filter Performance for user ID: #{user.id}: #{result.filters}"
 
@@ -26,11 +26,11 @@ class FindPotentialMatches
 
   def formatted_result(ids)
     User
-      .includes(:work_title, :company, :course, :industry, :gender, :university)
+      .includes(:work_title, :company, :industry, :gender, educations: [:course, :university])
       .find(ids).map(&:to_h)
   end
 
-  def find_matches_for_professional
+  def find_matches
     filters = {}
     results = users_in_same_designation.pluck(:id)
 
@@ -103,15 +103,19 @@ class FindPotentialMatches
 
   def base_query
     bounds = Geokit::Bounds.from_point_and_radius(user, user.search_radius_value * 1000)
-    # TODO: Accommodate ALL gender preference from both sides
-    User
+    query = User
       .where.not(id: [user.id, *swiped_user_ids])
-      .where(gender_id: user.interested_gender_ids)
       .in_bounds(bounds, inclusive: true)
       .between_age(user.interested_age_lower, user.interested_age_upper)
-      .interested_in_gender(user.gender_id)
+      .interested_in_genders([user.gender_id, Gender.find_by(name: 'All')].compact)
       .public_send(institute_query, institute_id)
       .distinct
+
+    if user.interested_genders.detect { |gender| gender.name == 'All' }.nil?
+      return query.where(gender_id: user.interested_gender_ids)
+    end
+
+    query
   end
 
   def swiped_user_ids

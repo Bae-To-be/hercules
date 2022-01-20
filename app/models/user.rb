@@ -132,9 +132,9 @@ class User < ApplicationRecord
           Time.now.utc.to_date.advance(years: -lower))
   }
 
-  scope :interested_in_gender, lambda { |gender_id|
+  scope :interested_in_genders, lambda { |gender_ids|
     joins(:user_gender_interests)
-      .where(user_gender_interests: { gender_id: gender_id })
+      .where(user_gender_interests: { gender_id: [gender_ids] })
   }
 
   scope :exclude_company, lambda { |company_id|
