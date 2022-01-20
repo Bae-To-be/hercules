@@ -53,6 +53,7 @@ gem 'scenic'
 gem 'sib-api-v3-sdk'
 gem 'skylight'
 gem 'webpacker', '~> 5.4.3'
+gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
 
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]
@@ -79,7 +80,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara', '>= 3.26'
   gem 'factory_bot'
-  gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', require: false
