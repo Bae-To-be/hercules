@@ -102,7 +102,7 @@ class FindPotentialMatches
   end
 
   def base_query
-    bounds = Geokit::Bounds.from_point_and_radius(user, user.search_radius_value * 1000)
+    bounds = Geokit::Bounds.from_point_and_radius(user, user.search_radius_value)
     query = User
               .where.not(id: [user.id, *swiped_user_ids])
               .in_bounds(bounds, inclusive: true)
