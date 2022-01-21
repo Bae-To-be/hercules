@@ -18,9 +18,9 @@ module Api
       private
 
       def likes_sent
-        Swipe
+        current_user
+          .swipes_performed
           .right
-          .where(from_id: current_user.id)
           .limit(limit)
           .offset(offset)
           .order(id: :desc)
@@ -28,9 +28,9 @@ module Api
       end
 
       def likes_received
-        Swipe
+        current_user
+          .swipes_received
           .right
-          .where(to_id: current_user.id)
           .limit(limit)
           .offset(offset)
           .order(id: :desc)
