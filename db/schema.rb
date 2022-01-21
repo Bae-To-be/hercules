@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_21_153145) do
+ActiveRecord::Schema.define(version: 2022_01_21_205603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
@@ -226,6 +227,16 @@ ActiveRecord::Schema.define(version: 2022_01_21_153145) do
     t.index ["target_id"], name: "index_match_stores_on_target_id"
   end
 
+  create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "match_store_id", null: false
+    t.text "content"
+    t.bigint "author_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_messages_on_author_id"
+    t.index ["match_store_id"], name: "index_messages_on_match_store_id"
+  end
+
   create_table "refresh_tokens", force: :cascade do |t|
     t.string "crypted_token"
     t.bigint "user_id", null: false
@@ -407,6 +418,8 @@ ActiveRecord::Schema.define(version: 2022_01_21_153145) do
   add_foreign_key "industry_relationships", "industries", column: "source_id"
   add_foreign_key "industry_relationships", "industries", column: "target_id"
   add_foreign_key "match_stores", "users", column: "source_id"
+  add_foreign_key "messages", "match_stores"
+  add_foreign_key "messages", "users", column: "author_id"
   add_foreign_key "swipes", "users", column: "from_id"
   add_foreign_key "swipes", "users", column: "to_id"
   add_foreign_key "user_gender_interests", "genders"

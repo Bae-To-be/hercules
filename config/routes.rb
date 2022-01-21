@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
   namespace :admin do
     get '/login', to: 'login#new', as: :login
     get '/login/create', to: 'login#create', as: :create_login

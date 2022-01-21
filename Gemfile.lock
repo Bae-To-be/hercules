@@ -388,6 +388,7 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.0.0)
     rake (13.0.6)
+    redis (4.5.1)
     regexp_parser (2.1.1)
     reline (0.2.7)
       io-console (~> 0.5)
@@ -573,6 +574,7 @@ DEPENDENCIES
   rails_admin (~> 2.2.1)
   rails_admin_rollincode (~> 1.0)
   rails_semantic_logger
+  redis (~> 4.0)
   rexml
   rollbar
   rspec-rails (~> 5.0.0)
