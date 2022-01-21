@@ -34,10 +34,10 @@ RSpec.feature 'Matches ', type: :request do
         expect(response.status).to eq 200
         expect(JSON.parse(response.body, symbolize_names: true)[:data])
           .to eq([{
-                   id: valid_match.id,
-                   time_since_creation: "#{time_ago_in_words(valid_match.created_at)} ago",
-                   matched_user: user_1.basic_hash
-                 }])
+            id: valid_match.id,
+            time_since_creation: "#{time_ago_in_words(valid_match.created_at)} ago",
+            matched_user: user_1.basic_hash
+          }])
       end
     end
   end
