@@ -187,7 +187,6 @@ class User < ApplicationRecord
   end
 
   def basic_hash(include_picture: true)
-
     {
       id: id,
       name: name,

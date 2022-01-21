@@ -15,6 +15,7 @@ module Api
         Match
           .find_by!(id: params[:match_id], user: current_user)
           .messages
+          .order(created_at: :desc)
           .limit(limit)
           .offset(offset)
           .map(&:to_h)

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Match < ApplicationRecord
-  self.primary_key = "id"
+  self.primary_key = 'id'
 
   include ActionView::Helpers::DateHelper
 
