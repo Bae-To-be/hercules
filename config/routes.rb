@@ -60,7 +60,9 @@ Rails.application.routes.draw do
       resources :genders, only: %i[index]
       resources :work_titles, only: %i[index]
       resources :articles, only: %i[index]
-      resources :matches, only: %i[index]
+      resources :matches, only: %i[index] do
+        resources :messages, only: %i[index]
+      end
     end
   end
 

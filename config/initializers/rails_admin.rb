@@ -206,5 +206,8 @@ RailsAdmin.config do |config|
     RefreshToken
     ActionText::RichText
     ActionText::EncryptedRichText
+    Message
+    Match
+    MatchStore
   ]
 end

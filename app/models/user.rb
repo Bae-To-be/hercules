@@ -186,11 +186,12 @@ class User < ApplicationRecord
     recent_verification&.rejected?
   end
 
-  def basic_hash
+  def basic_hash(include_picture: true)
+
     {
       id: id,
       name: name,
-      profile_picture: images.min_by(&:position)&.to_h
+      profile_picture: include_picture ? images.min_by(&:position)&.to_h : nil
     }
   end
 

@@ -9,6 +9,9 @@ class MatchStore < ApplicationRecord
   validate :node_uniqueness,
            :same_entity
 
+  has_many :messages,
+           inverse_of: :match_store
+
   private
 
   def node_uniqueness
