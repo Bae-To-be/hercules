@@ -20,7 +20,9 @@ module Api
       def likes_sent
         current_user
           .swipes_performed
+          .includes(to: :images)
           .right
+          .where.not(to_id: current_user.swipes_received.pluck(:from_id))
           .limit(limit)
           .offset(offset)
           .order(id: :desc)
@@ -30,7 +32,9 @@ module Api
       def likes_received
         current_user
           .swipes_received
+          .includes(from: :images)
           .right
+          .where.not(from_id: current_user.swipes_performed.pluck(:to_id))
           .limit(limit)
           .offset(offset)
           .order(id: :desc)
