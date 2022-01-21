@@ -1,5 +1,5 @@
 class RemoveDescriptionFromGenders < ActiveRecord::Migration[7.0]
   def change
-    remove_column :genders, :description
+    safety_assured { remove_column :genders, :description }
   end
 end

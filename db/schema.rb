@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 2022_01_21_153145) do
     t.bigint "target_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index "(ARRAY[LEAST(source_id, target_id), GREATEST(target_id, source_id)])", name: "course_pair_uniq", unique: true
     t.index ["source_id"], name: "index_course_relationships_on_source_id"
     t.index ["target_id"], name: "index_course_relationships_on_target_id"
   end
@@ -383,7 +384,6 @@ ActiveRecord::Schema.define(version: 2022_01_21_153145) do
     t.bigint "target_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "(ARRAY[LEAST(source_id, target_id), GREATEST(target_id, source_id)])", name: "course_pair_uniq", unique: true
     t.index "(ARRAY[LEAST(source_id, target_id), GREATEST(target_id, source_id)])", name: "work_title_pair_uniq", unique: true
     t.index ["source_id"], name: "index_work_title_relationships_on_source_id"
     t.index ["target_id"], name: "index_work_title_relationships_on_target_id"

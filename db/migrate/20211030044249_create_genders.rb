@@ -1,4 +1,6 @@
 class CreateGenders < ActiveRecord::Migration[7.0]
+  disable_ddl_transaction!
+
   def change
     create_table :genders do |t|
       t.string :name
@@ -7,6 +9,6 @@ class CreateGenders < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_reference :users, :gender, index: true
+    add_reference_concurrently :users, :gender, index: true
   end
 end
