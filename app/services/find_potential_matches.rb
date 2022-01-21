@@ -104,6 +104,7 @@ class FindPotentialMatches
   def base_query
     bounds = Geokit::Bounds.from_point_and_radius(user, user.search_radius_value)
     query = User
+              .active
               .where.not(id: [user.id, *swiped_user_ids])
               .in_bounds(bounds, inclusive: true)
               .between_age(user.interested_age_lower, user.interested_age_upper)
