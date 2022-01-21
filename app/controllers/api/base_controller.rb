@@ -65,5 +65,13 @@ module Api
     def auth
       @auth ||= request.headers['HTTP_AUTHORIZATION']&.gsub('Bearer ', '')
     end
+
+    def offset
+      ((params[:page]&.to_i.presence || 1) - 1) * limit
+    end
+
+    def limit
+      params[:limit]&.to_i.presence || 10
+    end
   end
 end

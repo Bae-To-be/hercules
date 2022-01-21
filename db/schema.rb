@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_21_144808) do
+ActiveRecord::Schema.define(version: 2022_01_21_153145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -447,11 +447,15 @@ ActiveRecord::Schema.define(version: 2022_01_21_144808) do
   SQL
   create_view "matches", sql_definition: <<-SQL
       SELECT match_stores.source_id AS user_id,
-      match_stores.target_id AS matched_user_id
+      match_stores.target_id AS matched_user_id,
+      match_stores.id,
+      match_stores.created_at
      FROM match_stores
   UNION
    SELECT match_stores.target_id AS user_id,
-      match_stores.source_id AS matched_user_id
+      match_stores.source_id AS matched_user_id,
+      match_stores.id,
+      match_stores.created_at
      FROM match_stores;
   SQL
 end

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# TODO: Fix the education lookup logic
 class FindPotentialMatches
   Result = Struct.new(:users, :filters)
 
