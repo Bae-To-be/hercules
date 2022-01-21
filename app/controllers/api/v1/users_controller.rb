@@ -23,6 +23,8 @@ module Api
       private
 
       def user
+        raise ActiveRecord::RecordNotFound, 'User not found' if current_user.swipes_received.left.exists?(from_id: params[:id])
+
         User.find(params[:id])
       end
 

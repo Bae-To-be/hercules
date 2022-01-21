@@ -316,6 +316,8 @@ GEM
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
     oj (3.13.9)
+    online_migrations (0.1.0)
+      activerecord (>= 4.2)
     os (1.1.4)
     paper_trail (12.1.0)
       activerecord (>= 5.2)
@@ -561,6 +563,7 @@ DEPENDENCIES
   net-pop
   net-smtp
   oj
+  online_migrations
   paper_trail
   paper_trail-association_tracking!
   pg (~> 1.1)

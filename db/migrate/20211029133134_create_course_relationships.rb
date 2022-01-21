@@ -7,7 +7,7 @@ class CreateCourseRelationships < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_index :work_title_relationships,
+    add_index :course_relationships,
       "(ARRAY[least(source_id, target_id), greatest(target_id, source_id)])",
       unique: true,
       name: :course_pair_uniq

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_21_141321) do
+ActiveRecord::Schema.define(version: 2022_01_21_144808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -70,6 +70,46 @@ ActiveRecord::Schema.define(version: 2022_01_21_141321) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "position"
     t.index ["position"], name: "index_articles_on_position", unique: true
+  end
+
+  create_table "background_migration_jobs", force: :cascade do |t|
+    t.bigint "migration_id", null: false
+    t.bigint "min_value", null: false
+    t.bigint "max_value", null: false
+    t.integer "batch_size", null: false
+    t.integer "sub_batch_size", null: false
+    t.integer "pause_ms", null: false
+    t.datetime "started_at", precision: 6
+    t.datetime "finished_at", precision: 6
+    t.string "status", default: "enqueued", null: false
+    t.integer "max_attempts", null: false
+    t.integer "attempts", default: 0, null: false
+    t.string "error_class"
+    t.string "error_message"
+    t.string "backtrace", array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["migration_id", "finished_at"], name: "index_background_migration_jobs_on_finished_at"
+    t.index ["migration_id", "max_value"], name: "index_background_migration_jobs_on_max_value"
+    t.index ["migration_id", "status", "updated_at"], name: "index_background_migration_jobs_on_updated_at"
+  end
+
+  create_table "background_migrations", force: :cascade do |t|
+    t.string "migration_name", null: false
+    t.jsonb "arguments", default: [], null: false
+    t.string "batch_column_name", null: false
+    t.bigint "min_value", null: false
+    t.bigint "max_value", null: false
+    t.bigint "rows_count"
+    t.integer "batch_size", null: false
+    t.integer "sub_batch_size", null: false
+    t.integer "batch_pause", null: false
+    t.integer "sub_batch_pause_ms", null: false
+    t.integer "batch_max_attempts", null: false
+    t.string "status", default: "enqueued", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["migration_name", "arguments"], name: "index_background_migrations_on_unique_configuration", unique: true
   end
 
   create_table "children_preferences", force: :cascade do |t|
@@ -173,6 +213,16 @@ ActiveRecord::Schema.define(version: 2022_01_21_141321) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_languages_on_name", unique: true
+  end
+
+  create_table "match_stores", force: :cascade do |t|
+    t.bigint "source_id", null: false
+    t.bigint "target_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index "(ARRAY[LEAST(source_id, target_id), GREATEST(target_id, source_id)])", name: "match_store_pair_uniq", unique: true
+    t.index ["source_id"], name: "index_match_stores_on_source_id"
+    t.index ["target_id"], name: "index_match_stores_on_target_id"
   end
 
   create_table "refresh_tokens", force: :cascade do |t|
@@ -348,6 +398,7 @@ ActiveRecord::Schema.define(version: 2022_01_21_141321) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "background_migration_jobs", "background_migrations", column: "migration_id", on_delete: :cascade
   add_foreign_key "course_relationships", "courses", column: "source_id"
   add_foreign_key "course_relationships", "courses", column: "target_id"
   add_foreign_key "educations", "courses"
@@ -355,6 +406,7 @@ ActiveRecord::Schema.define(version: 2022_01_21_141321) do
   add_foreign_key "educations", "users"
   add_foreign_key "industry_relationships", "industries", column: "source_id"
   add_foreign_key "industry_relationships", "industries", column: "target_id"
+  add_foreign_key "match_stores", "users", column: "source_id"
   add_foreign_key "swipes", "users", column: "from_id"
   add_foreign_key "swipes", "users", column: "to_id"
   add_foreign_key "user_gender_interests", "genders"
@@ -392,5 +444,14 @@ ActiveRecord::Schema.define(version: 2022_01_21_141321) do
    SELECT industry_relationships.target_id AS industry_id,
       industry_relationships.source_id AS related_industry_id
      FROM industry_relationships;
+  SQL
+  create_view "matches", sql_definition: <<-SQL
+      SELECT match_stores.source_id AS user_id,
+      match_stores.target_id AS matched_user_id
+     FROM match_stores
+  UNION
+   SELECT match_stores.target_id AS user_id,
+      match_stores.source_id AS matched_user_id
+     FROM match_stores;
   SQL
 end

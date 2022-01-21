@@ -33,10 +33,28 @@ RSpec.feature 'Create Swipe', type: :request do
 
         it 'returns 200' do
           post '/api/v1/swipes',
-               params: { user_id: another_user.id, direction: 'left' },
+               params: { user_id: another_user.id, direction: 'right' },
                headers: { 'HTTP_AUTHORIZATION' => token }
 
           expect(response.status).to eq 200
+          expect(JSON.parse(response.body, symbolize_names: true)[:data][:matched]).to eq false
+        end
+      end
+
+      context 'when right swiping someone who has right swipes the user' do
+        let!(:another_user) { create(:user) }
+
+        before do
+          create(:swipe, from: another_user, to: user, direction: 'right')
+        end
+
+        it 'returns 200' do
+          post '/api/v1/swipes',
+               params: { user_id: another_user.id, direction: 'right' },
+               headers: { 'HTTP_AUTHORIZATION' => token }
+
+          expect(response.status).to eq 200
+          expect(JSON.parse(response.body, symbolize_names: true)[:data][:matched]).to eq true
         end
       end
 

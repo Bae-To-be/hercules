@@ -105,11 +105,13 @@ class FindPotentialMatches
     bounds = Geokit::Bounds.from_point_and_radius(user, user.search_radius_value)
     query = User
               .active
-              .where.not(id: [user.id, *swiped_user_ids])
+              .where.not(id: user.id)
+              .where.not(id: users_who_swiped_left)
+              .where.not(id: swiped_user_ids)
               .in_bounds(bounds, inclusive: true)
               .between_age(user.interested_age_lower, user.interested_age_upper)
               .interested_in_genders([user.gender_id, Gender.find_by(name: 'All').id].compact)
-              .public_send(institute_query, institute_id)
+              .exclude_company(user.company_id)
               .distinct
 
     return query.where(gender_id: user.interested_gender_ids) if user.interested_genders.detect { |gender| gender.name == 'All' }.nil?
@@ -117,19 +119,15 @@ class FindPotentialMatches
     query
   end
 
+  def users_who_swiped_left
+    Swipe.where(to_id: user.id, direction: :left).select(:from_id)
+  end
+
   def swiped_user_ids
-    Swipe.where(from_id: user.id).pluck(:to_id)
+    Swipe.where(from_id: user.id).select(:to_id)
   end
 
   def add_if_doesnt_exist(step_results, results)
     results.push(*step_results).uniq
-  end
-
-  def institute_query
-    :exclude_company
-  end
-
-  def institute_id
-    user.company_id
   end
 end

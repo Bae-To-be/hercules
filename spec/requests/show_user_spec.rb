@@ -28,6 +28,19 @@ RSpec.feature 'Get user profile', type: :request do
         end
       end
 
+      context 'when the other user has left swiped the current user' do
+        before do
+          create(:swipe, from: user_to_find, to: user, direction: :left)
+        end
+
+        it 'returns 404' do
+          get "/api/v1/users/#{user_to_find.id}",
+              headers: { 'HTTP_AUTHORIZATION' => token }
+
+          expect(response.status).to eq 404
+        end
+      end
+
       context 'when invalid user ID' do
         it 'returns 404' do
           get '/api/v1/users/random',
