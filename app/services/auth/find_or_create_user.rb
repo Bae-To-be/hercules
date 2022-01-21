@@ -71,11 +71,15 @@ module Auth
       @new_user ||= User.create!(
         strategy.main_attributes
           .merge(strategy.attributes_to_update)
+          .merge(last_logged_in: DateTime.now)
       )
     end
 
     def update_existing_user
-      existing_user.update!(strategy.attributes_to_update)
+      existing_user.update!(
+        strategy.attributes_to_update
+                .merge(last_logged_in: DateTime.now)
+      )
     end
 
     def attach_image

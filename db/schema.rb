@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_18_134735) do
+ActiveRecord::Schema.define(version: 2022_01_21_141321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -266,6 +266,7 @@ ActiveRecord::Schema.define(version: 2022_01_18_134735) do
     t.bigint "smoking_preference_id"
     t.bigint "children_preference_id"
     t.integer "status", default: 0
+    t.datetime "last_logged_in", precision: 6
     t.index ["children_preference_id"], name: "index_users_on_children_preference_id"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["drinking_preference_id"], name: "index_users_on_drinking_preference_id"

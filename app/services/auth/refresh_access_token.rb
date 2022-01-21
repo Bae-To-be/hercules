@@ -24,6 +24,8 @@ module Auth
         )
       end
 
+      token.user.update!(last_logged_in: DateTime.now)
+
       ServiceResponse.ok(
         access_token: Auth::Token.jwt_token(token.user),
         expires_in: Auth::Token.expires_in
