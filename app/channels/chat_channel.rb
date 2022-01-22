@@ -18,11 +18,13 @@ class ChatChannel < ApplicationCable::Channel
     end
 
     begin
+      match = MatchStore.find(params[:match_id])
       message = Message.create(
-        match_store: MatchStore.find_by(id: params[:match_id]),
+        match_store: match,
         author: current_user,
         content: data['text']
       )
+      match.update!(updated_at: DateTime.now)
       ActionCable.server.broadcast("chat_#{params[:match_id]}", {
         event: 'new_message',
         data: message.to_h

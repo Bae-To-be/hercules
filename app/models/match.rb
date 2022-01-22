@@ -17,7 +17,7 @@ class Match < ApplicationRecord
   def to_h
     {
       id: id,
-      time_since_creation: "#{time_ago_in_words(created_at)} ago",
+      time_since_update: "#{time_ago_in_words(updated_at)} ago",
       matched_user: matched_user.basic_hash
     }
   end

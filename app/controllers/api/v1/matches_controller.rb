@@ -14,7 +14,7 @@ module Api
       def matches
         Match
           .where(user_id: current_user.id)
-          .order(id: :desc)
+          .order(updated_at: :desc)
           .limit(limit)
           .offset(offset)
           .map(&:to_h)
