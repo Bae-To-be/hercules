@@ -7,7 +7,8 @@ class MatchStore < ApplicationRecord
              class_name: 'User'
 
   validate :node_uniqueness,
-           :same_entity
+           :same_entity,
+           on: :create
 
   has_many :messages,
            inverse_of: :match_store
