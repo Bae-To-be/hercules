@@ -15,6 +15,8 @@ task user_seed: :environment do
       name: Faker::Name.name,
       email: Faker::Internet.unique.email,
       birthday: Time.now.utc.to_date - 20.years,
+      interested_age_lower: 18,
+      interested_age_upper: 50,
       lat: location.lat,
       lng: location.lng,
       gender: [male_gender, female_gender].sample,
