@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 desc 'Creates a seed with random users'
-task user_seed: :environment do
+task :user_seed, [:lat, :lng] => :environment do |t, args|
   male_gender = Gender.find_or_create_by!(name: 'Male')
   female_gender = Gender.find_or_create_by!(name: 'Female')
   all_genders = Gender.find_or_create_by!(name: 'All')
 
-  origin = Geokit::LatLng.new(19.138449, 72.862637)
+  origin = Geokit::LatLng.new(args.lat.presence || 19.138449, args.lng.presence || 72.862637)
 
   100.times do
     location = origin.endpoint((0..360).to_a.sample, ENV.fetch('DEFAULT_SEARCH_RADIUS').to_i)

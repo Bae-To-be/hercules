@@ -6,7 +6,7 @@ require_relative '../../lib/rails_admin/maps'
 
 RailsAdmin.config do |config|
   config.parent_controller = '::ApplicationController'
-  config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
+  config.audit_with :paper_trail, 'AdminUser', 'PaperTrail::Version'
 
   config.current_user_method do
     current_user
