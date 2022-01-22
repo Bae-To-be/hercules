@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 desc 'Creates a seed with random users'
-task :user_seed, [:lat, :lng] => :environment do |t, args|
+task :user_seed, [:lat, :lng] => :environment do |_t, args|
   male_gender = Gender.find_or_create_by!(name: 'Male')
   female_gender = Gender.find_or_create_by!(name: 'Female')
   all_genders = Gender.find_or_create_by!(name: 'All')
