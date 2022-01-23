@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_23_123859) do
+ActiveRecord::Schema.define(version: 2022_01_23_155915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -233,6 +233,7 @@ ActiveRecord::Schema.define(version: 2022_01_23_123859) do
     t.bigint "author_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "client_id"
     t.index ["author_id"], name: "index_messages_on_author_id"
     t.index ["match_store_id"], name: "index_messages_on_match_store_id"
   end

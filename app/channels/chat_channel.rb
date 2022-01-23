@@ -28,10 +28,15 @@ class ChatChannel < ApplicationCable::Channel
 
     begin
       match = MatchStore.find(params[:match_id])
-      message = Message.create(
+      attributes = {
         match_store: match,
         author: current_user,
-        content: data['text']
+        content: data['text'],
+        client_id: data['client_id'].presence
+      }.compact
+
+      message = Message.create(
+        attributes
       )
       message.mark_as_read! for: current_user
       match.update!(updated_at: DateTime.now)

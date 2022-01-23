@@ -23,7 +23,7 @@ module ApplicationCable
     end
 
     def auth
-      request.params[:token]
+      request.headers['HTTP_AUTHORIZATION']&.gsub('Bearer ', '')
     end
   end
 end
