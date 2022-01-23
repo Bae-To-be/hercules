@@ -11,6 +11,15 @@ class ChatChannel < ApplicationCable::Channel
 
   def unsubscribed; end
 
+  def mark_as_read(data)
+    unless data.keys.include?('message_id')
+      Rails.logger.error("received invalid payload: #{data}")
+      return
+    end
+    Message.find(data['message_id'])
+      .mark_as_read!(for: current_user)
+  end
+
   def send_message(data)
     unless data.keys.include?('text')
       Rails.logger.error("received invalid payload: #{data}")
@@ -24,6 +33,7 @@ class ChatChannel < ApplicationCable::Channel
         author: current_user,
         content: data['text']
       )
+      message.mark_as_read! for: current_user
       match.update!(updated_at: DateTime.now)
       ActionCable.server.broadcast("chat_#{params[:match_id]}", {
         event: 'new_message',

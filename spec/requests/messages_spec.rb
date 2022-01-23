@@ -48,8 +48,8 @@ RSpec.feature 'List Messages', type: :request do
             get "/api/v1/matches/#{match_store.id}/messages",
                 headers: { 'HTTP_AUTHORIZATION' => token }
             expect(response.status).to eq 200
-            expect(JSON.parse(response.body, symbolize_names: true)[:data])
-              .to eq([message.to_h])
+            expect(JSON.parse(response.body)['data'])
+              .to eq([JSON.parse(message.to_h.to_json)])
           end
         end
       end

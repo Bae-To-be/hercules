@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_22_072218) do
+ActiveRecord::Schema.define(version: 2022_01_23_123859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -235,6 +235,17 @@ ActiveRecord::Schema.define(version: 2022_01_22_072218) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_messages_on_author_id"
     t.index ["match_store_id"], name: "index_messages_on_match_store_id"
+  end
+
+  create_table "read_marks", id: :serial, force: :cascade do |t|
+    t.string "readable_type", null: false
+    t.uuid "readable_id"
+    t.string "reader_type", null: false
+    t.integer "reader_id"
+    t.datetime "timestamp"
+    t.index ["readable_type", "readable_id"], name: "index_read_marks_on_readable"
+    t.index ["reader_id", "reader_type", "readable_type", "readable_id"], name: "read_marks_reader_readable_index", unique: true
+    t.index ["reader_type", "reader_id"], name: "index_read_marks_on_reader"
   end
 
   create_table "refresh_tokens", force: :cascade do |t|

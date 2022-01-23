@@ -3,6 +3,7 @@
 class User < ApplicationRecord
   include PgSearch::Model
   acts_as_mappable
+  acts_as_reader
   has_paper_trail ignore: %i[fcm updated_at created_at last_logged_in]
 
   validates :email,
