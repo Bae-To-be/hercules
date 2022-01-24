@@ -6,7 +6,7 @@ class NotificationService
   REJECTED_TITLE = 'Oh No!'
   REJECTED_BODY = 'Looks like your application was rejected by our team'
   NEW_MESSAGE_TITLE = 'New Message'
-  NEW_MESSAGE_BODY = 'You have received a new message from %{username}'
+  NEW_MESSAGE_BODY = 'You have received a new message from %<username>s'
   NEW_MATCH_TITLE = 'New Match'
   NEW_MATCH_BODY = 'You have received a new match'
 
@@ -37,7 +37,7 @@ class NotificationService
     def new_message(user, from, metadata)
       send_message(
         NEW_MESSAGE_TITLE,
-        NEW_MESSAGE_BODY % from.name,
+        format(NEW_MESSAGE_BODY, username: from.name),
         user.fcm['token'],
         metadata.merge(event: NEW_MESSAGE)
       )
