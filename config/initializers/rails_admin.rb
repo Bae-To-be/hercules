@@ -107,6 +107,10 @@ RailsAdmin.config do |config|
         hide
       end
     end
+
+    configure :fcm do
+      queryable false
+    end
   end
 
   config.model 'PaperTrail::Version' do
