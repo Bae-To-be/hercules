@@ -59,7 +59,7 @@ class NotificationService
           title: title,
           body: body
         ),
-        data: recursively_stringify(metadata)
+        data: Stringify.hash_values(metadata)
       )
 
       if token.nil?
@@ -67,16 +67,6 @@ class NotificationService
         return
       end
       FIREBASE_APP.messaging.send_one(message)
-    end
-
-    def recursively_stringify(map)
-      map.transform_values do |value|
-        if value.is_a? Hash
-          recursively_stringify(map)
-        else
-          value.to_s
-        end
-      end
     end
   end
 end
