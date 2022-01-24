@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ListMatchesService
   def initialize(user, limit, offset)
     @user = user

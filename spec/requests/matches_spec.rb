@@ -24,7 +24,7 @@ RSpec.feature 'Matches ', type: :request do
       let!(:valid_match) { create(:match_store, source: user, target: user_1) }
 
       before do
-        match = create(:match_store, source: user_2, target: user_1)
+        create(:match_store, source: user_2, target: user_1)
         valid_match.messages.create(content: 'test', author: user_1)
       end
 

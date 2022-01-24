@@ -8,8 +8,6 @@ module Api
           ListMatchesService.new(current_user, limit, offset).run
         )
       end
-
-      private
     end
   end
 end
