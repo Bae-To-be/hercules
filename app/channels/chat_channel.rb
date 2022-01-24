@@ -25,6 +25,21 @@ class ChatChannel < ApplicationCable::Channel
     })
   end
 
+  def update_typing(data)
+    unless data.keys.include?('status')
+      Rails.logger.error("received invalid payload: #{data}")
+      return
+    end
+    ActionCable.server.broadcast("chat_#{params[:match_id]}", {
+      event: 'typing_upate',
+      data: {
+        user_id: current_user.id,
+        user_name: current_user.name,
+        status: data['status']
+      }
+    })
+  end
+
   def send_message(data)
     unless data.keys.include?('text')
       Rails.logger.error("received invalid payload: #{data}")
