@@ -3,7 +3,7 @@
 class Stringify
   class << self
     def hash_values(map)
-      map.transform_values(&method(:stringify_value))
+      map.transform_values(&method(:value))
     end
 
     def value(value)
