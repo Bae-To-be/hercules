@@ -9,7 +9,7 @@ class Stringify
     def value(value)
       case value
       when Hash
-        hash_values(map)
+        hash_values(value)
       when Array
         value.map(&method(:value))
       else
