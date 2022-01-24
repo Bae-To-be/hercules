@@ -14,6 +14,10 @@ class MatchStore < ApplicationRecord
            inverse_of: :match_store,
            dependent: :destroy
 
+  def other_user(some_user)
+    User.find([source_id, target_id].detect { |matched_id| matched_id != some_user.id })
+  end
+
   private
 
   def node_uniqueness

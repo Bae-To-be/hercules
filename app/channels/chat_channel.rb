@@ -40,11 +40,20 @@ class ChatChannel < ApplicationCable::Channel
         client_id: data['client_id'].presence
       }.compact
 
-      message = Message.create(
-        attributes
-      )
+      message = Message.create(attributes)
       message.mark_as_read! for: current_user
       match.update!(updated_at: DateTime.now)
+
+      begin
+        NotificationService.new_message(
+          match.other_user(current_user),
+          current_user,
+          { match_id: match.id }
+        )
+      rescue StandardError => e
+        Rails.logger.error("Failed to notify user: #{e}")
+      end
+
       ActionCable.server.broadcast("chat_#{params[:match_id]}", {
         event: 'new_message',
         data: message.to_h

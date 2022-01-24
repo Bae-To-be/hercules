@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class VerificationRequest < ApplicationRecord
-  VERIFICATION_UPDATE = 'verification_update'
-
   has_paper_trail
 
   belongs_to :user, inverse_of: :verification_requests
@@ -66,12 +64,8 @@ class VerificationRequest < ApplicationRecord
   def notify_user
     return if Rails.env.test?
 
-    event_data = {
-      event: VERIFICATION_UPDATE
-    }
-
     if approved?
-      MessageService.approved(user, event_data)
+      NotificationService.approved(user)
       EmailService.new(
         to_name: 'gaurav',
         to_email: 'gaurav@baetobe.com',
@@ -93,7 +87,7 @@ class VerificationRequest < ApplicationRecord
         rejection_reason: rejection_reason
       }
     ).send
-    MessageService.rejected(user, event_data)
+    NotificationService.rejected(user)
   end
 
   def rejected_fields

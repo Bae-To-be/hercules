@@ -27,11 +27,22 @@ class CreateSwipeService
          actor.swipes_received.right.exists?(from_id: to_id)
 
         matched = true
-        MatchStore.create!(
+
+        match = MatchStore.create!(
           source: actor,
           target_id: to_id
         )
+
+        begin
+          NotificationService.new_match(
+            match.target,
+            Match.find_by(user: actor, id: match.id).to_h
+          )
+        rescue StandardError => e
+          Rails.logger.error("Failed to notify user: #{e}")
+        end
       end
+
       ServiceResponse.ok(matched: matched)
     end
   rescue ArgumentError
