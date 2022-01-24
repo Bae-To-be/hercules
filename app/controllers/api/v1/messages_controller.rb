@@ -16,7 +16,7 @@ module Api
       def messages
         match
           .messages
-          .includes(:author, :read_marks, match_store: [:source, :target])
+          .includes(:author, :read_marks, :match_store)
           .order(created_at: :desc)
           .limit(limit)
           .offset(offset)
@@ -24,10 +24,12 @@ module Api
       end
 
       def mark_as_read
-        Message.mark_as_read!(
-          Message.unread_by(current_user),
-          for: current_user
-        )
+        Message.where(match_store_id: params[:match_id]).unread_by(current_user).in_batches do |unread_messages|
+          MarkAsReadJob.perform_later(
+            current_user.id,
+            unread_messages.map(&:id)
+          )
+        end
       end
 
       def match
