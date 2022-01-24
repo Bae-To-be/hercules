@@ -11,7 +11,8 @@ class MatchStore < ApplicationRecord
            on: :create
 
   has_many :messages,
-           inverse_of: :match_store
+           inverse_of: :match_store,
+           dependent: :destroy
 
   private
 
