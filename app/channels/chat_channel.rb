@@ -16,8 +16,13 @@ class ChatChannel < ApplicationCable::Channel
       Rails.logger.error("received invalid payload: #{data}")
       return
     end
-    Message.find(data['message_id'])
-      .mark_as_read!(for: current_user)
+    message = Message.find(data['message_id'])
+    message.mark_as_read!(for: current_user)
+
+    ActionCable.server.broadcast("chat_#{params[:match_id]}", {
+      event: 'message_updated',
+      data: message.to_h
+    })
   end
 
   def send_message(data)
