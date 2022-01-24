@@ -59,14 +59,24 @@ class NotificationService
           title: title,
           body: body
         ),
-        data: metadata
+        data: recursively_stringify(metadata)
       )
 
       if token.nil?
-        Rails.logger.warn("Token missing for: #{message}")
+        Rails.logger.warn("Token missing for: #{message.inspect}")
         return
       end
       FIREBASE_APP.messaging.send_one(message)
+    end
+
+    def recursively_stringify(map)
+      map.transform_values do |value|
+        if value.is_a? Hash
+          recursively_stringify(map)
+        else
+          value.to_s
+        end
+      end
     end
   end
 end
