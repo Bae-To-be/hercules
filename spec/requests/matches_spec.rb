@@ -24,7 +24,8 @@ RSpec.feature 'Matches ', type: :request do
       let!(:valid_match) { create(:match_store, source: user, target: user_1) }
 
       before do
-        create(:match_store, source: user_2, target: user_1)
+        match = create(:match_store, source: user_2, target: user_1)
+        valid_match.messages.create(content: 'test', author: user_1)
       end
 
       it 'returns all the matches of the current user' do
@@ -37,7 +38,8 @@ RSpec.feature 'Matches ', type: :request do
             id: valid_match.id,
             updated_at: valid_match.updated_at.to_datetime.strftime('%Q'),
             time_since_update: "#{time_ago_in_words(valid_match.updated_at)} ago",
-            matched_user: user_1.basic_hash
+            matched_user: user_1.basic_hash,
+            unread_count: 1
           }])
       end
     end
