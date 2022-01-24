@@ -15,8 +15,8 @@ class Message < ApplicationRecord
       id: id,
       content: content,
       author: author.basic_hash(include_picture: false),
-      created_at: created_at.to_datetime.utc.strftime('%Q'),
-      updated_at: updated_at.to_datetime.utc.strftime('%Q'),
+      created_at: created_at.to_datetime.strftime('%Q'),
+      updated_at: updated_at.to_datetime.strftime('%Q'),
       client_id: client_id,
       unread_by: {
         match_store.source_id => read_marks.to_a.detect { |mark| mark.reader_id == match_store.source_id }.nil?,
