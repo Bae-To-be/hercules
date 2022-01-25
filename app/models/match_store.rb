@@ -18,6 +18,10 @@ class MatchStore < ApplicationRecord
     User.find([source_id, target_id].detect { |matched_id| matched_id != some_user.id })
   end
 
+  def updated_at_int
+    updated_at.to_datetime.strftime('%Q')
+  end
+
   private
 
   def node_uniqueness
