@@ -25,16 +25,18 @@ module Auth
       end
 
       if existing_user
+        if ENV.fetch('TEST_USERS_ENABLED') == 'true' &&
+           ENV.fetch('TEST_USER_EMAILS').split(',').include?(existing_user.email)
+
+          existing_user.destroy!
+          return new_user_response
+        end
         update_existing_user
         return ServiceResponse
                  .ok(formatted_data(existing_user, false))
       end
 
-      User.transaction do
-        attach_image
-        ServiceResponse
-          .ok(formatted_data(new_user, true))
-      end
+      new_user_response
     rescue GoogleIDToken::ClientIDMismatchError,
            GoogleIDToken::AudienceMismatchError,
            GoogleIDToken::InvalidIssuerError,
@@ -49,6 +51,14 @@ module Auth
     private
 
     attr_reader :strategy, :token
+
+    def new_user_response
+      User.transaction do
+        attach_image
+        ServiceResponse
+          .ok(formatted_data(new_user, true))
+      end
+    end
 
     def formatted_data(user, is_new)
       {
