@@ -24,6 +24,6 @@ class Match < ApplicationRecord
   end
 
   def updated_at_int
-    updated_at: updated_at.to_datetime.strftime('%Q'),
+    updated_at.to_datetime.strftime('%Q')
   end
 end
