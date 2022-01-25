@@ -36,7 +36,7 @@ class CreateSwipeService
         begin
           NotificationService.new_match(
             match.target,
-            Match.find_by(user: actor, id: match.id).to_h
+            match: Match.find_by(user: match.target, id: match.id).to_h.to_json
           )
         rescue StandardError => e
           Rails.logger.error("Failed to notify user: #{e}")
