@@ -17,9 +17,13 @@ class Match < ApplicationRecord
   def to_h
     {
       id: id,
-      updated_at: updated_at.to_datetime.strftime('%Q'),
+      updated_at: updated_at_int,
       time_since_update: "#{time_ago_in_words(updated_at)} ago",
       matched_user: matched_user.basic_hash
     }
+  end
+
+  def updated_at_int
+    updated_at: updated_at.to_datetime.strftime('%Q'),
   end
 end
