@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+require 'admin_constraint'
+
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
+  mount Sidekiq::Web => '/sidekiq', :constraints => AdminConstraint.new if Rails.env.production?
 
   namespace :admin do
     get '/login', to: 'login#new', as: :login

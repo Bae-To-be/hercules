@@ -58,6 +58,10 @@ gem 'skylight'
 gem 'unread'
 gem 'webpacker', '~> 5.4.3'
 
+group :production do
+  gem 'sidekiq', '~> 6.4.0'
+end
+
 group :development, :test do
   # Start debugger with binding.b [https://github.com/ruby/debug]
   gem 'better_errors'
