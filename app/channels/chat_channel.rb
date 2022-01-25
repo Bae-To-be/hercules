@@ -25,6 +25,20 @@ class ChatChannel < ApplicationCable::Channel
     })
   end
 
+  def delete_message(data)
+    unless data.keys.include?('message_id')
+      Rails.logger.error("received invalid payload: #{data}")
+      return
+    end
+
+    message = Message.find_by!(id: data['message_id'], author: current_user)
+    message.update(deleted_at: DateTime.now)
+    ActionCable.server.broadcast("chat_#{params[:match_id]}", {
+      event: 'message_updated',
+      data: message.to_h
+    })
+  end
+
   def send_message(data)
     unless data.keys.include?('text')
       Rails.logger.error("received invalid payload: #{data}")

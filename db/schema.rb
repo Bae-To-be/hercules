@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_23_155915) do
+ActiveRecord::Schema.define(version: 2022_01_25_164343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -234,6 +234,7 @@ ActiveRecord::Schema.define(version: 2022_01_23_155915) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "client_id"
+    t.datetime "deleted_at", precision: 6
     t.index ["author_id"], name: "index_messages_on_author_id"
     t.index ["match_store_id"], name: "index_messages_on_match_store_id"
   end
@@ -329,7 +330,7 @@ ActiveRecord::Schema.define(version: 2022_01_23_155915) do
     t.string "country_code"
     t.string "locality"
     t.boolean "linkedin_public", default: false
-    t.json "fcm", default: {}
+    t.jsonb "fcm", default: {}
     t.string "bio"
     t.bigint "hometown_city_id"
     t.string "hometown_country"
