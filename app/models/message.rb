@@ -13,7 +13,7 @@ class Message < ApplicationRecord
   def to_h
     {
       id: id,
-      content: deleted? ? 'this message was deleted' : content,
+      content: deleted? ? 'This message was deleted.' : content,
       author: author.basic_hash(include_picture: false),
       created_at: created_at.to_datetime.strftime('%Q'),
       updated_at: updated_at.to_datetime.strftime('%Q'),
