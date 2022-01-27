@@ -17,7 +17,7 @@ class FindUserProfileService
     ServiceResponse.ok(
       User.find(user_id).to_h.merge(
         status: match_status,
-        match_id: match&.id
+        match: match&.to_h
       )
     )
   end

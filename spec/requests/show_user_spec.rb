@@ -26,7 +26,7 @@ RSpec.feature 'Get user profile', type: :request do
           expect(response.status).to eq 200
           expect(JSON.parse(response.body, symbolize_names: true)[:data]).to eq(user_to_find.to_h.merge(
                                                                                   status: FindUserProfileService::STATUS_NONE,
-                                                                                  match_id: nil
+                                                                                  match: nil
                                                                                 ))
         end
       end
@@ -43,7 +43,7 @@ RSpec.feature 'Get user profile', type: :request do
           expect(response.status).to eq 200
           expect(JSON.parse(response.body, symbolize_names: true)[:data]).to eq(user_to_find.to_h.merge(
                                                                                   status: FindUserProfileService::STATUS_REJECTED,
-                                                                                  match_id: nil
+                                                                                  match: nil
                                                                                 ))
         end
       end
@@ -60,13 +60,14 @@ RSpec.feature 'Get user profile', type: :request do
           expect(response.status).to eq 200
           expect(JSON.parse(response.body, symbolize_names: true)[:data]).to eq(user_to_find.to_h.merge(
                                                                                   status: FindUserProfileService::STATUS_PENDING,
-                                                                                  match_id: nil
+                                                                                  match: nil
                                                                                 ))
         end
       end
 
       context 'when valid user ID matched with user' do
-        let!(:match) { create(:match_store, source: user_to_find, target: user) }
+        let!(:match_store) { create(:match_store, source: user_to_find, target: user) }
+        let(:match) { Match.find(match_store.id) }
 
         it 'returns 200' do
           get "/api/v1/users/#{user_to_find.id}",
@@ -75,7 +76,7 @@ RSpec.feature 'Get user profile', type: :request do
           expect(response.status).to eq 200
           expect(JSON.parse(response.body, symbolize_names: true)[:data]).to eq(user_to_find.to_h.merge(
                                                                                   status: FindUserProfileService::STATUS_MATCHED,
-                                                                                  match_id: match.id
+                                                                                  match: match.to_h
                                                                                 ))
         end
       end
