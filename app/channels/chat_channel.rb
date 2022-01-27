@@ -75,10 +75,10 @@ class ChatChannel < ApplicationCable::Channel
       match.update!(updated_at: DateTime.now)
 
       begin
-        NotificationService.new_message(
-          match.other_user(current_user),
-          current_user,
-          { match_id: match.id, updated_at: match.updated_at_int }
+        NotifyUserJob.perform_later(
+          match.other_user_id(current_user),
+          'new_message',
+          [current_user.name, { match_id: match.id, updated_at: match.updated_at_int }]
         )
       rescue StandardError => e
         Rails.logger.error("Failed to notify user: #{e}")

@@ -34,10 +34,10 @@ class NotificationService
       )
     end
 
-    def new_message(user, from, metadata)
+    def new_message(user, from_name, metadata)
       send_message(
         NEW_MESSAGE_TITLE,
-        format(NEW_MESSAGE_BODY, username: from.name),
+        format(NEW_MESSAGE_BODY, username: from_name),
         user.fcm['token'],
         metadata.merge(event: NEW_MESSAGE)
       )

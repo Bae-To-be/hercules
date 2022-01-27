@@ -65,7 +65,11 @@ class VerificationRequest < ApplicationRecord
     return if Rails.env.test?
 
     if approved?
-      NotificationService.approved(user)
+      NotifyUserJob.perform_later(
+        user.id,
+        'approved',
+        []
+      )
       EmailService.new(
         to_name: 'gaurav',
         to_email: 'gaurav@baetobe.com',
@@ -87,7 +91,11 @@ class VerificationRequest < ApplicationRecord
         rejection_reason: rejection_reason
       }
     ).send
-    NotificationService.rejected(user)
+    NotifyUserJob.perform_later(
+      user.id,
+      'rejected',
+      []
+    )
   end
 
   def rejected_fields
