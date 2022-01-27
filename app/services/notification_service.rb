@@ -46,7 +46,7 @@ class NotificationService
       )
     end
 
-    def new_like(user)
+    def new_like(user, metadata)
       send_message(
         NEW_LIKE_TITLE,
         NEW_LIKE_BODY,
