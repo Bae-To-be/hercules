@@ -10,36 +10,42 @@ class CreateSwipeService
   def run
     Swipe.transaction do
       matched = false
-      existing = Swipe.find_by(
+      swipe = Swipe.find_by(
         from_id: actor.id,
         to_id: to_id
       )
-      if existing.present?
-        existing.update(direction: direction)
+      if swipe.present?
+        swipe.update(direction: direction)
       else
-        Swipe.create!(
+        swipe = Swipe.create!(
           from_id: actor.id,
           to_id: to_id,
           direction: direction
         )
       end
-      if direction == 'right' &&
-         actor.swipes_received.right.exists?(from_id: to_id)
+      if direction == 'right'
+        if actor.swipes_received.right.exists?(from_id: to_id)
+          matched = true
 
-        matched = true
+          match = MatchStore.create!(
+            source: actor,
+            target_id: to_id
+          )
 
-        match = MatchStore.create!(
-          source: actor,
-          target_id: to_id
-        )
-
-        NotifyUserJob.perform_later(
-          match.target_id,
-          'new_match',
-          [{ match: Match
-                   .find_by(user: match.target, id: match.id)
-                   .to_h.merge(unread_count: 0).to_json }]
-        )
+          NotifyUserJob.perform_later(
+            match.target_id,
+            'new_match',
+            [{ match: Match
+                        .find_by(user: match.target, id: match.id)
+                        .to_h.merge(unread_count: 0).to_json }]
+          )
+        else
+          NotifyUserJob.perform_later(
+            to_id,
+            'new_like',
+            [{ like: swipe.to_hash.to_json }]
+          )
+        end
       end
 
       ServiceResponse.ok(matched: matched)

@@ -7,6 +7,8 @@ class NotificationService
   REJECTED_BODY = 'Looks like your application was rejected by our team'
   NEW_MESSAGE_TITLE = 'New Message'
   NEW_MESSAGE_BODY = 'You have received a new message from %<username>s'
+  NEW_LIKE_TITLE = 'New Like'
+  NEW_LIKE_BODY = 'You have received a new like'
   NEW_MATCH_TITLE = 'New Match'
   NEW_MATCH_BODY = 'You have received a new match'
 
@@ -14,6 +16,7 @@ class NotificationService
   VERIFICATION_UPDATE = 'verification_update'
   NEW_MESSAGE = 'new_message'
   NEW_MATCH = 'new_match'
+  NEW_LIKE = 'new_like'
 
   class << self
     def approved(user)
@@ -40,6 +43,15 @@ class NotificationService
         format(NEW_MESSAGE_BODY, username: from_name),
         user.fcm['token'],
         metadata.merge(event: NEW_MESSAGE)
+      )
+    end
+
+    def new_like(user)
+      send_message(
+        NEW_LIKE_TITLE,
+        NEW_LIKE_BODY,
+        user.fcm['token'],
+        metadata.merge(event: NEW_LIKE)
       )
     end
 
