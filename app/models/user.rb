@@ -61,7 +61,7 @@ class User < ApplicationRecord
   has_many :reports_received,
            class_name: 'UserReport',
            foreign_key: 'for_id',
-           inverse_of: :for
+           inverse_of: :for_user
 
   has_many :user_gender_interests,
            inverse_of: :user,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_27_141558) do
+ActiveRecord::Schema.define(version: 2022_01_27_160519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -326,6 +326,7 @@ ActiveRecord::Schema.define(version: 2022_01_27_141558) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["for_id"], name: "index_user_reports_on_for_id"
+    t.index ["from_id", "for_id"], name: "index_user_reports_on_from_id_and_for_id", unique: true
     t.index ["from_id"], name: "index_user_reports_on_from_id"
     t.index ["user_report_reason_id"], name: "index_user_reports_on_user_report_reason_id"
   end

@@ -20,7 +20,7 @@ RSpec.feature 'Get user profile', type: :request do
     context 'when valid token' do
       context 'when valid user ID with no past action' do
         before do
-          create(:user_report, for: user_to_find, from: user)
+          create(:user_report, for_user: user_to_find, from: user)
         end
 
         it 'returns 200' do

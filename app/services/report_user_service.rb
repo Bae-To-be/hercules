@@ -18,7 +18,7 @@ class ReportUserService
       UserReport.create!(
         user_report_reason: reason,
         from: from,
-        for: for_user,
+        for_user: for_user,
         comment: comment
       )
     end
@@ -31,7 +31,7 @@ class ReportUserService
   attr_reader :from, :for_id, :comment, :reason_id
 
   def existing_report
-    @existing_report ||= UserReport.find_by(from: from, for: for_user)
+    @existing_report ||= UserReport.find_by(from: from, for_user: for_user)
   end
 
   def for_user
