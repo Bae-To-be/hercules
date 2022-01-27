@@ -15,7 +15,8 @@ class CloseMatchService
     )
 
     ActionCable.server.broadcast("chat_#{match_id}", {
-      event: 'match_closed'
+      event: 'match_closed',
+      closed_by: actor.id
     })
     ServiceResponse.ok(nil)
   end
