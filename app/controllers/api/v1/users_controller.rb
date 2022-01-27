@@ -11,7 +11,7 @@ module Api
 
       def show
         render_response(
-          ServiceResponse.ok(user.to_h)
+          FindUserProfileService.new(current_user, params[:id]).run
         )
       end
 
@@ -21,12 +21,6 @@ module Api
       end
 
       private
-
-      def user
-        raise ActiveRecord::RecordNotFound, 'User not found' if current_user.swipes_received.left.exists?(from_id: params[:id])
-
-        User.find(params[:id])
-      end
 
       def user_params
         params.permit(
