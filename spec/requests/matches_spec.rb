@@ -36,6 +36,8 @@ RSpec.feature 'Matches ', type: :request do
         expect(JSON.parse(response.body, symbolize_names: true)[:data])
           .to eq([{
             id: valid_match.id,
+            is_closed: false,
+            closed_by: nil,
             updated_at: valid_match.updated_at.to_datetime.strftime('%Q'),
             time_since_update: "#{time_ago_in_words(valid_match.updated_at)} ago",
             matched_user: user_1.basic_hash,

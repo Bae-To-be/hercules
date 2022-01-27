@@ -65,6 +65,10 @@ Rails.application.routes.draw do
       resources :work_titles, only: %i[index]
       resources :articles, only: %i[index]
       resources :matches, only: %i[index] do
+        member do
+          post :close
+        end
+
         resources :messages, only: %i[index]
       end
     end

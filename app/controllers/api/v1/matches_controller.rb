@@ -8,6 +8,12 @@ module Api
           ListMatchesService.new(current_user, limit, offset).run
         )
       end
+
+      def close
+        render_response(
+          CloseMatchService.new(current_user, params[:id]).run
+        )
+      end
     end
   end
 end

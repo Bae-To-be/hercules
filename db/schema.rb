@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_25_164343) do
+ActiveRecord::Schema.define(version: 2022_01_27_112939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -222,7 +222,10 @@ ActiveRecord::Schema.define(version: 2022_01_25_164343) do
     t.bigint "target_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "closed_by_id"
+    t.datetime "closed_at", precision: 6
     t.index "(ARRAY[LEAST(source_id, target_id), GREATEST(target_id, source_id)])", name: "match_store_pair_uniq", unique: true
+    t.index ["closed_by_id"], name: "index_match_stores_on_closed_by_id"
     t.index ["source_id"], name: "index_match_stores_on_source_id"
     t.index ["target_id"], name: "index_match_stores_on_target_id"
   end
@@ -430,6 +433,7 @@ ActiveRecord::Schema.define(version: 2022_01_25_164343) do
   add_foreign_key "educations", "users"
   add_foreign_key "industry_relationships", "industries", column: "source_id"
   add_foreign_key "industry_relationships", "industries", column: "target_id"
+  add_foreign_key "match_stores", "users", column: "closed_by_id"
   add_foreign_key "match_stores", "users", column: "source_id"
   add_foreign_key "messages", "match_stores"
   add_foreign_key "messages", "users", column: "author_id"
@@ -476,14 +480,18 @@ ActiveRecord::Schema.define(version: 2022_01_25_164343) do
       match_stores.target_id AS matched_user_id,
       match_stores.id,
       match_stores.created_at,
-      match_stores.updated_at
+      match_stores.updated_at,
+      match_stores.closed_by_id,
+      match_stores.closed_at
      FROM match_stores
   UNION
    SELECT match_stores.target_id AS user_id,
       match_stores.source_id AS matched_user_id,
       match_stores.id,
       match_stores.created_at,
-      match_stores.updated_at
+      match_stores.updated_at,
+      match_stores.closed_by_id,
+      match_stores.closed_at
      FROM match_stores;
   SQL
 end

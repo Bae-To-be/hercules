@@ -5,6 +5,9 @@ class MatchStore < ApplicationRecord
              class_name: 'User'
   belongs_to :target,
              class_name: 'User'
+  belongs_to :closed_by,
+             class_name: 'User',
+             optional: true
 
   validate :node_uniqueness,
            :same_entity,

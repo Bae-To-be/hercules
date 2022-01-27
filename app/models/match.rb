@@ -9,6 +9,9 @@ class Match < ApplicationRecord
              class_name: 'User'
   belongs_to :matched_user,
              class_name: 'User'
+  belongs_to :closed_by,
+             class_name: 'User',
+             optional: true
 
   has_many :messages,
            foreign_key: 'match_store_id',
@@ -19,7 +22,9 @@ class Match < ApplicationRecord
       id: id,
       updated_at: updated_at_int,
       time_since_update: "#{time_ago_in_words(updated_at)} ago",
-      matched_user: matched_user.basic_hash
+      matched_user: matched_user.basic_hash,
+      is_closed: closed_at.present?,
+      closed_by: closed_by_id
     }
   end
 
