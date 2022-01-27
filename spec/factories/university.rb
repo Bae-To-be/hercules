@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :university do
-    name { Faker::University.unique.name }
+    name { Faker::Alphanumeric.unique.alpha(number: 10) }
   end
 end
