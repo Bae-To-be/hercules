@@ -64,6 +64,8 @@ Rails.application.routes.draw do
       resources :genders, only: %i[index]
       resources :work_titles, only: %i[index]
       resources :articles, only: %i[index]
+      resources :user_report_reasons, only: %i[index]
+      resources :user_reports, only: %i[create]
       resources :matches, only: %i[index] do
         member do
           post :close

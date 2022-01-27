@@ -17,7 +17,8 @@ class FindUserProfileService
     ServiceResponse.ok(
       User.find(user_id).to_h.merge(
         status: match_status,
-        match: match&.to_h
+        match: match&.to_h,
+        is_reported: for_user.reports_filed.exists?(for_id: user_id)
       )
     )
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_27_112939) do
+ActiveRecord::Schema.define(version: 2022_01_27_141558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -312,6 +312,24 @@ ActiveRecord::Schema.define(version: 2022_01_27_112939) do
     t.index ["user_id"], name: "index_user_languages_on_user_id"
   end
 
+  create_table "user_report_reasons", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_reports", force: :cascade do |t|
+    t.bigint "from_id", null: false
+    t.bigint "for_id", null: false
+    t.bigint "user_report_reason_id", null: false
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["for_id"], name: "index_user_reports_on_for_id"
+    t.index ["from_id"], name: "index_user_reports_on_from_id"
+    t.index ["user_report_reason_id"], name: "index_user_reports_on_user_report_reason_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "name", null: false
@@ -443,6 +461,9 @@ ActiveRecord::Schema.define(version: 2022_01_27_112939) do
   add_foreign_key "user_gender_interests", "users"
   add_foreign_key "user_languages", "languages"
   add_foreign_key "user_languages", "users"
+  add_foreign_key "user_reports", "user_report_reasons"
+  add_foreign_key "user_reports", "users", column: "for_id"
+  add_foreign_key "user_reports", "users", column: "from_id"
   add_foreign_key "users", "cities", column: "hometown_city_id"
   add_foreign_key "verification_files", "users"
   add_foreign_key "work_title_relationships", "work_titles", column: "source_id"

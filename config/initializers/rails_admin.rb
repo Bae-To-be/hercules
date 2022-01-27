@@ -25,8 +25,6 @@ RailsAdmin.config do |config|
   end
 
   config.model 'VerificationRequest' do
-    navigation_label 'KYC'
-
     configure :user do
       read_only true
     end
@@ -135,9 +133,19 @@ RailsAdmin.config do |config|
   %w[
     AdminUser
     Article
+    UserReportReason
   ].each do |model|
     config.model model do
       navigation_label 'Others'
+    end
+  end
+
+  %w[
+    UserReport
+    VerificationRequest
+  ].each do |model|
+    config.model model do
+      navigation_label 'KYC'
     end
   end
 

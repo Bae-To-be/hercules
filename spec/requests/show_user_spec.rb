@@ -19,6 +19,10 @@ RSpec.feature 'Get user profile', type: :request do
 
     context 'when valid token' do
       context 'when valid user ID with no past action' do
+        before do
+          create(:user_report, for: user_to_find, from: user)
+        end
+
         it 'returns 200' do
           get "/api/v1/users/#{user_to_find.id}",
               headers: { 'HTTP_AUTHORIZATION' => token }
@@ -26,6 +30,7 @@ RSpec.feature 'Get user profile', type: :request do
           expect(response.status).to eq 200
           expect(JSON.parse(response.body, symbolize_names: true)[:data]).to eq(user_to_find.to_h.merge(
                                                                                   status: FindUserProfileService::STATUS_NONE,
+                                                                                  is_reported: true,
                                                                                   match: nil
                                                                                 ))
         end
@@ -43,6 +48,7 @@ RSpec.feature 'Get user profile', type: :request do
           expect(response.status).to eq 200
           expect(JSON.parse(response.body, symbolize_names: true)[:data]).to eq(user_to_find.to_h.merge(
                                                                                   status: FindUserProfileService::STATUS_REJECTED,
+                                                                                  is_reported: false,
                                                                                   match: nil
                                                                                 ))
         end
@@ -60,6 +66,7 @@ RSpec.feature 'Get user profile', type: :request do
           expect(response.status).to eq 200
           expect(JSON.parse(response.body, symbolize_names: true)[:data]).to eq(user_to_find.to_h.merge(
                                                                                   status: FindUserProfileService::STATUS_PENDING,
+                                                                                  is_reported: false,
                                                                                   match: nil
                                                                                 ))
         end
@@ -76,6 +83,7 @@ RSpec.feature 'Get user profile', type: :request do
           expect(response.status).to eq 200
           expect(JSON.parse(response.body, symbolize_names: true)[:data]).to eq(user_to_find.to_h.merge(
                                                                                   status: FindUserProfileService::STATUS_MATCHED,
+                                                                                  is_reported: false,
                                                                                   match: match.to_h
                                                                                 ))
         end
