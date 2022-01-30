@@ -56,12 +56,14 @@ class User < ApplicationRecord
   has_many :reports_filed,
            class_name: 'UserReport',
            foreign_key: 'from_id',
-           inverse_of: :from
+           inverse_of: :from,
+           dependent: :destroy
 
   has_many :reports_received,
            class_name: 'UserReport',
            foreign_key: 'for_id',
-           inverse_of: :for_user
+           inverse_of: :for_user,
+           dependent: :destroy
 
   has_many :user_gender_interests,
            inverse_of: :user,
