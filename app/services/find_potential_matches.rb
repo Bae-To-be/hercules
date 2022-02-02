@@ -101,6 +101,7 @@ class FindPotentialMatches
   end
 
   def base_query
+    # TODO: Remove users who don't have approved KYC
     bounds = Geokit::Bounds.from_point_and_radius(user, user.search_radius_value)
     query = User
               .active
