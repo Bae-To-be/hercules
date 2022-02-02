@@ -17,6 +17,7 @@ class NotificationService
   NEW_MESSAGE = 'new_message'
   NEW_MATCH = 'new_match'
   NEW_LIKE = 'new_like'
+  LEFT_SWIPED = 'left_swiped'
 
   class << self
     def approved(user)
@@ -55,6 +56,13 @@ class NotificationService
       )
     end
 
+    def left_swiped(user, metadata)
+      send_data_message(
+        user.fcm['token'],
+        metadata.merge(event: LEFT_SWIPED)
+      )
+    end
+
     def new_match(user, metadata)
       send_message(
         NEW_MATCH_TITLE,
@@ -62,6 +70,19 @@ class NotificationService
         user.fcm['token'],
         metadata.merge(event: NEW_MATCH)
       )
+    end
+
+    def send_data_message(_data, token)
+      message = Firebase::Admin::Messaging::Message.new(
+        token: token,
+        data: Stringify.hash_values(metadata)
+      )
+
+      if token.nil?
+        Rails.logger.warn("Token missing for: #{message.inspect}")
+        return
+      end
+      FIREBASE_APP.messaging.send_one(message)
     end
 
     def send_message(title, body, token, metadata = {})

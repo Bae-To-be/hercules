@@ -46,6 +46,12 @@ class CreateSwipeService
             [{ like: swipe.to_hash.to_json }]
           )
         end
+      elsif actor.swipes_received.right.exists?(from_id: to_id)
+        NotifyUserJob.perform_later(
+          to_id,
+          'left_swiped',
+          [{ like_id: swipe.id }]
+        )
       end
 
       ServiceResponse.ok(matched: matched)
