@@ -273,7 +273,9 @@ class User < ApplicationRecord
       company: company&.name,
       work_title: work_title&.name,
       birthday: birthday&.strftime('%d-%m-%Y'),
-      education: educations.includes(:course, :university).map(&:to_h)
+      education: educations.includes(:course, :university).map(&:to_h),
+      locality: locality,
+      country_code: country_code
     }.to_json
   end
 
