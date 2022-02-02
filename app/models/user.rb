@@ -215,6 +215,7 @@ class User < ApplicationRecord
     {
       id: id,
       name: name,
+      summary: "#{work_title&.name}, #{industry&.name}",
       profile_picture: include_picture ? images.min_by(&:position)&.to_h : nil
     }
   end
