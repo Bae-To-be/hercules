@@ -22,12 +22,15 @@ class VerificationRequest < ApplicationRecord
     REJECTED => 2
   }
 
+  after_create :send_slack_alert
   before_update :notify_user, if: :status_changed?
 
   delegate :linkedin_url,
            :identity_verification_file,
            :selfie_verification_file,
            :images_for_verification,
+           :email,
+           :selfie_verification,
            :kyc_info,
            to: :user,
            prefix: true
@@ -60,6 +63,10 @@ class VerificationRequest < ApplicationRecord
   end
 
   private
+
+  def send_slack_alert
+    AdminSlackNotificationJob.perform_later(id)
+  end
 
   def notify_user
     return if Rails.env.test?

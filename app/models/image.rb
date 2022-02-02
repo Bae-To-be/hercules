@@ -20,8 +20,6 @@ class Image < ApplicationRecord
     }
   end
 
-  private
-
   def download_url
     if Rails.env.test?
       Rails
@@ -33,6 +31,8 @@ class Image < ApplicationRecord
       url
     end
   end
+
+  private
 
   def validate_blob
     if file.attached?
