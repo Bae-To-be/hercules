@@ -33,7 +33,7 @@ class VerificationSlackAlertService
                 },
                 {
                   type: 'mrkdwn',
-                  text: "*Submitted info*\n#{verification.user_kyc_info.to_json}"
+                  text: "*Submitted info*\n#{verification.user_kyc_info}"
                 }
               ]
             }
