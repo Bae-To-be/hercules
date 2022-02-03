@@ -82,8 +82,8 @@ class UpdateUser
 
           Education.find_or_create_by!(
             user: user,
-            course: Course.find_or_create_by!(name: education_params[:course_name]),
-            university: University.find_or_create_by!(name: education_params[:university_name].titleize),
+            course: Course.find_or_create_by!(name: titlize_if_not_upcase(education_params[:course_name])),
+            university: University.find_or_create_by!(name: titlize_if_not_upcase(education_params[:university_name])),
             year: education_params[:year]
           )
         end
@@ -102,7 +102,7 @@ class UpdateUser
       FUZZY_ATTRIBUTES.each do |key, model|
         next if params[key].blank?
 
-        record = model.find_or_create_by!(name: params[key].titleize)
+        record = model.find_or_create_by!(name: titlize_if_not_upcase(params[key]))
         user.public_send(
           "#{model.name.underscore}=",
           record
@@ -151,4 +151,8 @@ class UpdateUser
   private
 
   attr_reader :user, :params
+
+  def titlize_if_not_upcase(value)
+    value == value.upcase ? value : value.titleize
+  end
 end

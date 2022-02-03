@@ -136,6 +136,22 @@ RSpec.feature 'Update user fields', type: :request do
         expect(user.interested_age_lower).to eq 20
         expect(user.interested_age_upper).to eq 30
       end
+
+      it 'does not change case of course and university if already all capital' do
+        patch '/api/v1/user',
+              params: {
+                education: [
+                  course_name: 'BCA',
+                  university_name: 'IIT',
+                  year: 2019
+                ]
+              },
+              headers: { 'HTTP_AUTHORIZATION' => token }
+        expect(response.status).to eq 200
+        user.reload
+        expect(user.educations.first.course.name).to eq 'BCA'
+        expect(user.educations.first.university.name).to eq 'IIT'
+      end
     end
   end
 end

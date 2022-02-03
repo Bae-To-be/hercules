@@ -10,6 +10,7 @@ RSpec.feature 'Simple List Apis spec', type: :request do
   it_behaves_like 'simple_list_controller', 'Religion'
   it_behaves_like 'simple_list_controller', 'Industry'
   it_behaves_like 'simple_list_controller', 'Language'
+  it_behaves_like 'simple_list_controller', 'UserReportReason'
 end
 
 RSpec.feature 'Simple Search Apis spec', type: :request do
