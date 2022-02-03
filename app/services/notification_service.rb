@@ -18,6 +18,7 @@ class NotificationService
   NEW_MATCH = 'new_match'
   NEW_LIKE = 'new_like'
   LEFT_SWIPED = 'left_swiped'
+  MATCH_CLOSED = 'match_closed'
 
   class << self
     def approved(user)
@@ -60,6 +61,13 @@ class NotificationService
       send_data_message(
         user.fcm['token'],
         metadata.merge(event: LEFT_SWIPED)
+      )
+    end
+
+    def match_closed(user, metadata)
+      send_data_message(
+        user.fcm['token'],
+        metadata.merge(event: MATCH_CLOSED)
       )
     end
 

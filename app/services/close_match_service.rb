@@ -14,6 +14,12 @@ class CloseMatchService
       closed_at: DateTime.now
     )
 
+    NotifyUserJob.perform_later(
+      to_id,
+      'match_closed',
+      [{ match_id: match.id, updated_at: match.updated_at_int }]
+    )
+
     ActionCable.server.broadcast("chat_#{match_id}", {
       event: 'match_closed',
       closed_by: actor.id
