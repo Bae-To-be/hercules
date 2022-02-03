@@ -9,7 +9,7 @@ class CreateSwipeService
 
   def run
     Swipe.transaction do
-      matched = false
+      match_hash = nil
       swipe = Swipe.find_by(
         from_id: actor.id,
         to_id: to_id
@@ -25,19 +25,20 @@ class CreateSwipeService
       end
       if direction == 'right'
         if actor.swipes_received.right.exists?(from_id: to_id)
-          matched = true
-
           match = MatchStore.create!(
             source: actor,
             target_id: to_id
           )
+          match_hash = Match
+                         .find_by(user: actor, id: match.id)
+                         .to_h.merge(unread_count: 0)
 
           NotifyUserJob.perform_later(
             match.target_id,
             'new_match',
             [{ match: Match
-                        .find_by(user: match.target, id: match.id)
-                        .to_h.merge(unread_count: 0).to_json }]
+                         .find_by(user: match.target, id: match.id)
+                         .to_h.merge(unread_count: 0).to_json }]
           )
         else
           NotifyUserJob.perform_later(
@@ -54,7 +55,7 @@ class CreateSwipeService
         )
       end
 
-      ServiceResponse.ok(matched: matched)
+      ServiceResponse.ok(match: match_hash)
     end
   rescue ArgumentError
     ServiceResponse.bad_request(

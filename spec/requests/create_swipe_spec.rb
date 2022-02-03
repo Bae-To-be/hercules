@@ -37,7 +37,7 @@ RSpec.feature 'Create Swipe', type: :request do
                headers: { 'HTTP_AUTHORIZATION' => token }
 
           expect(response.status).to eq 200
-          expect(JSON.parse(response.body, symbolize_names: true)[:data][:matched]).to eq false
+          expect(JSON.parse(response.body, symbolize_names: true)[:data][:match]).to eq nil
         end
       end
 
@@ -54,7 +54,7 @@ RSpec.feature 'Create Swipe', type: :request do
                headers: { 'HTTP_AUTHORIZATION' => token }
 
           expect(response.status).to eq 200
-          expect(JSON.parse(response.body, symbolize_names: true)[:data][:matched]).to eq true
+          expect(JSON.parse(response.body, symbolize_names: true)[:data][:match]).to eq Match.find_by(user: user).to_h.merge(unread_count: 0)
         end
       end
 
