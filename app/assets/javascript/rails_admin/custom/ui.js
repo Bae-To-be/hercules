@@ -39,7 +39,8 @@ $(document).on('rails_admin.dom_ready', function() {
                     fillOpacity: 0.1,
                     radius: location.search_radius,
                 }).addTo(map);
-                L.marker([location.lat, location.lng]).addTo(map);
+                const icon = L.divIcon({html: `<div style="background-color: white;border: 1px solid black;display: inline-block;padding: 5px">${location.gender} <br/> ${location.age} <b/> ${location.status || 'N/A'}</div>`, className: 'location-marker'});
+                L.marker([location.lat, location.lng], {icon: icon}).addTo(map);
             });
         });
         document.head.appendChild(script);

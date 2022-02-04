@@ -16,7 +16,7 @@ module RailsAdmin
 
         register_instance_option :controller do
           proc do
-            @users = User.all
+            @users = User.includes(:last_verification, :gender).all
           end
         end
       end

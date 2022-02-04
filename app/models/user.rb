@@ -51,6 +51,10 @@ class User < ApplicationRecord
 
   has_many :verification_requests, dependent: :destroy, inverse_of: :user
 
+  has_one :last_verification,
+          -> { order(id: :desc) },
+          class_name: 'VerificationRequest'
+
   has_many :educations, dependent: :destroy, inverse_of: :user
 
   has_many :reports_filed,
@@ -339,7 +343,10 @@ class User < ApplicationRecord
     {
       lat: lat,
       lng: lng,
-      search_radius: search_radius_value
+      search_radius: search_radius_value,
+      gender: gender&.name,
+      age: current_age,
+      status: last_verification&.status
     }
   end
 
