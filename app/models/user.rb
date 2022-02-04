@@ -87,13 +87,13 @@ class User < ApplicationRecord
            foreign_key: :from_id,
            dependent: :destroy
 
-  has_many :sent_matche_stores,
+  has_many :sent_match_stores,
            class_name: 'MatchStore',
            inverse_of: :source,
            foreign_key: :source_id,
            dependent: :destroy
 
-  has_many :received_matche_stores,
+  has_many :received_match_stores,
            class_name: 'MatchStore',
            inverse_of: :target,
            foreign_key: :target_id,

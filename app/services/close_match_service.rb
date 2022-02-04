@@ -15,7 +15,7 @@ class CloseMatchService
     )
 
     NotifyUserJob.perform_later(
-      to_id,
+      match_store.other_user_id(actor),
       'match_closed',
       [{ match_id: match.id, updated_at: match.updated_at_int }]
     )
