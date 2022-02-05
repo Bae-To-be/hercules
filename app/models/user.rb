@@ -155,6 +155,10 @@ class User < ApplicationRecord
   delegate :file, to: :selfie_verification, prefix: true, allow_nil: true
   delegate :file, to: :identity_verification, prefix: true, allow_nil: true
 
+  before_destroy do
+    versions.destroy_all
+  end
+
   scope :between_age, lambda { |lower, upper|
     where('birthday BETWEEN ? AND ?',
           Time.now.utc.to_date.advance(years: -upper),
