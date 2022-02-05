@@ -49,6 +49,10 @@ class VerificationRequest < ApplicationRecord
     }
   end
 
+  def other_verifications_for_user
+    user.verification_requests.where.not(id: id)
+  end
+
   def user_update_submitted!(keys)
     update!(user_updates: (user_updates + keys).uniq)
   end

@@ -45,6 +45,10 @@ RailsAdmin.config do |config|
       read_only true
     end
 
+    configure :other_verifications_for_user do
+      read_only true
+    end
+
     configure :user_kyc_info do
       read_only true
 
