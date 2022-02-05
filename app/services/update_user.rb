@@ -90,12 +90,8 @@ class UpdateUser
       end
 
       if params[:hometown].present?
-        if params.dig(:hometown, :city_name).present?
-          user.hometown_city_id = City.find_or_create_by!(name: params.dig(:hometown, :city_name)).id
-        end
-        if params.dig(:hometown, :country_name).present?
-          user.hometown_country = params.dig(:hometown, :country_name)
-        end
+        user.hometown_city_id = City.find_or_create_by!(name: params.dig(:hometown, :city_name)).id if params.dig(:hometown, :city_name).present?
+        user.hometown_country = params.dig(:hometown, :country_name) if params.dig(:hometown, :country_name).present?
       end
 
       if params[:fcm_token].present?
@@ -118,8 +114,8 @@ class UpdateUser
         user.interested_age_upper = user.current_age + ENV.fetch('UPPER_AGE_BUFFER').to_i if user.interested_age_upper.nil?
       end
 
+      changes = []
       if user.verification_rejected?
-        changes = []
         if !user.recent_verification.linkedin_approved? &&
            params[:linkedin_url].present?
           changes << VerificationRequest::LINKEDIN_URL
@@ -145,7 +141,7 @@ class UpdateUser
         user.recent_verification.user_update_submitted!(changes)
       end
 
-      user.queue_verification!
+      user.queue_verification!(check_changes: changes.blank?)
 
       user.save!
     end

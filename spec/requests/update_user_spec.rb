@@ -152,6 +152,29 @@ RSpec.feature 'Update user fields', type: :request do
         expect(user.educations.first.course.name).to eq 'BCA'
         expect(user.educations.first.university.name).to eq 'IIT'
       end
+
+      it 'creates another verification if an existing verification was present with a rejection' do
+        patch '/api/v1/user',
+              params: params,
+              headers: { 'HTTP_AUTHORIZATION' => token }
+        expect(response.status).to eq 200
+        user.reload.recent_verification.update!(
+          status: :rejected,
+          dob_approved: false,
+          linkedin_approved: true,
+          work_details_approved: true,
+          education_approved: true,
+          selfie_approved: true,
+          identity_approved: true
+        )
+        patch '/api/v1/user',
+              params: {
+                birthday: birthday
+              },
+              headers: { 'HTTP_AUTHORIZATION' => token }
+        expect(response.status).to eq 200
+        expect(user.reload.last_verification).to be_in_review
+      end
     end
   end
 end
