@@ -47,12 +47,20 @@ RailsAdmin.config do |config|
 
     configure :other_verifications_for_user do
       read_only true
+
+      pretty_value do
+        bindings[:view].content_tag(:code, value)
+      end
     end
 
     configure :user_kyc_info do
       read_only true
 
       label 'Information Submitted'
+
+      pretty_value do
+        bindings[:view].content_tag(:code, value)
+      end
     end
 
     configure :user_images_for_verification, :multiple_active_storage do

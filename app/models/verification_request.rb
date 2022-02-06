@@ -50,7 +50,7 @@ class VerificationRequest < ApplicationRecord
   end
 
   def other_verifications_for_user
-    user.verification_requests.where.not(id: id).to_a
+    user.verification_requests.where.not(id: id).map(&:attributes)
   end
 
   def user_update_submitted!(keys)
