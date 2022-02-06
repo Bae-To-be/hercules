@@ -18,6 +18,7 @@ class UpdateUser
     height_in_cms
     language_ids
     food_preference_id
+    exercise_preference_id
     children_preference_id
     drinking_preference_id
     smoking_preference_id

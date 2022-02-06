@@ -40,6 +40,7 @@ module Api
           :interested_age_lower,
           :interested_age_upper,
           :food_preference_id,
+          :exercise_preference_id,
           :children_preference_id,
           :drinking_preference_id,
           :smoking_preference_id,

@@ -140,6 +140,10 @@ class User < ApplicationRecord
              optional: true,
              inverse_of: :users
 
+  belongs_to :exercise_preference,
+             optional: true,
+             inverse_of: :users
+
   belongs_to :children_preference,
              optional: true,
              inverse_of: :users
@@ -203,6 +207,7 @@ class User < ApplicationRecord
         city: city&.to_h
       },
       food_preference: food_preference&.to_h,
+      exercise_preference: exercise_preference&.to_h,
       children_preference: children_preference&.to_h,
       smoking_preference: smoking_preference&.to_h,
       drinking_preference: drinking_preference&.to_h,
@@ -263,6 +268,7 @@ class User < ApplicationRecord
         city: city&.to_h
       },
       food_preference: food_preference&.to_h,
+      exercise_preference: exercise_preference&.to_h,
       children_preference: children_preference&.to_h,
       smoking_preference: smoking_preference&.to_h,
       drinking_preference: drinking_preference&.to_h,

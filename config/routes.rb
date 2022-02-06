@@ -53,6 +53,7 @@ Rails.application.routes.draw do
       resources :religions, only: %i[index]
       resources :languages, only: %i[index]
       resources :food_preferences, only: %i[index]
+      resources :exercise_preferences, only: %i[index]
       resources :children_preferences, only: %i[index]
       resources :smoking_preferences, only: %i[index]
       resources :drinking_preferences, only: %i[index]

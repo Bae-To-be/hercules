@@ -196,6 +196,7 @@ RailsAdmin.config do |config|
      DrinkingPreference
      SmokingPreference
      FoodPreference
+     ExercisePreference
      ChildrenPreference].each do |model|
     config.model model do
       navigation_label 'Background Information'

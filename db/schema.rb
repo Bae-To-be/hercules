@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_27_160519) do
+ActiveRecord::Schema.define(version: 2022_02_06_095002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -168,6 +168,13 @@ ActiveRecord::Schema.define(version: 2022_01_27_160519) do
     t.index ["course_id"], name: "index_educations_on_course_id"
     t.index ["university_id"], name: "index_educations_on_university_id"
     t.index ["user_id"], name: "index_educations_on_user_id"
+  end
+
+  create_table "exercise_preferences", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_exercise_preferences_on_name", unique: true
   end
 
   create_table "food_preferences", force: :cascade do |t|
@@ -364,10 +371,12 @@ ActiveRecord::Schema.define(version: 2022_01_27_160519) do
     t.bigint "children_preference_id"
     t.integer "status", default: 0
     t.datetime "last_logged_in", precision: 6
+    t.bigint "exercise_preference_id"
     t.index ["children_preference_id"], name: "index_users_on_children_preference_id"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["drinking_preference_id"], name: "index_users_on_drinking_preference_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["exercise_preference_id"], name: "index_users_on_exercise_preference_id"
     t.index ["food_preference_id"], name: "index_users_on_food_preference_id"
     t.index ["gender_id"], name: "index_users_on_gender_id"
     t.index ["hometown_city_id"], name: "index_users_on_hometown_city_id"
