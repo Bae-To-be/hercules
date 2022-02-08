@@ -7,6 +7,7 @@ RSpec.feature 'Simple List Apis spec', type: :request do
   it_behaves_like 'simple_list_controller', 'ChildrenPreference'
   it_behaves_like 'simple_list_controller', 'DrinkingPreference'
   it_behaves_like 'simple_list_controller', 'SmokingPreference'
+  it_behaves_like 'simple_list_controller', 'ExercisePreference'
   it_behaves_like 'simple_list_controller', 'Religion'
   it_behaves_like 'simple_list_controller', 'Industry'
   it_behaves_like 'simple_list_controller', 'Language'
