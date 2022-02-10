@@ -229,6 +229,7 @@ class User < ApplicationRecord
       id: id,
       name: name,
       summary: "#{work_title&.name}, #{industry&.name}",
+      age: current_age,
       profile_picture: include_picture ? profile_picture&.to_h : nil
     }
   end
