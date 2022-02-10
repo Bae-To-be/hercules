@@ -13,7 +13,6 @@ class FindPotentialMatches
 
     Rails.logger.info "Filter Performance for user ID: #{user.id}: #{result.filters}"
 
-
     result = formatted_result(result.users)
     if result.empty?
       NewRelic::Agent
