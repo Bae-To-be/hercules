@@ -96,4 +96,5 @@ group :test do
   gem 'vcr', git: 'https://github.com/vcr/vcr'
   gem 'webdrivers'
   gem 'webmock'
+  gem 'rspec-openapi'
 end

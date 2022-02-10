@@ -39,6 +39,14 @@ RSpec.feature 'Upload Image', type: :request do
         response_image = JSON.parse(response.body, symbolize_names: true)[:data]
         expect(response_image[:position]).to eq(1)
         expect(response_image[:url]).to end_with('sample.jpeg')
+
+        get '/api/v1/images',
+            headers: { 'HTTP_AUTHORIZATION' => "Bearer #{token}" }
+
+        expect(response.status).to eq 200
+        response_image = JSON.parse(response.body, symbolize_names: true)[:data][0]
+        expect(response_image[:position]).to eq(1)
+        expect(response_image[:url]).to end_with('sample.jpeg')
       end
     end
   end
