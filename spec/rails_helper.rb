@@ -104,4 +104,3 @@ VCR.configure do |config|
   config.filter_sensitive_data('<FACEBOOK_APP_ID>')     { ENV.fetch('FACEBOOK_APP_ID') }
   config.filter_sensitive_data('<FACEBOOK_APP_SECRET>') { ENV.fetch('FACEBOOK_APP_SECRET') }
 end
-
