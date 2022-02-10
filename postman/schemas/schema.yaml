@@ -4,7 +4,7 @@ info:
   title: hercules
   version: 1.0.0
 servers:
-    - url: https://www.staging.baetobe.com
+- url: https://www.staging.baetobe.com
 paths:
   "/api/v1/auth":
     post:
@@ -483,6 +483,24 @@ paths:
         schema:
           type: string
         example: some_position
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: some_id
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 752
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 594
       responses:
         '401':
           description: returns 401
@@ -822,6 +840,18 @@ paths:
         schema:
           type: integer
         example: 1
+      - name: match_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 4
+      - name: match_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 5
       responses:
         '401':
           description: returns 401
@@ -994,6 +1024,42 @@ paths:
         schema:
           type: integer
         example: 61
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 64
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 66
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 68
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 70
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 72
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: random
       responses:
         '401':
           description: returns 401
@@ -1574,6 +1640,11 @@ paths:
         schema:
           type: string
         example: oyhjtjhuch
+      - name: query
+        in: query
+        schema:
+          type: string
+        example: vgogypljml
   "/api/v1/courses":
     get:
       summary: index
@@ -1634,6 +1705,11 @@ paths:
         schema:
           type: string
         example: ngccwnpxnj
+      - name: query
+        in: query
+        schema:
+          type: string
+        example: jaxumwlzlk
   "/api/v1/cities":
     get:
       summary: index
@@ -1694,6 +1770,11 @@ paths:
         schema:
           type: string
         example: Chinshire
+      - name: query
+        in: query
+        schema:
+          type: string
+        example: Lynchport
   "/api/v1/universities":
     get:
       summary: index
@@ -1754,6 +1835,11 @@ paths:
         schema:
           type: string
         example: jeuprtrvyh
+      - name: query
+        in: query
+        schema:
+          type: string
+        example: hixmmtmjcd
   "/api/v1/work_titles":
     get:
       summary: index
@@ -1814,6 +1900,11 @@ paths:
         schema:
           type: string
         example: Legacy Mining Producer
+      - name: query
+        in: query
+        schema:
+          type: string
+        example: International Technology Officer
   "/api/v1/user":
     patch:
       summary: update
