@@ -3,7 +3,8 @@ openapi: 3.0.3
 info:
   title: hercules
   version: 1.0.0
-servers: []
+servers:
+    - url: https://www.staging.baetobe.com
 paths:
   "/api/v1/auth":
     post:
@@ -481,61 +482,7 @@ paths:
         required: true
         schema:
           type: string
-        example: some_id
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
         example: some_position
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 153
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 508
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 1091
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 530
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 511
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 1064
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 924
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 960
       responses:
         '401':
           description: returns 401
@@ -875,42 +822,6 @@ paths:
         schema:
           type: integer
         example: 1
-      - name: match_id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 4
-      - name: match_id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 5
-      - name: match_id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 10
-      - name: match_id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 11
-      - name: match_id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 16
-      - name: match_id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 17
       responses:
         '401':
           description: returns 401
@@ -1083,114 +994,6 @@ paths:
         schema:
           type: integer
         example: 61
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 64
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 66
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 68
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 70
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 72
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-        example: random
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 162
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 165
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 167
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 169
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 171
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 173
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 263
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 266
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 268
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 270
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 272
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 274
       responses:
         '401':
           description: returns 401
