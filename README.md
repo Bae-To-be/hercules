@@ -30,8 +30,3 @@ brew services start redis
 ```bash
   bundle exec rspec
 ```
-
-## Generate Open API Documentation 
-```bash
-OPENAPI=1 bundle exec rspec
-```

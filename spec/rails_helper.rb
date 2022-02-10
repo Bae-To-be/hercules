@@ -105,4 +105,3 @@ VCR.configure do |config|
   config.filter_sensitive_data('<FACEBOOK_APP_SECRET>') { ENV.fetch('FACEBOOK_APP_SECRET') }
 end
 
-RSpec::OpenAPI.path = 'postman/schemas/schema.yaml'
