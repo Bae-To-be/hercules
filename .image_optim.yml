@@ -1,16 +1,10 @@
 pngout: false
-advpng:
-  level: 2
-jhead: true
-jpegtran: true
-jpegrecompress: 
-  allow_lossy: true
-  quality: 2
+advpng: false
+jhead: false
+jpegtran: false
+jpegrecompress: false
 svgo: false
-oxipng:
-  level: 3
-optipng:
-  level: 5
+optipng: false
 pngquant: false
 jpegoptim:
   allow_lossy: true
