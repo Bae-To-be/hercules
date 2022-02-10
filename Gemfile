@@ -87,6 +87,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara', '>= 3.26'
   gem 'factory_bot'
+  gem 'rspec-openapi'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', require: false
@@ -96,5 +97,4 @@ group :test do
   gem 'vcr', git: 'https://github.com/vcr/vcr'
   gem 'webdrivers'
   gem 'webmock'
-  gem 'rspec-openapi'
 end
