@@ -33,13 +33,9 @@ jobs:
         cp .env.sample .env
         bundle exec rails db:create
         bundle exec rails db:migrate
-        OPENAPI=1 bundle exec rspec
+        bundle exec rspec
     - name: Run Rubocop
       run: bundle exec rubocop
-    - uses: stefanzweifel/git-auto-commit-action@v4
-      if: github.ref == 'refs/heads/main'
-      with:
-        commit_message: "Updates API schema"
     - name: Report Status
       if: always()
       uses: ravsamhq/notify-slack-action@v1
