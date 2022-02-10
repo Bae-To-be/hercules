@@ -1,6 +1,6 @@
 pngout: false
 advpng: false
-jhead: false
+jhead: true
 jpegtran: false
 jpegrecompress: false
 svgo: false
