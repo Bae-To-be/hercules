@@ -13,9 +13,13 @@ class FindPotentialMatches
 
     Rails.logger.info "Filter Performance for user ID: #{user.id}: #{result.filters}"
 
-    ServiceResponse.ok(
-      formatted_result(result.users)
-    )
+
+    result = formatted_result(result.users)
+    if result.empty?
+      NewRelic::Agent
+        .increment_metric('Custom/User/NoPotentialMatches')
+    end
+    ServiceResponse.ok(result)
   end
 
   private
