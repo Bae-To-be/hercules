@@ -359,7 +359,7 @@ ActiveRecord::Schema.define(version: 2022_02_06_095002) do
     t.string "country_code"
     t.string "locality"
     t.boolean "linkedin_public", default: false
-    t.jsonb "fcm", default: {}
+    t.json "fcm", default: {}
     t.string "bio"
     t.bigint "hometown_city_id"
     t.string "hometown_country"

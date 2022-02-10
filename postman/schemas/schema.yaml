@@ -42,7 +42,7 @@ paths:
                     type: string
               example:
                 success: false
-                data:
+                data: 
                 error: missing auth token
         '200':
           description: creates the user and returns 200
@@ -73,7 +73,7 @@ paths:
                   refresh_token: 0f25400dc1ed0f3429b4c6f61330cd18
                   expires_in: 2700
                   access_token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjM2MTk3NDYxfQ.nCfz5UZH9o2CA1AIVSldG_XzerahDOznuEpaLv5pZmc
-                error:
+                error: 
         '401':
           description: creates the user and returns 200
           content:
@@ -89,7 +89,7 @@ paths:
                     type: string
               example:
                 success: false
-                data:
+                data: 
                 error: invalid token
   "/api/v1/logout":
     post:
@@ -112,8 +112,8 @@ paths:
                     nullable: true
               example:
                 success: false
-                data:
-                error:
+                data: 
+                error: 
         '200':
           description: returns 200
           content:
@@ -129,8 +129,8 @@ paths:
                     nullable: true
               example:
                 success: true
-                data:
-                error:
+                data: 
+                error: 
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -162,7 +162,7 @@ paths:
                     type: string
               example:
                 success: false
-                data:
+                data: 
                 error: Refresh token is a required parameter
         '401':
           description: returns 401
@@ -179,7 +179,7 @@ paths:
                     type: string
               example:
                 success: false
-                data:
+                data: 
                 error: Invalid refresh token passed
         '200':
           description: returns 200
@@ -204,7 +204,7 @@ paths:
                 data:
                   access_token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NiwiZXhwIjoxNjQ0NDcxMTUwfQ.E1QsOb1z_1h3TOgA8EQoKk8qOeUaxW6pQVW6iYtT-oc
                   expires_in: 2700
-                error:
+                error: 
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -243,7 +243,7 @@ paths:
                     type: string
               example:
                 success: false
-                data:
+                data: 
                 error: 'Validation failed: cannot swipe yourself'
         '200':
           description: returns 200
@@ -289,8 +289,8 @@ paths:
               example:
                 success: true
                 data:
-                  match:
-                error:
+                  match: 
+                error: 
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -318,7 +318,7 @@ paths:
                 image:
                   nullable: true
             example:
-              image:
+              image: 
       responses:
         '401':
           description: returns 401
@@ -342,8 +342,8 @@ paths:
                     nullable: true
               example:
                 success: true
-                data:
-                error:
+                data: 
+                error: 
     get:
       summary: me
       tags:
@@ -444,32 +444,32 @@ paths:
                   id: 45
                   name: Chassidy Considine
                   status: active
-                  gender:
-                  industry:
-                  company:
-                  work_title:
+                  gender: 
+                  industry: 
+                  company: 
+                  work_title: 
                   birthday: 10-02-2002
                   age: 20
                   interested_genders: []
                   education: []
-                  linkedin_url:
+                  linkedin_url: 
                   linkedin_public: false
-                  bio:
+                  bio: 
                   hometown:
-                    country_name:
-                    city:
-                  food_preference:
-                  exercise_preference:
-                  children_preference:
-                  smoking_preference:
-                  drinking_preference:
-                  height_in_cms:
-                  religion:
+                    country_name: 
+                    city: 
+                  food_preference: 
+                  exercise_preference: 
+                  children_preference: 
+                  smoking_preference: 
+                  drinking_preference: 
+                  height_in_cms: 
+                  religion: 
                   languages: []
                   search_radius: 10000
-                  interested_age_lower:
-                  interested_age_upper:
-                error:
+                  interested_age_lower: 
+                  interested_age_upper: 
+                error: 
   "/api/v1/images/{id}":
     delete:
       summary: destroy
@@ -524,6 +524,18 @@ paths:
         schema:
           type: integer
         example: 1064
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 924
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 960
       responses:
         '401':
           description: returns 401
@@ -547,7 +559,7 @@ paths:
                     type: string
               example:
                 success: false
-                data:
+                data: 
                 error: Image not found
         '200':
           description: returns 200
@@ -564,8 +576,8 @@ paths:
                     nullable: true
               example:
                 success: true
-                data:
-                error:
+                data: 
+                error: 
   "/api/v1/facebook/data_deletion":
     post:
       summary: data_deletion
@@ -704,9 +716,9 @@ paths:
                     id: 27
                     name: Elidia Altenwerth
                     summary: ", "
-                    profile_picture:
+                    profile_picture: 
                   time_since_creation: less than a minute ago
-                error:
+                error: 
       parameters:
       - name: limit
         in: query
@@ -770,9 +782,9 @@ paths:
                     id: 38
                     name: Armanda Swift
                     summary: ", "
-                    profile_picture:
+                    profile_picture: 
                   time_since_creation: less than a minute ago
-                error:
+                error: 
   "/api/v1/matches":
     get:
       summary: index
@@ -835,11 +847,11 @@ paths:
                     id: 42
                     name: Ossie Hudson
                     summary: ", "
-                    profile_picture:
+                    profile_picture: 
                   is_closed: false
-                  closed_by:
+                  closed_by: 
                   unread_count: 1
-                error:
+                error: 
       parameters:
       - name: limit
         in: query
@@ -922,7 +934,7 @@ paths:
                     type: string
               example:
                 success: false
-                data:
+                data: 
                 error: Match not found
         '200':
           description: returns the messages
@@ -982,20 +994,20 @@ paths:
                 success: true
                 data:
                 - id: 35ad5ada-97c5-457c-b6c4-d88f84be9719
-                  content:
+                  content: 
                   author:
                     id: 54
                     name: Rudy Feest
                     summary: ", "
-                    profile_picture:
+                    profile_picture: 
                   created_at: '1644468451272'
                   updated_at: '1644468451272'
-                  client_id:
+                  client_id: 
                   is_deleted: false
                   unread_by:
                     '53': true
                     '52': true
-                error:
+                error: 
   "/api/v1/user_reports":
     post:
       summary: create
@@ -1024,7 +1036,7 @@ paths:
                     type: string
               example:
                 success: false
-                data:
+                data: 
                 error: User not found
         '200':
           description: returns 200
@@ -1041,8 +1053,8 @@ paths:
                     nullable: true
               example:
                 success: true
-                data:
-                error:
+                data: 
+                error: 
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1288,31 +1300,31 @@ paths:
                 data:
                   id: 64
                   name: Domingo Lynch
-                  gender:
-                  industry:
-                  company:
-                  work_title:
+                  gender: 
+                  industry: 
+                  company: 
+                  work_title: 
                   age: 20
                   education: []
                   linkedin_url: ''
                   linkedin_public: false
-                  bio:
+                  bio: 
                   hometown:
-                    country_name:
-                    city:
-                  food_preference:
-                  exercise_preference:
-                  children_preference:
-                  smoking_preference:
-                  drinking_preference:
-                  height_in_cms:
-                  religion:
+                    country_name: 
+                    city: 
+                  food_preference: 
+                  exercise_preference: 
+                  children_preference: 
+                  smoking_preference: 
+                  drinking_preference: 
+                  height_in_cms: 
+                  religion: 
                   languages: []
                   images: []
                   status: none
-                  match:
+                  match: 
                   is_reported: true
-                error:
+                error: 
         '404':
           description: returns 404
           content:
@@ -1328,7 +1340,7 @@ paths:
                     type: string
               example:
                 success: false
-                data:
+                data: 
                 error: " not found"
   "/api/v1/food_preferences":
     get:
@@ -1370,7 +1382,7 @@ paths:
                   name: risnoofjvm
                 - id: 2
                   name: tquzlsxzjw
-                error:
+                error: 
   "/api/v1/children_preferences":
     get:
       summary: index
@@ -1411,7 +1423,7 @@ paths:
                   name: dtqztjryyr
                 - id: 2
                   name: axyblwmktp
-                error:
+                error: 
   "/api/v1/drinking_preferences":
     get:
       summary: index
@@ -1452,7 +1464,7 @@ paths:
                   name: jsaxzenfxv
                 - id: 2
                   name: sfmezugoap
-                error:
+                error: 
   "/api/v1/smoking_preferences":
     get:
       summary: index
@@ -1493,7 +1505,7 @@ paths:
                   name: zskjhwiovo
                 - id: 2
                   name: wqwuxrimoo
-                error:
+                error: 
   "/api/v1/exercise_preferences":
     get:
       summary: index
@@ -1534,7 +1546,7 @@ paths:
                   name: dmvaxzljxj
                 - id: 2
                   name: ntoupzdmnj
-                error:
+                error: 
   "/api/v1/religions":
     get:
       summary: index
@@ -1575,7 +1587,7 @@ paths:
                   name: lmrkdimeiy
                 - id: 2
                   name: qmpnsjyyrn
-                error:
+                error: 
   "/api/v1/industries":
     get:
       summary: index
@@ -1616,7 +1628,7 @@ paths:
                   name: Consumer Goods
                 - id: 2
                   name: Technology
-                error:
+                error: 
   "/api/v1/languages":
     get:
       summary: index
@@ -1657,7 +1669,7 @@ paths:
                   name: Hindi
                 - id: 2
                   name: Korean
-                error:
+                error: 
   "/api/v1/user_report_reasons":
     get:
       summary: index
@@ -1698,7 +1710,7 @@ paths:
                   name: jmkkaufkek
                 - id: 5
                   name: ubyyoerhqd
-                error:
+                error: 
   "/api/v1/companies":
     get:
       summary: index
@@ -1737,7 +1749,7 @@ paths:
                 data:
                 - id: 1
                   name: bczuvvmrnl
-                error:
+                error: 
       parameters:
       - name: query
         in: query
@@ -1754,6 +1766,11 @@ paths:
         schema:
           type: string
         example: ewprhuqtfw
+      - name: query
+        in: query
+        schema:
+          type: string
+        example: oyhjtjhuch
   "/api/v1/courses":
     get:
       summary: index
@@ -1792,7 +1809,7 @@ paths:
                 data:
                 - id: 1
                   name: tvylwmtnth
-                error:
+                error: 
       parameters:
       - name: query
         in: query
@@ -1809,6 +1826,11 @@ paths:
         schema:
           type: string
         example: qyrdtjvurz
+      - name: query
+        in: query
+        schema:
+          type: string
+        example: ngccwnpxnj
   "/api/v1/cities":
     get:
       summary: index
@@ -1847,7 +1869,7 @@ paths:
                 data:
                 - id: 1
                   name: Osinskishire
-                error:
+                error: 
       parameters:
       - name: query
         in: query
@@ -1864,6 +1886,11 @@ paths:
         schema:
           type: string
         example: Kirlinmouth
+      - name: query
+        in: query
+        schema:
+          type: string
+        example: Chinshire
   "/api/v1/universities":
     get:
       summary: index
@@ -1902,7 +1929,7 @@ paths:
                 data:
                 - id: 1
                   name: ixnqgcswqm
-                error:
+                error: 
       parameters:
       - name: query
         in: query
@@ -1919,6 +1946,11 @@ paths:
         schema:
           type: string
         example: vwswmmernr
+      - name: query
+        in: query
+        schema:
+          type: string
+        example: jeuprtrvyh
   "/api/v1/work_titles":
     get:
       summary: index
@@ -1957,7 +1989,7 @@ paths:
                 data:
                 - id: 1
                   name: District IT Manager
-                error:
+                error: 
       parameters:
       - name: query
         in: query
@@ -1974,6 +2006,11 @@ paths:
         schema:
           type: string
         example: Human Real-Estate Manager
+      - name: query
+        in: query
+        schema:
+          type: string
+        example: Legacy Mining Producer
   "/api/v1/user":
     patch:
       summary: update
@@ -2155,7 +2192,7 @@ paths:
                   food_preference:
                     id: 3
                     name: Vegan
-                  exercise_preference:
+                  exercise_preference: 
                   children_preference:
                     id: 3
                     name: Never
@@ -2175,7 +2212,7 @@ paths:
                   search_radius: 2000
                   interested_age_lower: 18
                   interested_age_upper: 35
-                error:
+                error: 
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2298,7 +2335,7 @@ paths:
                 image:
                   nullable: true
             example:
-              image:
+              image: 
           multipart/form-data:
             schema:
               type: object
@@ -2334,7 +2371,7 @@ paths:
                     type: string
               example:
                 success: false
-                data:
+                data: 
                 error: position is required
         '200':
           description: returns 200 response
@@ -2362,7 +2399,7 @@ paths:
                   position: 1
                   url: "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBHdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--cda01cd465632e4bfd9c9e46eaf7b01085de4bae/sample.jpeg"
                   id: 14
-                error:
+                error: 
     get:
       summary: index
       tags:
@@ -2396,7 +2433,7 @@ paths:
                 - position: 1
                   url: "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBTdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--ef50d0af9fe5403c0f07a772be3fa4a1b3f8f634/sample.jpeg"
                   id: 42
-                error:
+                error: 
   "/api/v1/verification_files":
     post:
       summary: create
@@ -2411,7 +2448,7 @@ paths:
                 image:
                   nullable: true
             example:
-              image:
+              image: 
           multipart/form-data:
             schema:
               type: object
@@ -2447,7 +2484,7 @@ paths:
                     type: string
               example:
                 success: false
-                data:
+                data: 
                 error: invalid file
         '200':
           description: returns 200 response
@@ -2472,4 +2509,4 @@ paths:
                 data:
                   file_type: selfie
                   url: "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBIQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--445e9f69b7958813e718661a63a80ff6875db709/sample.jpeg"
-                error:
+                error: 
