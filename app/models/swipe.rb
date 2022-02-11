@@ -42,7 +42,7 @@ class Swipe < ApplicationRecord
   private
 
   def time_since_creation
-    "#{time_ago_in_words(created_at)} ago"
+    "#{time_ago_in_words(created_at, { scope: :'datetime.distance_in_words_short' })} ago"
   end
 
   def under_daily_limit
