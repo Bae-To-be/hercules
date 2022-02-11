@@ -20,6 +20,11 @@ brew services start redis
 ```bash
   cp .env.sample .env
 ```
+## Install Yarn
+```bash
+  brew install node && brew install yarn
+  yarn install
+```
 
 ## Setup Database
 ```bash
