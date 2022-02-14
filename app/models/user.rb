@@ -330,15 +330,7 @@ class User < ApplicationRecord
   def current_age
     return if birthday.blank?
 
-    years = Time.now.utc.to_date.year - birthday.year
-    years += 1 if Time.now.utc.to_date.month < birthday.month
-
-    if Time.now.utc.to_date.month == birthday.month &&
-       Time.now.utc.to_date.day < birthday.day
-      years -= 1
-    end
-
-    years
+    ((Time.zone.now - birthday.to_time) / 1.year.seconds).floor
   end
 
   def images_for_verification
