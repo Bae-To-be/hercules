@@ -37,7 +37,9 @@ RSpec.feature 'Create Swipe', type: :request do
                headers: { 'HTTP_AUTHORIZATION' => token }
 
           expect(response.status).to eq 200
-          expect(JSON.parse(response.body, symbolize_names: true)[:data][:match]).to eq nil
+          data = JSON.parse(response.body, symbolize_names: true)[:data]
+          expect(data[:match]).to eq nil
+          expect(data[:swipe]).to eq Swipe.last.from_hash
         end
       end
 
