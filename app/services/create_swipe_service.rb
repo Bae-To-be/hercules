@@ -55,7 +55,7 @@ class CreateSwipeService
         )
       end
 
-      ServiceResponse.ok(match: match_hash)
+      ServiceResponse.ok(match: match_hash, swipe: swipe.from_hash)
     end
   rescue ArgumentError
     ServiceResponse.bad_request(
