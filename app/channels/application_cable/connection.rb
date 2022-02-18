@@ -23,7 +23,9 @@ module ApplicationCable
     end
 
     def auth
-      request.headers['HTTP_AUTHORIZATION']&.gsub('Bearer ', '')
+      # TODO: Remove header authorization (ref: https://faqs.ably.com/is-it-secure-to-send-the-access_token-as-part-of-the-websocket-url-query-params)
+      request.params['token'].presence ||
+        request.headers['HTTP_AUTHORIZATION']&.gsub('Bearer ', '')
     end
   end
 end
