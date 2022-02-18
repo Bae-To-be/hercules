@@ -1,22 +1,6 @@
 # frozen_string_literal: true
 
 class ChatChannel < ApplicationCable::Channel
-  after_subscribe :connection_monitor
-  CONNECTION_TIMEOUT = 10.seconds
-  CONNECTION_PING_INTERVAL = 5.seconds
-
-  periodically every: CONNECTION_PING_INTERVAL do
-    @driver&.ping
-    connection.disconnect if Time.zone.now - @_last_request_at > @_timeout
-  end
-
-  def connection_monitor
-    @_last_request_at ||= Time.zone.now
-    @_timeout = CONNECTION_TIMEOUT
-    @driver = connection.instance_variable_get('@websocket').possible?&.instance_variable_get('@driver')
-    @driver.on(:pong) { @_last_request_at = Time.zone.now }
-  end
-
   def subscribed
     reject if params[:match_id].blank?
 
