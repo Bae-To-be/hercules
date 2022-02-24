@@ -5,7 +5,7 @@ require 'open-uri'
 module Auth
   module Strategies
     class Facebook < Base
-      GET_PROFILE_PARAMS = 'me?fields=name,email,picture.height(720).width(720),gender,birthday'
+      GET_PROFILE_PARAMS = 'me?fields=name,email,picture.height(960).width(768),gender,birthday'
 
       def email_id
         profile[:email]
