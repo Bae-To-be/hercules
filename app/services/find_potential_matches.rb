@@ -29,7 +29,7 @@ class FindPotentialMatches
   def formatted_result(ids)
     User
       .includes(:work_title, :images, :company, :industry, :gender)
-      .find(ids).map(&:swipe_hash)
+      .find(ids).map(&:to_h)
   end
 
   def find_matches

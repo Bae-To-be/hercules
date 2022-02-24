@@ -238,19 +238,6 @@ class User < ApplicationRecord
     images.min_by(&:position)
   end
 
-  def swipe_hash
-    {
-      id: id,
-      name: name,
-      gender: gender&.name,
-      industry: industry&.name,
-      company: company&.name,
-      work_title: work_title&.name,
-      age: current_age,
-      images: images.map(&:to_h)
-    }
-  end
-
   def to_h
     {
       id: id,
