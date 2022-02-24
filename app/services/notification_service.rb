@@ -80,7 +80,7 @@ class NotificationService
       )
     end
 
-    def send_data_message(data, token)
+    def send_data_message(token, data)
       message = Firebase::Admin::Messaging::Message.new(
         token: token,
         data: Stringify.hash_values(data)
