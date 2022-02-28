@@ -11,5 +11,7 @@ class NotifyUserJob < ApplicationJob
       user,
       *notification_arguments
     )
+  rescue Firebase::Admin::Messaging::UnregisteredError
+    user.update!(fcm: {})
   end
 end
